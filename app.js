@@ -216,28 +216,57 @@
     panelEl('pump').classList.remove('assembled');
     pAlpha = 1; pAlphaT = 1;
     syncPause();
-    requestAnimationFrame(function () { sample(name); if (!reduce) scatter(); switchT = performance.now(); });
+    if (name === 'types') pAlphaT = 0;
+    else requestAnimationFrame(function () { sample(name); if (!reduce) scatter(); switchT = performance.now(); });
+    decodePanel(name);
     if (!fromHash) history.replaceState(null, '', name === 'home' ? location.pathname : '#' + name);
   }
-  var TYPES = [
-    { title: 'Пассивный', desc: 'По градиенту концентрации, без затрат АТФ. Вещество само «скатывается» туда, где его меньше.', list: ['простая диффузия', 'облегчённая диффузия', 'обменная диффузия', 'осмос и фильтрация'] },
-    { title: 'Активный', desc: 'Против градиента, за счёт гидролиза АТФ — как вкатить мяч в гору. Первично-активный транспорт.', list: ['Na⁺/K⁺-насос', 'Ca²⁺-насос', 'протонная помпа'] },
-    { title: 'Сопряжённый', desc: 'Вторично-активный: Na⁺ идёт по своему градиенту и «тянет» за собой другие молекулы против их градиента.', list: ['Na⁺-зависимый перенос глюкозы', 'Na⁺-зависимый перенос аминокислот'] }
-  ];
+  /* ---------- decode effect: glyphs flicker, then lock into the real text left to right ---------- */
+  var GLYPHS = 'NaKCaHOАТФ⁺⁻→←↑↓⇌Δαβγ0123456789абвгдеклмнопрст'.split('');
+  function glyph() { return GLYPHS[Math.floor(Math.random() * GLYPHS.length)]; }
+  function decode(el, delay) {
+    if (!el || reduce) return;
+    var token = {}; el._dec = token;
+    if (!el._parts) {
+      var w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), n, parts = [];
+      while ((n = w.nextNode())) parts.push({ n: n, t: Array.from(n.nodeValue) });
+      el._parts = parts;
+    }
+    var parts = el._parts, total = parts.reduce(function (a, p) { return a + p.t.length; }, 0);
+    var frames = Math.min(42, Math.max(16, Math.round(total * 0.9)));
+    function paint(locked) {
+      var off = 0;
+      parts.forEach(function (p) {
+        var s = ''; for (var k = 0; k < p.t.length; k++) { var ch = p.t[k]; s += (off + k < locked || /\s/.test(ch)) ? ch : glyph(); }
+        p.n.nodeValue = s; off += p.t.length;
+      });
+    }
+    paint(0); el.classList.add('decoding');
+    var f = 0;
+    setTimeout(function tick() {
+      if (el._dec !== token) return;
+      paint(Math.floor(total * f / frames));
+      if (++f <= frames) setTimeout(tick, 34);
+      else { parts.forEach(function (p) { p.n.nodeValue = p.t.join(''); }); el.classList.remove('decoding'); }
+    }, delay || 0);
+  }
+  function decodePanel(name) {
+    var k = 0;
+    panelEl(name).querySelectorAll('.dec').forEach(function (el) { if (el.offsetParent !== null) decode(el, 60 + (k++) * 140); });
+  }
+
   function setType(i, silent) {
-    typeIdx = (i + TYPES.length) % TYPES.length;
-    var d = TYPES[typeIdx];
-    document.getElementById('typeNum').textContent = (typeIdx + 1) + ' / ' + TYPES.length;
-    document.getElementById('typeTitle').textContent = d.title;
-    document.getElementById('typeDesc').textContent = d.desc;
-    document.getElementById('typeList').innerHTML = d.list.map(function (x) { return '<li>' + x + '</li>'; }).join('');
-    document.querySelectorAll('[data-type]').forEach(function (b) { b.setAttribute('aria-current', +b.getAttribute('data-type') === typeIdx ? 'true' : 'false'); });
+    var prev = typeIdx;
+    typeIdx = (i + 3) % 3;
+    document.querySelectorAll('[data-card]').forEach(function (c) {
+      var on = +c.getAttribute('data-card') === typeIdx; c.classList.toggle('on', on);
+      if (on) { c.style.setProperty('--dx', (i < prev ? -40 : 40) + 'px'); }
+    });
     document.querySelectorAll('[data-gate]').forEach(function (gEl) { gEl.classList.toggle('cur', +gEl.getAttribute('data-gate') === typeIdx); });
-    if (!silent && cur === 'types') { sample('types'); if (!reduce) scatter(); switchT = performance.now(); }
+    if (!silent) decode(document.querySelector('[data-card="' + typeIdx + '"] .dec'), 80);
   }
   document.addEventListener('click', function (e) {
     var s = e.target.closest('[data-type-step]'); if (s) { setType(typeIdx + +s.getAttribute('data-type-step')); return; }
-    var tb = e.target.closest('[data-type]'); if (tb) { setType(+tb.getAttribute('data-type')); return; }
     var b = e.target.closest('[data-go]'); if (!b) return; e.preventDefault(); go(b.getAttribute('data-go'));
   });
   document.addEventListener('keydown', function (e) {
@@ -255,7 +284,7 @@
   window.addEventListener('pointermove', function (e) { mx = e.clientX; my = e.clientY; });
   document.addEventListener('pointerleave', function () { mx = -9999; my = -9999; });
   var rt = 0;
-  window.addEventListener('resize', function () { resize(); clearTimeout(rt); rt = setTimeout(function () { if (cur) sample(cur); }, 150); });
+  window.addEventListener('resize', function () { resize(); clearTimeout(rt); rt = setTimeout(function () { if (cur && cur !== 'types') sample(cur); }, 150); });
   document.getElementById('pauseBtn').addEventListener('click', function () { userPaused = !userPaused; syncPause(); });
 
   /* ---------- quiz ---------- */
@@ -277,7 +306,7 @@
       var cq = Q[qs.q], answered = qs.picked >= 0, ok = answered && qs.picked === cq.c;
       var dots = Q.map(function (_, i) { var bg = i < qs.answers.length ? (qs.answers[i] ? '#7CE0B0' : '#FF90E8') : (i === qs.q ? '#FFC900' : '#FFFFFF'); return '<span style="width: 20px; height: 10px; border: 2px solid #000000; border-radius: 3px; background: ' + bg + '; display: inline-block"></span>'; }).join('');
       h += '<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px"><span style="' + PILL + '; background: #90A8ED">Вопрос ' + (qs.q + 1) + ' из ' + Q.length + '</span><span style="display: flex; gap: 5px" aria-hidden="true">' + dots + '</span></div>';
-      h += '<h3 style="font-weight: 900; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.1; letter-spacing: -0.02em; margin: 14px 0 18px">' + cq.t + '</h3>';
+      h += '<h3 class="dec" style="font-weight: 900; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.1; letter-spacing: -0.02em; margin: 14px 0 18px">' + cq.t + '</h3>';
       h += '<div role="group" aria-label="Варианты ответа" style="display: flex; flex-direction: column; gap: 10px">';
       cq.o.forEach(function (text, i) {
         var right = answered && i === cq.c, wrong = answered && i === qs.picked && !ok;
@@ -291,12 +320,16 @@
     } else {
       var score = qs.answers.filter(Boolean).length;
       h += '<span style="' + PILL + '; background: #FFC900">Результат</span>';
-      h += '<div style="font-weight: 900; font-size: clamp(48px, 5vw, 80px); line-height: 1; letter-spacing: -0.04em; margin: 14px 0 10px">' + score + ' из ' + Q.length + '</div>';
+      h += '<div class="dec" style="font-weight: 900; font-size: clamp(48px, 5vw, 80px); line-height: 1; letter-spacing: -0.04em; margin: 14px 0 10px">' + score + ' из ' + Q.length + '</div>';
       h += '<p style="margin: 0 0 20px; font-weight: 500; font-size: 18px">' + (score === Q.length ? 'Отлично! Ты уверенно разбираешься в мембранном транспорте.' : score >= 4 ? 'Хорошо! Разбери ошибки — и будет идеально.' : 'Стоит открыть справочник и пройти тест ещё раз.') + '</p>';
       h += '<div style="display: flex; flex-wrap: wrap; gap: 12px"><button type="button" class="btn" data-q="restart" style="' + ACT + '; background: #FF90E8">Пройти ещё раз</button><button type="button" class="btn" data-go="ref" style="' + ACT + '; background: #FFFFFF">Открыть справочник</button></div>';
     }
     qRoot.innerHTML = h;
+    var key = qs.done ? 'done' : 'q' + qs.q;
+    if (key !== lastQuizKey && cur === 'quiz') decode(qRoot.querySelector('.dec'), 40);
+    lastQuizKey = key;
   }
+  var lastQuizKey = '';
   qRoot.addEventListener('click', function (e) {
     var b = e.target.closest('[data-opt],[data-q]'); if (!b) return;
     if (b.hasAttribute('data-opt')) {
