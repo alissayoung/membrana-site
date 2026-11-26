@@ -57,6 +57,7 @@
       circle(g, x, yBot, hr * 1.22, C.ink); circle(g, x, yBot, hr, C.teal);
     }
   }
+  function slope(g, path) { g.strokeStyle = C.ink; g.lineWidth = 7; g.lineCap = 'round'; g.lineJoin = 'round'; g.beginPath(); path(); g.stroke(); }
   function lobe(g, x, y, w, h, color) { rrect(g, x - 4, y - 4, w + 8, h + 8, w / 2 + 2, C.ink); rrect(g, x, y, w, h, w / 2 - 2, color); }
 
   var TARGETS = {
@@ -64,16 +65,24 @@
       kIon(g, 80, 100, 46); na(g, 528, 86, 24); glu(g, 96, 300, 28); kIon(g, 520, 316, 52); atp(g, 470, 210, 34);
       na(g, 300, 205, 140);
     } },
-    types: { dw: 1000, dh: 300, draw: function (g) {
-      membrane(g, 6, 994, 112, 188, 26, 10);
-      [[188, 252], [462, 538], [736, 824]].forEach(function (z) { g.fillStyle = C.white; g.fillRect(z[0], 92, z[1] - z[0], 116); });
-      lobe(g, 196, 94, 22, 112, C.k); lobe(g, 230, 94, 22, 112, C.k);
-      g.save(); g.translate(500, 150); g.rotate(-0.12); lobe(g, -34, -58, 26, 116, C.teal); g.restore();
-      g.save(); g.translate(500, 150); g.rotate(0.12); lobe(g, 8, -58, 26, 116, C.teal); g.restore();
-      lobe(g, 744, 84, 32, 132, C.blue); lobe(g, 782, 84, 32, 132, C.blue);
-      kIon(g, 230, 40, 40); arrow(g, 230, 66, 230, 262, 6);
-      glu(g, 500, 40, 22); arrow(g, 500, 66, 500, 262, 6);
-      na(g, 780, 266, 20); arrow(g, 780, 240, 780, 36, 6);
+    type0: { dw: 320, dh: 170, draw: function (g) {
+      slope(g, function () { g.moveTo(0, 40); g.quadraticCurveTo(160, 60, 320, 150); });
+      g.strokeStyle = C.ink; g.lineWidth = 4; g.lineCap = 'round'; g.beginPath();
+      g.moveTo(98, 42); g.lineTo(124, 42); g.moveTo(92, 54); g.lineTo(118, 54); g.moveTo(100, 66); g.lineTo(126, 66); g.stroke();
+      na(g, 160, 55, 20); na(g, 262, 100, 13); na(g, 36, 22, 11);
+      arrow(g, 210, 128, 290, 160, 3);
+    } },
+    type1: { dw: 320, dh: 170, draw: function (g) {
+      slope(g, function () { g.moveTo(0, 150); g.quadraticCurveTo(160, 60, 320, 40); });
+      atp(g, 119, 74, 28); na(g, 160, 55, 20);
+      arrow(g, 210, 34, 290, 16, 3);
+    } },
+    type2: { dw: 320, dh: 170, draw: function (g) {
+      slope(g, function () { g.moveTo(0, 150); g.lineTo(160, 50); g.lineTo(320, 150); });
+      g.strokeStyle = C.ink; g.lineWidth = 3; g.beginPath(); g.moveTo(160, 46); g.lineTo(206, 75); g.moveTo(160, 46); g.lineTo(52, 118); g.stroke();
+      circle(g, 160, 40, 14, C.ink); circle(g, 160, 40, 11, C.white);
+      g.lineWidth = 3; g.beginPath(); g.moveTo(160, 31); g.lineTo(160, 49); g.moveTo(151, 40); g.lineTo(169, 40); g.stroke();
+      glu(g, 44, 124, 19); na(g, 212, 82, 17);
     } },
     pump: { dw: 1440, dh: 500, draw: function (g) {
       membrane(g, 11 * 1.6, 1440, 228 + 9 * 1.6, 228 + 55 * 1.6, 35.2, 12.8);
@@ -107,7 +116,7 @@
   var cv = document.getElementById('particles');
   var ctx = cv.getContext('2d');
   var W = 0, H = 0, dpr = 1;
-  var N = Math.min(3400, Math.max(1800, Math.round(window.innerWidth * window.innerHeight / 420)));
+  var N = Math.min(5200, Math.max(2600, Math.round(window.innerWidth * window.innerHeight / 300)));
   var P = [];
   for (var i = 0; i < N; i++) P.push({ x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight, vx: 0, vy: 0, rx: 0, ry: 0, r: 200, g: 200, b: 200, tr: 200, tg: 200, tb: 200, ph: Math.random() * TAU, delay: 0, s: 2.8 + Math.random() * 1.8 });
   var cur = null, targetEl = null, switchT = 0, pAlpha = 1, pAlphaT = 1, mx = -9999, my = -9999, last = 0, haveTarget = false;
@@ -118,25 +127,34 @@
   }
   function panelEl(name) { return document.querySelector('[data-panel="' + name + '"]'); }
   function targetFor(name) { return name === 'pump' ? panelEl(name).querySelector('#scene > [role="img"]') : panelEl(name).querySelector('.target'); }
+  var typeIdx = 0;
+  function targetKey(name) { return name === 'types' ? 'type' + typeIdx : name; }
 
+  // Mosaic sampling: every particle gets its own cell of a grid, so the picture assembles like crisp pixel art.
   function sample(name) {
     var el = targetFor(name); var rect = el.getBoundingClientRect();
     var w = Math.max(40, Math.round(rect.width)), h = Math.max(40, Math.round(rect.height));
-    var t = TARGETS[name]; var off = document.createElement('canvas'); off.width = w; off.height = h;
+    var t = TARGETS[targetKey(name)]; var off = document.createElement('canvas'); off.width = w; off.height = h;
     var g = off.getContext('2d'); var fit = Math.min(w / t.dw, h / t.dh);
     g.translate((w - t.dw * fit) / 2, (h - t.dh * fit) / 2); g.scale(fit, fit); t.draw(g);
     var data = g.getImageData(0, 0, w, h).data;
-    var step = Math.max(2, Math.round(Math.sqrt(w * h / (N * 6))));
-    var cand = [];
-    for (var y = 0; y < h; y += step) for (var x = 0; x < w; x += step) {
-      var o = (y * w + x) * 4; if (data[o + 3] > 180 && data[o] + data[o + 1] + data[o + 2] < 690) cand.push(x, y, data[o], data[o + 1], data[o + 2]);
+    var cell = 4, cand;
+    for (;;) {
+      cand = [];
+      var half = Math.floor(cell / 2);
+      for (var y = half; y < h; y += cell) for (var x = half; x < w; x += cell) {
+        var o = (y * w + x) * 4; if (data[o + 3] > 160 && data[o] + data[o + 1] + data[o + 2] < 690) cand.push(x, y, data[o], data[o + 1], data[o + 2]);
+      }
+      if (cand.length / 5 <= N || cell > 24) break;
+      cell++;
     }
     var n = cand.length / 5; if (!n) return;
-    var order = []; for (var j = 0; j < n; j++) order.push(j);
-    for (j = n - 1; j > 0; j--) { var q = Math.floor(Math.random() * (j + 1)); var tmp = order[j]; order[j] = order[q]; order[q] = tmp; }
+    var order = []; for (var j = 0; j < N; j++) order.push(j < n ? j : Math.floor(Math.random() * n));
+    for (j = N - 1; j > 0; j--) { var q = Math.floor(Math.random() * (j + 1)); var tmp = order[j]; order[j] = order[q]; order[q] = tmp; }
+    var size = Math.max(2, cell - 1);
     for (j = 0; j < N; j++) {
-      var c = order[j % n] * 5, p = P[j];
-      p.rx = cand[c] + (Math.random() - 0.5) * step; p.ry = cand[c + 1] + (Math.random() - 0.5) * step;
+      var c = order[j] * 5, p = P[j];
+      p.rx = cand[c]; p.ry = cand[c + 1]; p.s = size;
       p.tr = cand[c + 2]; p.tg = cand[c + 3]; p.tb = cand[c + 4];
     }
     targetEl = el; haveTarget = true;
@@ -164,17 +182,14 @@
         var tx = ox + p.rx, ty = oy + p.ry;
         if (reduce) { p.x = tx; p.y = ty; p.r = p.tr; p.g = p.tg; p.b = p.tb; }
         else {
-          if (now - switchT > p.delay) {
-            tx += Math.sin(t * 1.3 + p.ph) * 1.1; ty += Math.cos(t * 1.1 + p.ph) * 1.1;
-            p.vx += (tx - p.x) * k; p.vy += (ty - p.y) * k;
-          }
+          if (now - switchT > p.delay) { p.vx += (tx - p.x) * k; p.vy += (ty - p.y) * k; }
           var dx = p.x - mx, dy = p.y - my, d2 = dx * dx + dy * dy;
           if (d2 < 6400) { var d = Math.sqrt(d2) || 1, f = (1 - d2 / 6400) * 2.4 * dt; p.vx += dx / d * f; p.vy += dy / d * f; }
           p.vx *= damp; p.vy *= damp; p.x += p.vx * dt; p.y += p.vy * dt;
           p.r += (p.tr - p.r) * ck; p.g += (p.tg - p.g) * ck; p.b += (p.tb - p.b) * ck;
         }
         ctx.fillStyle = 'rgb(' + (p.r | 0) + ',' + (p.g | 0) + ',' + (p.b | 0) + ')';
-        ctx.fillRect(p.x - p.s / 2, p.y - p.s / 2, p.s, p.s);
+        ctx.fillRect(Math.round(p.x - p.s / 2), Math.round(p.y - p.s / 2), p.s, p.s);
       }
       ctx.globalAlpha = 1;
     }
@@ -204,8 +219,31 @@
     requestAnimationFrame(function () { sample(name); if (!reduce) scatter(); switchT = performance.now(); });
     if (!fromHash) history.replaceState(null, '', name === 'home' ? location.pathname : '#' + name);
   }
+  var TYPES = [
+    { title: 'Пассивный', desc: 'По градиенту концентрации, без затрат АТФ. Вещество само «скатывается» туда, где его меньше.', list: ['простая диффузия', 'облегчённая диффузия', 'обменная диффузия', 'осмос и фильтрация'] },
+    { title: 'Активный', desc: 'Против градиента, за счёт гидролиза АТФ — как вкатить мяч в гору. Первично-активный транспорт.', list: ['Na⁺/K⁺-насос', 'Ca²⁺-насос', 'протонная помпа'] },
+    { title: 'Сопряжённый', desc: 'Вторично-активный: Na⁺ идёт по своему градиенту и «тянет» за собой другие молекулы против их градиента.', list: ['Na⁺-зависимый перенос глюкозы', 'Na⁺-зависимый перенос аминокислот'] }
+  ];
+  function setType(i, silent) {
+    typeIdx = (i + TYPES.length) % TYPES.length;
+    var d = TYPES[typeIdx];
+    document.getElementById('typeNum').textContent = (typeIdx + 1) + ' / ' + TYPES.length;
+    document.getElementById('typeTitle').textContent = d.title;
+    document.getElementById('typeDesc').textContent = d.desc;
+    document.getElementById('typeList').innerHTML = d.list.map(function (x) { return '<li>' + x + '</li>'; }).join('');
+    document.querySelectorAll('[data-type]').forEach(function (b) { b.setAttribute('aria-current', +b.getAttribute('data-type') === typeIdx ? 'true' : 'false'); });
+    document.querySelectorAll('[data-gate]').forEach(function (gEl) { gEl.classList.toggle('cur', +gEl.getAttribute('data-gate') === typeIdx); });
+    if (!silent && cur === 'types') { sample('types'); if (!reduce) scatter(); switchT = performance.now(); }
+  }
   document.addEventListener('click', function (e) {
+    var s = e.target.closest('[data-type-step]'); if (s) { setType(typeIdx + +s.getAttribute('data-type-step')); return; }
+    var tb = e.target.closest('[data-type]'); if (tb) { setType(+tb.getAttribute('data-type')); return; }
     var b = e.target.closest('[data-go]'); if (!b) return; e.preventDefault(); go(b.getAttribute('data-go'));
+  });
+  document.addEventListener('keydown', function (e) {
+    if (cur !== 'types' || (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft')) return;
+    if (e.target.closest && e.target.closest('.dock')) return;
+    setType(typeIdx + (e.key === 'ArrowRight' ? 1 : -1)); e.preventDefault();
   });
   document.querySelector('.dock').addEventListener('keydown', function (e) {
     if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
@@ -269,7 +307,7 @@
   });
 
   /* ---------- start ---------- */
-  resize(); renderQuiz();
+  resize(); renderQuiz(); setType(0, true);
   var start = function () { go(location.hash.slice(1) || 'home', true); requestAnimationFrame(frame); };
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(start); else start();
 })();

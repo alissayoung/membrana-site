@@ -134,6 +134,22 @@ mark{background:#FF90E8;color:#000000;padding:0 .12em;border-radius:.08em;-webki
 .note{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;font-weight:600}
 .note b{background:#000000;color:#FFFFFF;border-radius:4px;padding:2px 8px}
 @media (prefers-reduced-motion: reduce){.panel.active .rv{animation:none;opacity:1}.panel{transition:none}}
+.typerow{display:flex;align-items:center;justify-content:center;gap:16px 22px;flex-wrap:wrap;flex:1 1 auto}
+.tstage{position:relative;width:min(720px,calc((100vh - 520px) * 1.882));min-width:280px;aspect-ratio:320/170}
+.arr{width:56px;height:56px;border-radius:50%;border:2px solid #000000;background:#FFFFFF;color:#000000;font:900 24px 'Inter Tight',sans-serif;cursor:pointer;flex:0 0 auto}
+.tinfo{flex:0 1 340px}
+.tnum{display:inline-block;background:#000000;color:#FFFFFF;border-radius:4px;padding:2px 10px;font-weight:900;font-size:14px}
+.tinfo h3{font-weight:900;font-size:clamp(28px,3vw,44px);letter-spacing:-0.03em;margin:8px 0 6px}
+.tinfo p{margin:0 0 8px;font-weight:500}
+.tinfo ul{margin:0;padding-left:20px;font-weight:600}
+.strip{display:flex;flex-direction:column;align-items:center;gap:10px}
+.stripbox{width:min(760px,100%);border:2px solid #000000;border-radius:8px;overflow:hidden;box-shadow:5px 5px 0 #000000}
+.striplabels{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.striplabels button{font:800 14px 'Inter Tight',sans-serif;color:#000000;border:2px solid #000000;border-radius:999px;padding:6px 12px;background:#FFFFFF;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.striplabels button[aria-current="true"]{background:#FF90E8;box-shadow:3px 3px 0 #000000}
+.striplabels .dot{width:12px;height:12px;border-radius:50%;border:2px solid #000000}
+.gate .hl{opacity:0;transition:opacity .3s ease}
+.gate.cur .hl{opacity:1}
 .hero-h1{font-weight:900;font-size:clamp(40px,6.4vw,104px);line-height:1;letter-spacing:-0.04em;margin:0;max-width:980px}
 #scene{max-width:min(1160px,calc((100vh - 330px) * 2.88))}
 @media (max-height: 820px){.panel{padding:70px 28px 100px;gap:12px}.head h2{font-size:clamp(28px,3.4vw,48px)}.hero-h1{font-size:clamp(36px,5vw,76px)}.tcard .tx{padding:10px 14px}.tcard h3{font-size:19px}.tcard p{font-size:14px}.dock{bottom:12px}.dock button{padding:8px 14px}}
@@ -240,34 +256,46 @@ mark{background:#FF90E8;color:#000000;padding:0 .12em;border-radius:.08em;-webki
 <h2 class="rv">Классификация видов транспорта</h2>
 <p class="rv" style="--d: .1s">Одни вещества идут по градиенту сами, другим нужен насос и энергия АТФ, третьи едут «в паре» с натрием.</p>
 </div>
-<div class="mid"><div class="target"></div></div>
-<div class="wrap cardrow">
-<article class="tcard rv" style="--d: .2s"><div aria-hidden="true" style="position: relative; overflow: hidden; border-bottom: 2px solid #000000; background-color: #FFC900; background-image: radial-gradient(rgba(0,0,0,0.13) 1.4px, transparent 1.7px); background-size: 12px 12px">
-<svg viewBox="0 0 320 170" style="display: block; width: 100%; height: auto"><path d="M0 40 Q160 60 320 150" stroke="#000000" stroke-width="4" fill="none"></path></svg>
-<div class="cardanim" style="position: absolute; inset: 0">
-<div class="actor roll" style="position: absolute; left: 27.5%; top: 19.4118%; width: 30%"><svg viewBox="88 33 96 48" style="display: block; width: 100%; height: auto; overflow: visible"><path d="M98 42 H124 M92 54 H118 M100 66 H126" stroke="#000000" stroke-width="3" stroke-linecap="round"></path></svg><div class="actor spin" style="position: absolute; left: 54.1667%; top: 8.3333%; width: 41.6667%"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#na"></use></svg></div></div>
-<div class="actor roll" style="position: absolute; left: 27.5%; top: 19.4118%; width: 30%; animation-delay: -2.25s"><svg viewBox="88 33 96 48" style="display: block; width: 100%; height: auto; overflow: visible"><path d="M98 42 H124 M92 54 H118 M100 66 H126" stroke="#000000" stroke-width="3" stroke-linecap="round"></path></svg><div class="actor spin" style="position: absolute; left: 54.1667%; top: 8.3333%; width: 41.6667%; animation-delay: -2.25s"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#na"></use></svg></div></div>
+<div class="wrap typerow">
+<button type="button" class="arr btn rv" data-type-step="-1" aria-label="Предыдущий тип транспорта" style="--d: .15s">←</button>
+<div class="tstage rv" style="--d: .15s"><div class="target"></div></div>
+<button type="button" class="arr btn rv" data-type-step="1" aria-label="Следующий тип транспорта" style="--d: .15s">→</button>
+<div class="tinfo rv" aria-live="polite" style="--d: .25s"><span class="tnum" id="typeNum">1 / 3</span><h3 id="typeTitle">Пассивный</h3><p id="typeDesc"></p><ul id="typeList"></ul></div>
 </div>
-</div><div class="tx"><h3>Пассивный</h3><p>По градиенту, без затрат АТФ: простая, облегчённая и обменная диффузия, осмос, фильтрация.</p></div></article>
-<article class="tcard rv" style="--d: .3s"><div aria-hidden="true" style="position: relative; overflow: hidden; border-bottom: 2px solid #000000; background-color: #FF90E8; background-image: radial-gradient(rgba(0,0,0,0.13) 1.4px, transparent 1.7px); background-size: 12px 12px">
-<svg viewBox="0 0 320 170" style="display: block; width: 100%; height: auto"><path d="M0 150 Q160 60 320 40" stroke="#000000" stroke-width="4" fill="none"></path></svg>
-<div class="cardanim" style="position: absolute; inset: 0">
-<div class="actor uphill" style="position: absolute; left: 31.25%; top: 19.4118%; width: 26.25%; aspect-ratio: 84 / 56">
-<div class="actor push" style="position: absolute; left: 4.7619%; top: 39.2857%; width: 35.7143%"><svg viewBox="0 0 40 40" style="display: block; width: 100%; height: auto"><use href="#atp"></use></svg></div>
-<div class="actor spinUp" style="position: absolute; left: 47.619%; top: 7.1429%; width: 47.619%"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#na"></use></svg></div>
+<div class="wrap strip rv" style="--d: .35s">
+<div class="stripbox"><svg viewBox="0 0 1000 200" role="img" aria-label="Мембрана: K⁺-канал — пассивный транспорт, Na⁺/K⁺-насос — активный, переносчик Na⁺ и глюкозы — сопряжённый" style="display: block; width: 100%; height: auto">
+<rect x="0" y="0" width="1000" height="68" fill="#90A8ED"></rect><rect x="0" y="0" width="1000" height="68" fill="url(#texOut)"></rect>
+<rect x="0" y="132" width="1000" height="68" fill="#FFC900"></rect><rect x="0" y="132" width="1000" height="68" fill="url(#texIn)"></rect>
+<g transform="translate(0,68)"><rect x="0" y="0" width="1000" height="64" fill="url(#lipid)"></rect></g>
+<g class="gate" data-gate="0">
+<rect x="178" y="58" width="18" height="84" rx="8" fill="#A77BFF" stroke="#000000" stroke-width="3"></rect>
+<rect x="204" y="58" width="18" height="84" rx="8" fill="#A77BFF" stroke="#000000" stroke-width="3"></rect>
+<path d="M200 46 V184" stroke="#000000" stroke-width="5" stroke-linecap="round"></path><path d="M190 172 L200 186 L210 172" stroke="#000000" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+<use href="#k" x="182" y="6" width="36" height="36"></use>
+<rect class="hl" x="128" y="3" width="144" height="194" rx="12" fill="#FF90E8" fill-opacity="0.3" stroke="#000000" stroke-width="3" stroke-dasharray="10 7"></rect>
+</g>
+<g class="gate" data-gate="1">
+<rect x="472" y="50" width="26" height="100" rx="12" fill="#2F6FEB" stroke="#000000" stroke-width="3"></rect>
+<rect x="502" y="50" width="26" height="100" rx="12" fill="#2F6FEB" stroke="#000000" stroke-width="3"></rect>
+<path d="M500 156 V16" stroke="#000000" stroke-width="5" stroke-linecap="round"></path><path d="M490 28 L500 14 L510 28" stroke="#000000" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+<use href="#na" x="466" y="160" width="36" height="36"></use>
+<use href="#atp" x="534" y="156" width="30" height="30"></use>
+<rect class="hl" x="428" y="3" width="144" height="194" rx="12" fill="#FF90E8" fill-opacity="0.3" stroke="#000000" stroke-width="3" stroke-dasharray="10 7"></rect>
+</g>
+<g class="gate" data-gate="2">
+<rect x="776" y="56" width="22" height="88" rx="10" fill="#23A094" stroke="#000000" stroke-width="3"></rect>
+<rect x="802" y="56" width="22" height="88" rx="10" fill="#23A094" stroke="#000000" stroke-width="3"></rect>
+<path d="M800 46 V184" stroke="#000000" stroke-width="5" stroke-linecap="round"></path><path d="M790 172 L800 186 L810 172" stroke="#000000" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+<use href="#na" x="758" y="6" width="34" height="34"></use>
+<use href="#glu" x="808" y="6" width="34" height="34"></use>
+<rect class="hl" x="728" y="3" width="144" height="194" rx="12" fill="#FF90E8" fill-opacity="0.3" stroke="#000000" stroke-width="3" stroke-dasharray="10 7"></rect>
+</g>
+</svg></div>
+<div class="striplabels">
+<button type="button" data-type="0" aria-current="true"><span class="dot" style="background: #A77BFF"></span>Пассивный · канал</button>
+<button type="button" data-type="1" aria-current="false"><span class="dot" style="background: #2F6FEB"></span>Активный · насос</button>
+<button type="button" data-type="2" aria-current="false"><span class="dot" style="background: #23A094"></span>Сопряжённый · переносчик</button>
 </div>
-</div>
-</div><div class="tx"><h3>Активный</h3><p>Против градиента, за счёт АТФ: Na⁺/K⁺-насос, Ca²⁺-насос, протонная помпа.</p></div></article>
-<article class="tcard rv" style="--d: .4s"><div aria-hidden="true" style="position: relative; overflow: hidden; border-bottom: 2px solid #000000; background-color: #90A8ED; background-image: radial-gradient(rgba(0,0,0,0.13) 1.4px, transparent 1.7px); background-size: 12px 12px">
-<svg viewBox="0 0 320 170" style="display: block; width: 100%; height: auto"><path d="M0 150 L160 50 L320 150" stroke="#000000" stroke-width="4" fill="none" stroke-linejoin="round"></path></svg>
-<div class="cardanim" style="position: absolute; inset: 0">
-<div class="actor ropeNa" style="position: absolute; left: 50%; top: 27.0588%; width: 9.5313%; height: 3px; margin-top: -1.5px; background: #000000; border-radius: 2px; transform-origin: 0 50%; transform: rotate(31.6deg)"></div>
-<div class="actor ropeGlu" style="position: absolute; left: 50%; top: 27.0588%; width: 45.25%; height: 3px; margin-top: -1.5px; background: #000000; border-radius: 2px; transform-origin: 0 50%; transform: rotate(145.98deg)"></div>
-<div class="actor pulley" style="position: absolute; left: 45.625%; top: 15.2941%; width: 8.75%"><svg viewBox="146 26 28 28" style="display: block; width: 100%; height: auto; overflow: visible"><circle cx="160" cy="40" r="12" fill="#FFFFFF" stroke="#000000" stroke-width="2.5"></circle><path d="M160 30 V50 M150 40 H170" stroke="#000000" stroke-width="2.5" stroke-linecap="round"></path></svg></div>
-<div class="actor gluSlide" style="position: absolute; left: 5.3125%; top: 61.1765%; width: 14.375%"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#glu"></use></svg></div>
-<div class="actor naSlide" style="position: absolute; left: 51.875%; top: 24.7059%; width: 12.5%"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#na"></use></svg></div>
-</div>
-</div><div class="tx"><h3>Сопряжённый</h3><p>Вторично-активный: глюкоза и аминокислоты идут вместе с Na⁺ по его градиенту.</p></div></article>
 </div>
 </section>
 
