@@ -599,6 +599,8 @@ toastTitle: st.toastOk ? 'Верно' : 'Ошибка'
   });
   ui();
   c.componentDidMount();
+  var hero = new URLSearchParams(location.search).get('hero');
+  if (hero && c.H[hero]) setTimeout(function () { c.start(hero); }, 400);
 })();
 
 </script>

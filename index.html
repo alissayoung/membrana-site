@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Мембрана — §16–17</title>
-<meta name="description" content="Мембранный транспорт: §16–17, биология 11 класс. Анимация Na+/K+-насоса, классификация видов транспорта, тест и мини-игра.">
+<title>Мембранный транспорт — §16–17</title>
+<meta name="description" content="Мембранный транспорт: §16–17, биология 11 класс. Анимация Na+/K+-насоса, виды транспорта, справочник, тест и мини-игра.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
 body{margin:0;background:#FFFFFF}
 a{color:#000000}a:hover{color:#000000}
@@ -41,6 +41,11 @@ a{color:#000000}a:hover{color:#000000}
 .scene .s3{animation:hi3 var(--cycle,14s) ease-out infinite}
 .scene .s4{animation:hi4 var(--cycle,14s) ease-out infinite}
 .paused *{animation-play-state:paused!important}
+.actor{will-change:transform;backface-visibility:hidden}
+.scene .driftL{animation:driftL 7s linear infinite}
+.scene .driftR{animation:driftR 12s linear infinite}
+@keyframes driftL{from{transform:translateX(0)}to{transform:translateX(-2.6316%)}}
+@keyframes driftR{from{transform:translateX(0)}to{transform:translateX(2.6316%)}}
 .cardanim .roll,.cardanim .spin,.cardanim .uphill,.cardanim .spinUp,.cardanim .push,.cardanim .naSlide,.cardanim .gluSlide,.cardanim .pulley{transform-box:fill-box;transform-origin:50% 50%}
 .cardanim .roll{animation:roll 4.5s linear infinite}
 .cardanim .spin{animation:spin 4.5s linear infinite}
@@ -53,40 +58,89 @@ a{color:#000000}a:hover{color:#000000}
 .cardanim .ropeGlu{animation:ropeGlu 6s ease-in-out infinite}
 .cardanim .pulley{animation:pulley 6s ease-in-out infinite}
 @media (prefers-reduced-motion: reduce){.cardanim *{animation:none!important}.scene *{animation-play-state:paused!important}.btn,.btnw,.card{transition:none}}
-@keyframes roll{0%{transform:translate(-180px,-41px);opacity:0}8%{transform:translate(-160px,-37px);opacity:1}32%{transform:translate(-80px,-23px)}54%{transform:translate(0,0)}72%{transform:translate(80px,32px)}88%{transform:translate(160px,73px);opacity:1}100%{transform:translate(190px,88px);opacity:0}}
+@keyframes roll{0%{transform:translate(-187.5%,-85.417%);opacity:0}8%{transform:translate(-166.667%,-77.083%);opacity:1}32%{transform:translate(-83.333%,-47.917%)}54%{transform:translate(0%,0%)}72%{transform:translate(83.333%,66.667%)}88%{transform:translate(166.667%,152.083%);opacity:1}100%{transform:translate(197.917%,183.333%);opacity:0}}
 @keyframes spin{0%{transform:rotate(0)}8%{transform:rotate(20deg)}32%{transform:rotate(140deg)}54%{transform:rotate(330deg)}72%{transform:rotate(560deg)}88%{transform:rotate(820deg)}100%{transform:rotate(920deg)}}
-@keyframes uphill{0%{transform:translate(-200px,93px);opacity:0}6%{transform:translate(-160px,73px);opacity:1}16%{transform:translate(-110px,48px)}22%{transform:translate(-116px,52px)}34%{transform:translate(-50px,21px)}40%{transform:translate(-56px,24px)}52%{transform:translate(10px,-3px)}58%{transform:translate(5px,0)}72%{transform:translate(80px,-23px)}84%{transform:translate(160px,-37px);opacity:1}92%,100%{transform:translate(170px,-41px);opacity:0}}
+@keyframes uphill{0%{transform:translate(-238.095%,166.071%);opacity:0}6%{transform:translate(-190.476%,130.357%);opacity:1}16%{transform:translate(-130.952%,85.714%)}22%{transform:translate(-138.095%,92.857%)}34%{transform:translate(-59.524%,37.5%)}40%{transform:translate(-66.667%,42.857%)}52%{transform:translate(11.905%,-5.357%)}58%{transform:translate(5.952%,0%)}72%{transform:translate(95.238%,-41.071%)}84%{transform:translate(190.476%,-66.071%);opacity:1}92%,100%{transform:translate(202.381%,-73.214%);opacity:0}}
 @keyframes spinUp{0%,6%{transform:rotate(0)}16%{transform:rotate(80deg)}22%{transform:rotate(70deg)}34%{transform:rotate(160deg)}40%{transform:rotate(150deg)}52%{transform:rotate(240deg)}58%{transform:rotate(235deg)}72%{transform:rotate(320deg)}84%,100%{transform:rotate(400deg)}}
 @keyframes push{0%,8%{transform:scale(1)}11%{transform:scale(1.25,.8)}15%,24%{transform:scale(1)}27%{transform:scale(1.25,.8)}31%,42%{transform:scale(1)}45%{transform:scale(1.25,.8)}49%,60%{transform:scale(1)}63%{transform:scale(1.25,.8)}67%,100%{transform:scale(1)}}
-@keyframes naSlide{0%{transform:translate(0,0) rotate(0);opacity:0}8%{opacity:1}12%{transform:translate(0,0) rotate(0)}70%{transform:translate(104px,65px) rotate(300deg)}74%{transform:translate(100px,62px) rotate(290deg)}78%,86%{transform:translate(104px,65px) rotate(300deg);opacity:1}94%,100%{transform:translate(104px,65px) rotate(300deg);opacity:0}}
-@keyframes gluSlide{0%{transform:translate(0,0) rotate(0);opacity:0}8%{opacity:1}12%{transform:translate(0,0) rotate(0)}40%{transform:translate(46px,-28px) rotate(-8deg)}70%{transform:translate(92px,-57px) rotate(4deg)}74%{transform:translate(88px,-54px) rotate(0)}78%,86%{transform:translate(92px,-57px) rotate(0);opacity:1}94%,100%{transform:translate(92px,-57px);opacity:0}}
-@keyframes ropeNa{0%{transform:scale(1);opacity:0}8%{opacity:1}12%{transform:scale(1)}70%{transform:scale(5)}74%{transform:scale(4.85)}78%,86%{transform:scale(5);opacity:1}94%,100%{transform:scale(5);opacity:0}}
-@keyframes ropeGlu{0%{transform:scale(1);opacity:0}8%{opacity:1}12%{transform:scale(1)}70%{transform:scale(.255)}74%{transform:scale(.28)}78%,86%{transform:scale(.255);opacity:1}94%,100%{transform:scale(.255);opacity:0}}
+@keyframes naSlide{0%{transform:translate(0%,0%) rotate(0);opacity:0}8%{opacity:1}12%{transform:translate(0%,0%) rotate(0)}70%{transform:translate(260%,162.5%) rotate(300deg)}74%{transform:translate(250%,155%) rotate(290deg)}78%,86%{transform:translate(260%,162.5%) rotate(300deg);opacity:1}94%,100%{transform:translate(260%,162.5%) rotate(300deg);opacity:0}}
+@keyframes gluSlide{0%{transform:translate(0%,0%) rotate(0);opacity:0}8%{opacity:1}12%{transform:translate(0%,0%) rotate(0)}40%{transform:translate(100%,-60.87%) rotate(-8deg)}70%{transform:translate(200%,-123.913%) rotate(4deg)}74%{transform:translate(191.304%,-117.391%) rotate(0)}78%,86%{transform:translate(200%,-123.913%) rotate(0);opacity:1}94%,100%{transform:translate(200%,-123.913%);opacity:0}}
+@keyframes ropeNa{0%{transform:rotate(31.6deg) scaleX(1);opacity:0}8%{opacity:1}12%{transform:rotate(31.6deg) scaleX(1)}70%{transform:rotate(31.6deg) scaleX(5)}74%{transform:rotate(31.6deg) scaleX(4.85)}78%,86%{transform:rotate(31.6deg) scaleX(5);opacity:1}94%,100%{transform:rotate(31.6deg) scaleX(5);opacity:0}}
+@keyframes ropeGlu{0%{transform:rotate(145.98deg) scaleX(1);opacity:0}8%{opacity:1}12%{transform:rotate(145.98deg) scaleX(1)}70%{transform:rotate(145.98deg) scaleX(0.255)}74%{transform:rotate(145.98deg) scaleX(0.28)}78%,86%{transform:rotate(145.98deg) scaleX(0.255);opacity:1}94%,100%{transform:rotate(145.98deg) scaleX(0.255);opacity:0}}
 @keyframes pulley{0%,12%{transform:rotate(0)}70%{transform:rotate(400deg)}74%{transform:rotate(385deg)}78%,100%{transform:rotate(400deg)}}
-@keyframes wander{0%,100%{transform:translate(0,0) rotate(0)}25%{transform:translate(7px,-10px) rotate(7deg)}50%{transform:translate(-3px,-4px) rotate(-5deg)}75%{transform:translate(-8px,-12px) rotate(4deg)}}
+@keyframes wander{0%,100%{transform:translate(0%,0%) rotate(0)}25%{transform:translate(12.069%,-17.241%) rotate(7deg)}50%{transform:translate(-5.172%,-6.897%) rotate(-5deg)}75%{transform:translate(-13.793%,-20.69%) rotate(4deg)}}
 @keyframes blink{0%,37%,40%,77%,80%,100%{transform:scaleY(1)}38.5%,78.5%{transform:scaleY(.1)}}
 @keyframes lobeL{0%,20%{transform:rotate(7deg) scale(1)}22%{transform:rotate(9.5deg) scale(1.02,.98)}26%,40%{transform:rotate(7deg) scale(1)}42%{transform:rotate(5deg) scale(1.05,.95)}46%{transform:rotate(9deg) scale(.97,1.04);animation-timing-function:cubic-bezier(.34,1.56,.64,1)}51%{transform:rotate(-11deg) scale(1)}55%{transform:rotate(-5.5deg)}58%,72%{transform:rotate(-7deg)}74%{transform:rotate(-9deg) scale(1.03,.97);animation-timing-function:cubic-bezier(.34,1.56,.64,1)}79%{transform:rotate(10deg) scale(1)}83%{transform:rotate(6deg)}86%,100%{transform:rotate(7deg)}}
 @keyframes lobeR{0%,20%{transform:rotate(-7deg) scale(1)}22%{transform:rotate(-9.5deg) scale(1.02,.98)}26%,40%{transform:rotate(-7deg) scale(1)}42%{transform:rotate(-5deg) scale(1.05,.95)}46%{transform:rotate(-9deg) scale(.97,1.04);animation-timing-function:cubic-bezier(.34,1.56,.64,1)}51%{transform:rotate(11deg) scale(1)}55%{transform:rotate(5.5deg)}58%,72%{transform:rotate(7deg)}74%{transform:rotate(9deg) scale(1.03,.97);animation-timing-function:cubic-bezier(.34,1.56,.64,1)}79%{transform:rotate(-10deg) scale(1)}83%{transform:rotate(-6deg)}86%,100%{transform:rotate(-7deg)}}
-@keyframes naA{0%{transform:translate(-50px,450px) scale(.5) rotate(-30deg);opacity:0}5%{transform:translate(-40px,420px) scale(1) rotate(-10deg);opacity:1}11%{transform:translate(-8px,370px) rotate(12deg)}17%{transform:translate(12px,300px) rotate(-8deg);animation-timing-function:cubic-bezier(.34,1.56,.64,1)}22%{transform:translate(0,227px) scale(1.2,.8) rotate(0)}25%{transform:translate(0,227px) scale(1)}30%{transform:translate(-3px,224px) rotate(-8deg)}35%{transform:translate(3px,229px) rotate(8deg)}40%{transform:translate(-2px,226px) rotate(-5deg)}45%{transform:translate(0,232px) scale(1.15,.85) rotate(0);animation-timing-function:cubic-bezier(.5,0,.3,1)}52%{transform:translate(-10px,150px) scale(.8,1.25) rotate(-5deg)}60%{transform:translate(-60px,20px) scale(1) rotate(-20deg)}66%{transform:translate(-100px,-20px) rotate(-35deg);opacity:1}71%,100%{transform:translate(-120px,-40px) scale(.7) rotate(-45deg);opacity:0}}
-@keyframes naB{0%,4%{transform:translate(40px,460px) scale(.5) rotate(20deg);opacity:0}8%{transform:translate(30px,420px) scale(1) rotate(15deg);opacity:1}14%{transform:translate(-10px,350px) rotate(-10deg)}20%{transform:translate(8px,290px) rotate(6deg);animation-timing-function:cubic-bezier(.34,1.56,.64,1)}25%{transform:translate(0,227px) scale(1.2,.8) rotate(0)}28%{transform:translate(0,227px) scale(1)}33%{transform:translate(3px,230px) rotate(7deg)}38%{transform:translate(-3px,225px) rotate(-7deg)}43%{transform:translate(1px,228px) rotate(3deg)}47%{transform:translate(0,233px) scale(1.15,.85) rotate(0);animation-timing-function:cubic-bezier(.5,0,.3,1)}54%{transform:translate(4px,140px) scale(.8,1.25) rotate(0)}62%{transform:translate(10px,0) scale(1) rotate(8deg)}67%{transform:translate(14px,-40px) rotate(15deg);opacity:1}72%,100%{transform:translate(18px,-60px) scale(.7) rotate(20deg);opacity:0}}
-@keyframes naC{0%,7%{transform:translate(-20px,470px) scale(.5) rotate(0);opacity:0}11%{transform:translate(-30px,420px) scale(1) rotate(-12deg);opacity:1}17%{transform:translate(10px,340px) rotate(10deg)}23%{transform:translate(-6px,270px) rotate(-6deg);animation-timing-function:cubic-bezier(.34,1.56,.64,1)}27%{transform:translate(0,227px) scale(1.2,.8) rotate(0)}30%{transform:translate(0,227px) scale(1)}35%{transform:translate(-3px,229px) rotate(-6deg)}40%{transform:translate(3px,225px) rotate(6deg)}46%{transform:translate(0,233px) scale(1.15,.85) rotate(0);animation-timing-function:cubic-bezier(.5,0,.3,1)}55%{transform:translate(20px,130px) scale(.8,1.25) rotate(8deg)}63%{transform:translate(80px,-20px) scale(1) rotate(25deg)}68%{transform:translate(110px,-50px) rotate(35deg);opacity:1}73%,100%{transform:translate(125px,-65px) scale(.7) rotate(40deg);opacity:0}}
-@keyframes kA{0%,57%{transform:translate(-170px,20px) scale(.5) rotate(-30deg);opacity:0}61%{transform:translate(-140px,30px) scale(1) rotate(-15deg);opacity:1}66%{transform:translate(-70px,90px) rotate(10deg)}70%{transform:translate(-15px,170px) rotate(-6deg);animation-timing-function:cubic-bezier(.34,1.56,.64,1)}73%{transform:translate(0,236px) scale(1.2,.8) rotate(0)}76%{transform:translate(0,236px) scale(1)}78%{transform:translate(-2px,233px) rotate(-6deg)}80%{transform:translate(0,238px) scale(1.12,.88) rotate(0);animation-timing-function:cubic-bezier(.5,0,.3,1)}86%{transform:translate(-20px,330px) scale(.85,1.2) rotate(-8deg)}93%{transform:translate(-70px,410px) scale(1) rotate(-20deg);opacity:1}100%{transform:translate(-95px,440px) scale(.7) rotate(-30deg);opacity:0}}
-@keyframes kB{0%,59%{transform:translate(170px,10px) scale(.5) rotate(30deg);opacity:0}63%{transform:translate(140px,20px) scale(1) rotate(15deg);opacity:1}68%{transform:translate(70px,90px) rotate(-10deg)}72%{transform:translate(15px,170px) rotate(6deg);animation-timing-function:cubic-bezier(.34,1.56,.64,1)}75%{transform:translate(0,236px) scale(1.2,.8) rotate(0)}78%{transform:translate(0,236px) scale(1)}81%{transform:translate(0,240px) scale(1.12,.88);animation-timing-function:cubic-bezier(.5,0,.3,1)}88%{transform:translate(20px,330px) scale(.85,1.2) rotate(8deg)}95%{transform:translate(70px,400px) scale(1) rotate(20deg);opacity:1}100%{transform:translate(90px,420px) scale(.7) rotate(28deg);opacity:0}}
-@keyframes atpGo{0%{transform:translate(330px,50px) scale(.8) rotate(0);opacity:0}5%{transform:translate(305px,44px) scale(1) rotate(-4deg);opacity:1}14%{transform:translate(190px,14px) rotate(-7deg)}23%{transform:translate(60px,-22px) rotate(6deg);animation-timing-function:cubic-bezier(.34,1.56,.64,1)}33%{transform:translate(-178px,-43px) scale(1.12,.88) rotate(0)}36%{transform:translate(-178px,-43px) scale(1)}39%{transform:translate(-178px,-43px) scale(.92)}41%{transform:translate(-178px,-43px) scale(1.25);opacity:1}43%,100%{transform:translate(-178px,-43px) scale(.3);opacity:0}}
-@keyframes adpGo{0%,40%{transform:translate(-178px,-43px) scale(.5);opacity:0}43%{transform:translate(-178px,-43px) scale(1.1) rotate(0);opacity:1}46%{transform:translate(-190px,-30px) scale(1) rotate(-6deg)}56%{transform:translate(-270px,0) rotate(-14deg)}64%{transform:translate(-360px,18px) rotate(-20deg);opacity:.8}70%,100%{transform:translate(-420px,26px) scale(.8) rotate(-26deg);opacity:0}}
+@keyframes naA{0%{transform:translate(-138.889%,1250%) scale(.5) rotate(-30deg);opacity:0}5%{transform:translate(-111.111%,1166.667%) scale(1) rotate(-10deg);opacity:1}11%{transform:translate(-22.222%,1027.778%) rotate(12deg)}17%{transform:translate(33.333%,833.333%) rotate(-8deg);animation-timing-function:cubic-bezier(.34,1.56,.64,1)}22%{transform:translate(0%,630.556%) scale(1.2,.8) rotate(0)}25%{transform:translate(0%,630.556%) scale(1)}30%{transform:translate(-8.333%,622.222%) rotate(-8deg)}35%{transform:translate(8.333%,636.111%) rotate(8deg)}40%{transform:translate(-5.556%,627.778%) rotate(-5deg)}45%{transform:translate(0%,644.444%) scale(1.15,.85) rotate(0);animation-timing-function:cubic-bezier(.5,0,.3,1)}52%{transform:translate(-27.778%,416.667%) scale(.8,1.25) rotate(-5deg)}60%{transform:translate(-166.667%,55.556%) scale(1) rotate(-20deg)}66%{transform:translate(-277.778%,-55.556%) rotate(-35deg);opacity:1}71%,100%{transform:translate(-333.333%,-111.111%) scale(.7) rotate(-45deg);opacity:0}}
+@keyframes naB{0%,4%{transform:translate(111.111%,1277.778%) scale(.5) rotate(20deg);opacity:0}8%{transform:translate(83.333%,1166.667%) scale(1) rotate(15deg);opacity:1}14%{transform:translate(-27.778%,972.222%) rotate(-10deg)}20%{transform:translate(22.222%,805.556%) rotate(6deg);animation-timing-function:cubic-bezier(.34,1.56,.64,1)}25%{transform:translate(0%,630.556%) scale(1.2,.8) rotate(0)}28%{transform:translate(0%,630.556%) scale(1)}33%{transform:translate(8.333%,638.889%) rotate(7deg)}38%{transform:translate(-8.333%,625%) rotate(-7deg)}43%{transform:translate(2.778%,633.333%) rotate(3deg)}47%{transform:translate(0%,647.222%) scale(1.15,.85) rotate(0);animation-timing-function:cubic-bezier(.5,0,.3,1)}54%{transform:translate(11.111%,388.889%) scale(.8,1.25) rotate(0)}62%{transform:translate(27.778%,0%) scale(1) rotate(8deg)}67%{transform:translate(38.889%,-111.111%) rotate(15deg);opacity:1}72%,100%{transform:translate(50%,-166.667%) scale(.7) rotate(20deg);opacity:0}}
+@keyframes naC{0%,7%{transform:translate(-55.556%,1305.556%) scale(.5) rotate(0);opacity:0}11%{transform:translate(-83.333%,1166.667%) scale(1) rotate(-12deg);opacity:1}17%{transform:translate(27.778%,944.444%) rotate(10deg)}23%{transform:translate(-16.667%,750%) rotate(-6deg);animation-timing-function:cubic-bezier(.34,1.56,.64,1)}27%{transform:translate(0%,630.556%) scale(1.2,.8) rotate(0)}30%{transform:translate(0%,630.556%) scale(1)}35%{transform:translate(-8.333%,636.111%) rotate(-6deg)}40%{transform:translate(8.333%,625%) rotate(6deg)}46%{transform:translate(0%,647.222%) scale(1.15,.85) rotate(0);animation-timing-function:cubic-bezier(.5,0,.3,1)}55%{transform:translate(55.556%,361.111%) scale(.8,1.25) rotate(8deg)}63%{transform:translate(222.222%,-55.556%) scale(1) rotate(25deg)}68%{transform:translate(305.556%,-138.889%) rotate(35deg);opacity:1}73%,100%{transform:translate(347.222%,-180.556%) scale(.7) rotate(40deg);opacity:0}}
+@keyframes kA{0%,57%{transform:translate(-472.222%,55.556%) scale(.5) rotate(-30deg);opacity:0}61%{transform:translate(-388.889%,83.333%) scale(1) rotate(-15deg);opacity:1}66%{transform:translate(-194.444%,250%) rotate(10deg)}70%{transform:translate(-41.667%,472.222%) rotate(-6deg);animation-timing-function:cubic-bezier(.34,1.56,.64,1)}73%{transform:translate(0%,655.556%) scale(1.2,.8) rotate(0)}76%{transform:translate(0%,655.556%) scale(1)}78%{transform:translate(-5.556%,647.222%) rotate(-6deg)}80%{transform:translate(0%,661.111%) scale(1.12,.88) rotate(0);animation-timing-function:cubic-bezier(.5,0,.3,1)}86%{transform:translate(-55.556%,916.667%) scale(.85,1.2) rotate(-8deg)}93%{transform:translate(-194.444%,1138.889%) scale(1) rotate(-20deg);opacity:1}100%{transform:translate(-263.889%,1222.222%) scale(.7) rotate(-30deg);opacity:0}}
+@keyframes kB{0%,59%{transform:translate(472.222%,27.778%) scale(.5) rotate(30deg);opacity:0}63%{transform:translate(388.889%,55.556%) scale(1) rotate(15deg);opacity:1}68%{transform:translate(194.444%,250%) rotate(-10deg)}72%{transform:translate(41.667%,472.222%) rotate(6deg);animation-timing-function:cubic-bezier(.34,1.56,.64,1)}75%{transform:translate(0%,655.556%) scale(1.2,.8) rotate(0)}78%{transform:translate(0%,655.556%) scale(1)}81%{transform:translate(0%,666.667%) scale(1.12,.88);animation-timing-function:cubic-bezier(.5,0,.3,1)}88%{transform:translate(55.556%,916.667%) scale(.85,1.2) rotate(8deg)}95%{transform:translate(194.444%,1111.111%) scale(1) rotate(20deg);opacity:1}100%{transform:translate(250%,1166.667%) scale(.7) rotate(28deg);opacity:0}}
+@keyframes atpGo{0%{transform:translate(589.286%,89.286%) scale(.8) rotate(0);opacity:0}5%{transform:translate(544.643%,78.571%) scale(1) rotate(-4deg);opacity:1}14%{transform:translate(339.286%,25%) rotate(-7deg)}23%{transform:translate(107.143%,-39.286%) rotate(6deg);animation-timing-function:cubic-bezier(.34,1.56,.64,1)}33%{transform:translate(-317.857%,-76.786%) scale(1.12,.88) rotate(0)}36%{transform:translate(-317.857%,-76.786%) scale(1)}39%{transform:translate(-317.857%,-76.786%) scale(.92)}41%{transform:translate(-317.857%,-76.786%) scale(1.25);opacity:1}43%,100%{transform:translate(-317.857%,-76.786%) scale(.3);opacity:0}}
+@keyframes adpGo{0%,40%{transform:translate(-317.857%,-76.786%) scale(.5);opacity:0}43%{transform:translate(-317.857%,-76.786%) scale(1.1) rotate(0);opacity:1}46%{transform:translate(-339.286%,-53.571%) scale(1) rotate(-6deg)}56%{transform:translate(-482.143%,0%) rotate(-14deg)}64%{transform:translate(-642.857%,32.143%) rotate(-20deg);opacity:.8}70%,100%{transform:translate(-750%,46.429%) scale(.8) rotate(-26deg);opacity:0}}
 @keyframes phoShow{0%,41%{transform:scale(0) rotate(-40deg);opacity:0}44%{transform:scale(1.45) rotate(15deg);opacity:1}47%{transform:scale(.85) rotate(-8deg)}50%,73%{transform:scale(1) rotate(0);opacity:1}76%{transform:scale(1.25) rotate(10deg);opacity:1}82%,100%{transform:translate(40px,60px) scale(.2) rotate(120deg);opacity:0}}
 @keyframes ripple{0%,40%{transform:scale(.4);opacity:0}41%{transform:scale(.5);opacity:.9}55%,100%{transform:scale(2.8);opacity:0}}
-@keyframes arrNa{0%,46%{opacity:.3;transform:translateY(0)}50%{opacity:1;transform:translateY(-10px)}56%{transform:translateY(0)}62%{transform:translateY(-10px)}68%{opacity:1;transform:translateY(0)}74%,100%{opacity:.3;transform:translateY(0)}}
-@keyframes arrK{0%,72%{opacity:.3;transform:translateY(0)}78%{opacity:1;transform:translateY(10px)}84%{transform:translateY(0)}90%{transform:translateY(10px)}96%{opacity:1;transform:translateY(0)}100%{opacity:.3}}
+@keyframes arrNa{0%,46%{opacity:.3;transform:translateY(0%)}50%{opacity:1;transform:translateY(-10.638%)}56%{transform:translateY(0%)}62%{transform:translateY(-10.638%)}68%{opacity:1;transform:translateY(0%)}74%,100%{opacity:.3;transform:translateY(0%)}}
+@keyframes arrK{0%,72%{opacity:.3;transform:translateY(0%)}78%{opacity:1;transform:translateY(11.494%)}84%{transform:translateY(0%)}90%{transform:translateY(11.494%)}96%{opacity:1;transform:translateY(0%)}100%{opacity:.3}}
 @keyframes hi1{0%{background:#FF90E8;transform:translate(-2px,-2px) scale(1.06)}3%,23%{background:#FF90E8;transform:translate(-2px,-2px)}24%,100%{background:#FFFFFF;transform:translate(0,0)}}
 @keyframes hi2{0%,23%{background:#FFFFFF;transform:translate(0,0)}24%{background:#FF90E8;transform:translate(-2px,-2px) scale(1.06)}27%,47%{background:#FF90E8;transform:translate(-2px,-2px)}48%,100%{background:#FFFFFF;transform:translate(0,0)}}
 @keyframes hi3{0%,47%{background:#FFFFFF;transform:translate(0,0)}48%{background:#FF90E8;transform:translate(-2px,-2px) scale(1.06)}51%,73%{background:#FF90E8;transform:translate(-2px,-2px)}74%,100%{background:#FFFFFF;transform:translate(0,0)}}
 @keyframes hi4{0%,73%{background:#FFFFFF;transform:translate(0,0)}74%{background:#FF90E8;transform:translate(-2px,-2px) scale(1.06)}77%,100%{background:#FF90E8;transform:translate(-2px,-2px)}}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:'Inter Tight',system-ui,sans-serif;color:#000000;background:#FFFFFF;overflow:hidden;font-size:17px;line-height:1.45}
+.bg{position:fixed;inset:0;z-index:0;background-color:#FFFFFF;background-image:radial-gradient(rgba(0,0,0,0.09) 1px,transparent 1.3px);background-size:22px 22px}
+#particles{position:fixed;inset:0;width:100vw;height:100vh;z-index:3;pointer-events:none}
+.top{position:fixed;top:0;left:0;right:0;z-index:6;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 24px;pointer-events:none}
+.top>*{pointer-events:auto}
+.logo{display:flex;align-items:center;gap:10px;background:none;border:0;padding:0;cursor:pointer;font:900 20px 'Inter Tight',sans-serif;letter-spacing:-0.02em;color:#000000}
+.tag{display:inline-block;background:#FFC900;border:2px solid #000000;border-radius:999px;padding:5px 14px;font-weight:800;font-size:14px;box-shadow:3px 3px 0 #000000}
+main{position:fixed;inset:0;z-index:2}
+.panel{position:absolute;inset:0;padding:78px 32px 118px;display:flex;flex-direction:column;gap:18px;visibility:hidden;opacity:0;transition:opacity .45s ease,visibility 0s linear .45s;overflow-y:auto}
+.panel.active{visibility:visible;opacity:1;transition:opacity .45s ease}
+.wrap{width:100%;max-width:1240px;margin:0 auto}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px 40px}
+.head h2{font-weight:900;font-size:clamp(32px,4.4vw,64px);line-height:.98;letter-spacing:-0.035em;margin:0;max-width:760px}
+.head p{margin:0;max-width:380px;font-weight:500;color:#222222}
+.mid{position:relative;flex:1 1 auto;min-height:150px}
+.target{position:absolute;inset:0}
+.rv{opacity:0}
+.panel.active .rv{animation:blurIn .8s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--d,0s)}
+@keyframes blurIn{from{opacity:0;filter:blur(14px);transform:translateY(16px)}to{opacity:1;filter:none;transform:none}}
+mark{background:#FF90E8;color:#000000;padding:0 .12em;border-radius:.08em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.dock{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:7;display:flex;gap:6px;background:#FFFFFF;border:2px solid #000000;border-radius:12px;box-shadow:6px 6px 0 #000000;padding:8px;max-width:calc(100vw - 24px);overflow-x:auto}
+.dock button{font:800 17px 'Inter Tight',sans-serif;border:2px solid transparent;background:transparent;padding:10px 16px;border-radius:8px;cursor:pointer;white-space:nowrap;color:#000000;transition:background .2s ease,transform .15s ease,box-shadow .15s ease}
+.dock button:hover{background:#F1F1F1}
+.dock button[aria-selected="true"]{background:#FF90E8;border-color:#000000;box-shadow:3px 3px 0 #000000;transform:translate(-1px,-1px)}
+.cardrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.tcard{background:#FFFFFF;border:2px solid #000000;border-radius:8px;overflow:hidden;box-shadow:6px 6px 0 #000000}
+.tcard .tx{padding:14px 16px}
+.tcard h3{margin:0 0 4px;font-weight:900;font-size:22px;letter-spacing:-0.02em}
+.tcard p{margin:0;font-size:15px;font-weight:500;color:#222222}
+.hero-link{display:flex;align-items:center;gap:14px;text-decoration:none;color:#000000;border:2px solid #000000;border-radius:8px;padding:14px 16px}
+.hero-link b{display:block;font-size:20px;font-weight:900}
+.hero-link span{font-size:15px;font-weight:500}
+.refgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.refgrid a{display:block;background:#FFFFFF;border:2px solid #000000;border-radius:8px;padding:10px 14px;text-decoration:none;color:#000000;font-weight:800;box-shadow:3px 3px 0 #000000;transition:transform .12s ease,box-shadow .12s ease}
+.refgrid a:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 #000000}
+.refgrid a small{display:block;font-weight:900;font-size:12px;color:#333333}
+.split{display:flex;flex-wrap:wrap;gap:28px;flex:1 1 auto;align-items:stretch}
+.split .mid{flex:1 1 320px}
+.qcard{flex:1 1 440px;max-width:620px;align-self:center;background:#FFFFFF;border:2px solid #000000;border-radius:8px;box-shadow:8px 8px 0 #000000;padding:24px}
+#scene{width:100%;max-width:1160px;margin:0 auto}
+#scene > [role="img"]{border:2px solid #000000;border-radius:8px;opacity:0;transition:opacity .8s ease;box-shadow:6px 6px 0 #000000}
+[data-panel="pump"].assembled #scene > [role="img"]{opacity:1}
+.note{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;font-weight:600}
+.note b{background:#000000;color:#FFFFFF;border-radius:4px;padding:2px 8px}
+@media (prefers-reduced-motion: reduce){.panel.active .rv{animation:none;opacity:1}.panel{transition:none}}
+.hero-h1{font-weight:900;font-size:clamp(40px,6.4vw,104px);line-height:1;letter-spacing:-0.04em;margin:0;max-width:980px}
+#scene{max-width:min(1160px,calc((100vh - 330px) * 2.88))}
+@media (max-height: 820px){.panel{padding:70px 28px 100px;gap:12px}.head h2{font-size:clamp(28px,3.4vw,48px)}.hero-h1{font-size:clamp(36px,5vw,76px)}.tcard .tx{padding:10px 14px}.tcard h3{font-size:19px}.tcard p{font-size:14px}.dock{bottom:12px}.dock button{padding:8px 14px}}
+@media (max-width: 760px){.panel{padding:72px 16px 110px}.head h2{font-size:34px}.dock button{font-size:15px;padding:8px 12px}#scene{max-width:100%}}
 </style>
 </head>
 <body>
-<div style="background: #FFFFFF; color: #000000; font-family: 'Inter Tight', system-ui, sans-serif; font-size: 18px; line-height: 1.5; overflow: hidden">
-
 <svg width="0" height="0" style="position: absolute" aria-hidden="true">
 <defs>
 <pattern id="lipid" width="22" height="64" patternUnits="userSpaceOnUse">
@@ -104,6 +158,17 @@ a{color:#000000}a:hover{color:#000000}
 <line x1="14" y1="34" x2="14" y2="48" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"></line>
 <circle cx="11" cy="9" r="8" fill="#23A094" stroke="#000000" stroke-width="1.6"></circle>
 <circle cx="11" cy="55" r="8" fill="#23A094" stroke="#000000" stroke-width="1.6"></circle>
+</pattern>
+<pattern id="texOut" width="40" height="24" patternUnits="userSpaceOnUse">
+<path d="M0 12 Q10 6 20 12 T40 12" fill="none" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="2"></path>
+<circle cx="30" cy="4" r="1.7" fill="#6C86DC"></circle>
+<circle cx="9" cy="20" r="1.2" fill="#6C86DC"></circle>
+</pattern>
+<pattern id="texIn" width="40" height="40" patternUnits="userSpaceOnUse">
+<circle cx="10" cy="10" r="2.6" fill="#E8B000"></circle>
+<circle cx="30" cy="30" r="2.6" fill="#E8B000"></circle>
+<circle cx="30" cy="10" r="4" fill="none" stroke="#FFE27A" stroke-width="1.6"></circle>
+<circle cx="10" cy="30" r="1.4" fill="#D9A300"></circle>
 </pattern>
 <symbol id="na" viewBox="0 0 44 44">
 <circle cx="20" cy="24" r="16.5" fill="#FF9A2E" stroke="#000000" stroke-width="2.5"></circle>
@@ -147,41 +212,81 @@ a{color:#000000}a:hover{color:#000000}
 </symbol>
 </defs>
 </svg>
+<div class="bg" aria-hidden="true"></div>
+<canvas id="particles" aria-hidden="true"></canvas>
 
-<header style="border-bottom: 2px solid #000000; background: #FFFFFF">
-<div style="max-width: 1240px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
-<a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #000000">
-<svg width="36" height="36" viewBox="0 0 44 44" aria-hidden="true"><use href="#na"></use></svg>
-<span style="font-weight: 900; font-size: 20px; letter-spacing: -0.02em">мембранный транспорт</span>
-</a>
-<nav aria-label="Разделы" style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
-<a href="#types" style="color: #000000; text-decoration: none; padding: 10px 14px; font-weight: 700">§16 Типы</a>
-<a href="#pump" style="color: #000000; text-decoration: none; padding: 10px 14px; font-weight: 700">§17 Насос</a>
-<a href="game.html" style="color: #000000; text-decoration: none; padding: 10px 14px; font-weight: 700">Игра</a>
-<a href="spravochnik.html" style="color: #000000; text-decoration: none; padding: 10px 14px; font-weight: 700">Справочник</a>
-<a href="#quiz" class="btn" style="color: #000000; background: #FF90E8; border: 2px solid #000000; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: 800">Вопросы</a>
-</nav>
-</div>
+<header class="top">
+<button type="button" class="logo" data-go="home"><svg width="34" height="34" viewBox="0 0 44 44" aria-hidden="true"><use href="#na"></use></svg>мембранный транспорт</button>
+<span class="tag">Биология · 11 класс · §16–17</span>
 </header>
 
-<section id="top" style="background: #FFFFFF; color: #000000; border-bottom: 2px solid #000000">
-<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px 96px">
-<div class="chip" style="display: inline-block; background: #FFC900; color: #000000; border: 2px solid #000000; border-radius: 999px; padding: 6px 16px; font-weight: 800; font-size: 15px; margin-bottom: 28px">Биология · 11 класс · глава 3 · §16–17</div>
-<h1 style="font-weight: 900; font-size: clamp(44px, 7.4vw, 112px); line-height: 1.02; letter-spacing: -0.04em; margin: 0 0 28px; max-width: 1100px">Транспорт веществ через <span style="background: #FF90E8; padding: 0 0.12em; border-radius: 0.08em; box-decoration-break: clone; -webkit-box-decoration-break: clone">клеточную мембрану</span></h1>
-<p style="font-size: clamp(18px, 1.7vw, 24px); color: #333333; max-width: 640px; margin: 0 0 40px; font-weight: 500">Пассивный и активный перенос. Механизм работы <span style="white-space: nowrap">Na⁺/K⁺-АТФазы</span>.</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px">
-<a href="#types" class="btn" style="display: inline-flex; align-items: center; gap: 10px; min-height: 56px; padding: 0 28px; border-radius: 6px; background: #FF90E8; color: #000000; border: 2px solid #000000; font-weight: 800; text-decoration: none; font-size: 18px">К §16
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
-</a>
-<a href="#pump" class="btn" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 28px; border-radius: 6px; background: #FFFFFF; color: #000000; border: 2px solid #000000; font-weight: 800; text-decoration: none; font-size: 18px">К §17</a>
+<main>
+<section class="panel" data-panel="home" aria-label="Главная">
+<div class="mid"><div class="target"></div></div>
+<div class="wrap head">
+<h1 class="rv hero-h1">Транспорт веществ через <mark>клеточную мембрану</mark></h1>
+<div class="rv" style="--d: .15s; max-width: 380px">
+<p style="margin: 0 0 16px; font-weight: 500">Пассивный и активный перенос, механизм работы <span style="white-space: nowrap">Na⁺/K⁺-АТФазы</span>. Выбери раздел внизу.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<button type="button" class="btn" data-go="types" style="min-height: 50px; padding: 0 22px; border-radius: 6px; border: 2px solid #000000; background: #FF90E8; color: #000000; font: 800 17px 'Inter Tight', sans-serif; cursor: pointer">Начать →</button>
+<button type="button" class="btn" data-go="game" style="min-height: 50px; padding: 0 22px; border-radius: 6px; border: 2px solid #000000; background: #FFFFFF; color: #000000; font: 800 17px 'Inter Tight', sans-serif; cursor: pointer">Сыграть</button>
+</div>
 </div>
 </div>
 </section>
 
+<section class="panel" data-panel="types" aria-label="§16 Типы транспорта">
+<div class="wrap head">
+<h2 class="rv">Классификация видов транспорта</h2>
+<p class="rv" style="--d: .1s">Одни вещества идут по градиенту сами, другим нужен насос и энергия АТФ, третьи едут «в паре» с натрием.</p>
+</div>
+<div class="mid"><div class="target"></div></div>
+<div class="wrap cardrow">
+<article class="tcard rv" style="--d: .2s"><div aria-hidden="true" style="position: relative; overflow: hidden; border-bottom: 2px solid #000000; background-color: #FFC900; background-image: radial-gradient(rgba(0,0,0,0.13) 1.4px, transparent 1.7px); background-size: 12px 12px">
+<svg viewBox="0 0 320 170" style="display: block; width: 100%; height: auto"><path d="M0 40 Q160 60 320 150" stroke="#000000" stroke-width="4" fill="none"></path></svg>
+<div class="cardanim" style="position: absolute; inset: 0">
+<div class="actor roll" style="position: absolute; left: 27.5%; top: 19.4118%; width: 30%"><svg viewBox="88 33 96 48" style="display: block; width: 100%; height: auto; overflow: visible"><path d="M98 42 H124 M92 54 H118 M100 66 H126" stroke="#000000" stroke-width="3" stroke-linecap="round"></path></svg><div class="actor spin" style="position: absolute; left: 54.1667%; top: 8.3333%; width: 41.6667%"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#na"></use></svg></div></div>
+<div class="actor roll" style="position: absolute; left: 27.5%; top: 19.4118%; width: 30%; animation-delay: -2.25s"><svg viewBox="88 33 96 48" style="display: block; width: 100%; height: auto; overflow: visible"><path d="M98 42 H124 M92 54 H118 M100 66 H126" stroke="#000000" stroke-width="3" stroke-linecap="round"></path></svg><div class="actor spin" style="position: absolute; left: 54.1667%; top: 8.3333%; width: 41.6667%; animation-delay: -2.25s"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#na"></use></svg></div></div>
+</div>
+</div><div class="tx"><h3>Пассивный</h3><p>По градиенту, без затрат АТФ: простая, облегчённая и обменная диффузия, осмос, фильтрация.</p></div></article>
+<article class="tcard rv" style="--d: .3s"><div aria-hidden="true" style="position: relative; overflow: hidden; border-bottom: 2px solid #000000; background-color: #FF90E8; background-image: radial-gradient(rgba(0,0,0,0.13) 1.4px, transparent 1.7px); background-size: 12px 12px">
+<svg viewBox="0 0 320 170" style="display: block; width: 100%; height: auto"><path d="M0 150 Q160 60 320 40" stroke="#000000" stroke-width="4" fill="none"></path></svg>
+<div class="cardanim" style="position: absolute; inset: 0">
+<div class="actor uphill" style="position: absolute; left: 31.25%; top: 19.4118%; width: 26.25%; aspect-ratio: 84 / 56">
+<div class="actor push" style="position: absolute; left: 4.7619%; top: 39.2857%; width: 35.7143%"><svg viewBox="0 0 40 40" style="display: block; width: 100%; height: auto"><use href="#atp"></use></svg></div>
+<div class="actor spinUp" style="position: absolute; left: 47.619%; top: 7.1429%; width: 47.619%"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#na"></use></svg></div>
+</div>
+</div>
+</div><div class="tx"><h3>Активный</h3><p>Против градиента, за счёт АТФ: Na⁺/K⁺-насос, Ca²⁺-насос, протонная помпа.</p></div></article>
+<article class="tcard rv" style="--d: .4s"><div aria-hidden="true" style="position: relative; overflow: hidden; border-bottom: 2px solid #000000; background-color: #90A8ED; background-image: radial-gradient(rgba(0,0,0,0.13) 1.4px, transparent 1.7px); background-size: 12px 12px">
+<svg viewBox="0 0 320 170" style="display: block; width: 100%; height: auto"><path d="M0 150 L160 50 L320 150" stroke="#000000" stroke-width="4" fill="none" stroke-linejoin="round"></path></svg>
+<div class="cardanim" style="position: absolute; inset: 0">
+<div class="actor ropeNa" style="position: absolute; left: 50%; top: 27.0588%; width: 9.5313%; height: 3px; margin-top: -1.5px; background: #000000; border-radius: 2px; transform-origin: 0 50%; transform: rotate(31.6deg)"></div>
+<div class="actor ropeGlu" style="position: absolute; left: 50%; top: 27.0588%; width: 45.25%; height: 3px; margin-top: -1.5px; background: #000000; border-radius: 2px; transform-origin: 0 50%; transform: rotate(145.98deg)"></div>
+<div class="actor pulley" style="position: absolute; left: 45.625%; top: 15.2941%; width: 8.75%"><svg viewBox="146 26 28 28" style="display: block; width: 100%; height: auto; overflow: visible"><circle cx="160" cy="40" r="12" fill="#FFFFFF" stroke="#000000" stroke-width="2.5"></circle><path d="M160 30 V50 M150 40 H170" stroke="#000000" stroke-width="2.5" stroke-linecap="round"></path></svg></div>
+<div class="actor gluSlide" style="position: absolute; left: 5.3125%; top: 61.1765%; width: 14.375%"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#glu"></use></svg></div>
+<div class="actor naSlide" style="position: absolute; left: 51.875%; top: 24.7059%; width: 12.5%"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#na"></use></svg></div>
+</div>
+</div><div class="tx"><h3>Сопряжённый</h3><p>Вторично-активный: глюкоза и аминокислоты идут вместе с Na⁺ по его градиенту.</p></div></article>
+</div>
+</section>
+
+<section class="panel" data-panel="pump" aria-label="§17 Натрий-калиевый насос">
+<div class="wrap head">
+<h2 class="rv">Na⁺/K⁺-АТФаза: цикл работы насоса</h2>
+<p class="rv" style="--d: .1s">За один цикл: <b>3 Na⁺</b> из клетки, <b>2 K⁺</b> в клетку, <b>1 АТФ</b>. Наружу выходит на один «плюс» больше — поэтому внутри клетки «минус».</p>
+</div>
+<div class="wrap" style="flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center">
 <div class="scene" id="scene" style="--cycle: 14s">
-<svg viewBox="0 0 1440 500" style="display: block; width: 100%; height: auto; border-bottom: 2px solid #000000" role="img" aria-label="Анимация цикла Na⁺/K⁺-АТФазы: три иона Na⁺ выводятся из цитоплазмы во внеклеточную среду, два иона K⁺ переносятся в цитоплазму, на цикл расходуется одна молекула АТФ">
+<div role="img" aria-label="Анимация цикла Na⁺/K⁺-АТФазы: три иона Na⁺ выводятся из цитоплазмы во внеклеточную среду, два иона K⁺ переносятся в цитоплазму, на цикл расходуется одна молекула АТФ" style="position: relative; overflow: hidden; border-bottom: 2px solid #000000">
+<svg viewBox="0 0 1440 500" style="display: block; width: 100%; height: auto" aria-hidden="true">
 <rect x="0" y="0" width="1440" height="240" fill="#90A8ED"></rect>
 <rect x="0" y="320" width="1440" height="180" fill="#FFC900"></rect>
+</svg>
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 100%; height: 48%; overflow: hidden"><svg class="actor driftL" viewBox="0 0 1520 240" style="display: block; width: 105.5556%; height: auto"><rect x="0" y="0" width="1520" height="240" fill="url(#texOut)"></rect></svg></div>
+<div aria-hidden="true" style="position: absolute; left: 0; top: 64%; width: 100%; height: 36%; overflow: hidden"><svg class="actor driftR" viewBox="0 0 1520 180" style="display: block; width: 105.5556%; height: auto; margin-left: -5.5556%"><rect x="0" y="0" width="1520" height="180" fill="url(#texIn)"></rect></svg></div>
+<svg viewBox="0 0 1440 500" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%" aria-hidden="true">
+<g transform="translate(0,228)"><rect x="0" y="0" width="1440" height="102.4" fill="url(#lipidBig)"></rect></g>
 <g>
 <rect x="40" y="180" width="236" height="36" rx="18" fill="#FFFFFF" stroke="#000000" stroke-width="2"></rect>
 <text x="158" y="204" text-anchor="middle" font-family="Inter Tight, sans-serif" font-weight="800" font-size="16" fill="#000000">внеклеточная среда</text>
@@ -190,51 +295,41 @@ a{color:#000000}a:hover{color:#000000}
 <rect x="40" y="446" width="150" height="36" rx="18" fill="#FFFFFF" stroke="#000000" stroke-width="2"></rect>
 <text x="115" y="470" text-anchor="middle" font-family="Inter Tight, sans-serif" font-weight="800" font-size="16" fill="#000000">цитоплазма</text>
 </g>
-<g transform="translate(0,228)"><rect x="0" y="0" width="1440" height="102.4" fill="url(#lipidBig)"></rect></g>
-<circle class="ripple" cx="730" cy="385" r="40" fill="none" stroke="#000000" stroke-width="6" style="opacity: 0"></circle>
-<circle class="ripple" cx="730" cy="385" r="40" fill="none" stroke="#FF5A4E" stroke-width="5" style="opacity: 0; animation-delay: 0.45s"></circle>
-<g class="lobeL">
-<rect x="604" y="190" width="72" height="180" rx="34" fill="#2F6FEB" stroke="#000000" stroke-width="4"></rect>
-<g class="eye">
-<circle cx="636" cy="226" r="9" fill="#FFFFFF" stroke="#000000" stroke-width="2"></circle>
-<circle cx="638" cy="228" r="4.5" fill="#000000"></circle>
-</g>
-</g>
-<g class="lobeR">
-<rect x="724" y="190" width="72" height="180" rx="34" fill="#2F6FEB" stroke="#000000" stroke-width="4"></rect>
-<g class="eye">
-<circle cx="764" cy="226" r="9" fill="#FFFFFF" stroke="#000000" stroke-width="2"></circle>
-<circle cx="762" cy="228" r="4.5" fill="#000000"></circle>
-</g>
-<use class="phoShow" href="#pho" x="732" y="296" width="28" height="28" style="opacity: 0"></use>
-</g>
-<g class="arrNa">
-<path d="M584 190 V112" stroke="#000000" stroke-width="6" stroke-linecap="round"></path>
-<path d="M568 130 L584 108 L600 130" stroke="#000000" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
-</g>
-<g class="arrK">
-<path d="M816 345 V420" stroke="#000000" stroke-width="6" stroke-linecap="round"></path>
-<path d="M800 402 L816 424 L832 402" stroke="#000000" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
-</g>
-<use class="adpGo" href="#adp" x="880" y="400" width="56" height="56" style="opacity: 0"></use>
-<use class="atpGo" href="#atp" x="880" y="400" width="56" height="56" style="opacity: 0"></use>
-<g transform="translate(-6,0)"><use class="naA" href="#na" x="682" y="0" width="36" height="36" style="opacity: 0"></use></g>
-<g transform="translate(6,35)"><use class="naB" href="#na" x="682" y="0" width="36" height="36" style="opacity: 0"></use></g>
-<g transform="translate(-6,70)"><use class="naC" href="#na" x="682" y="0" width="36" height="36" style="opacity: 0"></use></g>
-<g transform="translate(-8,0)"><use class="kA" href="#k" x="682" y="0" width="36" height="36" style="opacity: 0"></use></g>
-<g transform="translate(8,36)"><use class="kB" href="#k" x="682" y="0" width="36" height="36" style="opacity: 0"></use></g>
-<use class="bob" href="#na" x="140" y="50" width="64" height="64"></use>
-<use class="bob" href="#na" x="320" y="110" width="52" height="52" style="animation-duration: 10s; animation-delay: -0.8s"></use>
-<use class="bob" href="#na" x="430" y="30" width="58" height="58" style="animation-delay: -1.6s"></use>
-<use class="bob" href="#na" x="920" y="100" width="56" height="56" style="animation-delay: -0.4s"></use>
-<use class="bob" href="#na" x="1060" y="40" width="64" height="64" style="animation-duration: 7s; animation-delay: -2.2s"></use>
-<use class="bob" href="#na" x="1250" y="130" width="52" height="52" style="animation-delay: -1.2s"></use>
-<use class="bob" href="#k" x="420" y="392" width="60" height="60" style="animation-duration: 9s; animation-delay: -1s"></use>
-<use class="bob" href="#k" x="530" y="420" width="54" height="54" style="animation-delay: -2.4s"></use>
-<use class="bob" href="#k" x="1000" y="410" width="60" height="60" style="animation-duration: 7.6s; animation-delay: -0.6s"></use>
-<use class="bob" href="#k" x="1180" y="380" width="56" height="56" style="animation-delay: -1.8s"></use>
-<use class="bob" href="#k" x="1310" y="430" width="50" height="50" style="animation-duration: 11s; animation-delay: -2.8s"></use>
 </svg>
+<div aria-hidden="true">
+<div class="actor ripple" style="position: absolute; left: 47.6389%; top: 68.2%; width: 6.1111%; opacity: 0"><svg viewBox="686 341 88 88" style="display: block; width: 100%; height: auto; overflow: visible"><circle cx="730" cy="385" r="40" fill="none" stroke="#000000" stroke-width="6"></circle></svg></div>
+<div class="actor ripple" style="position: absolute; left: 47.6389%; top: 68.2%; width: 6.1111%; opacity: 0; animation-delay: 0.45s"><svg viewBox="686 341 88 88" style="display: block; width: 100%; height: auto; overflow: visible"><circle cx="730" cy="385" r="40" fill="none" stroke="#FF5A4E" stroke-width="5"></circle></svg></div>
+<div class="actor lobeL" style="position: absolute; left: 41.6667%; top: 37.2%; width: 5.5556%"><svg viewBox="600 186 80 188" style="display: block; width: 100%; height: auto; overflow: visible">
+<rect x="604" y="190" width="72" height="180" rx="34" fill="#2F6FEB" stroke="#000000" stroke-width="4"></rect>
+<g class="eye"><circle cx="636" cy="226" r="9" fill="#FFFFFF" stroke="#000000" stroke-width="2"></circle><circle cx="638" cy="228" r="4.5" fill="#000000"></circle></g>
+</svg></div>
+<div class="actor lobeR" style="position: absolute; left: 50%; top: 37.2%; width: 5.5556%"><svg viewBox="720 186 80 188" style="display: block; width: 100%; height: auto; overflow: visible">
+<rect x="724" y="190" width="72" height="180" rx="34" fill="#2F6FEB" stroke="#000000" stroke-width="4"></rect>
+<g class="eye"><circle cx="764" cy="226" r="9" fill="#FFFFFF" stroke="#000000" stroke-width="2"></circle><circle cx="762" cy="228" r="4.5" fill="#000000"></circle></g>
+<use class="phoShow" href="#pho" x="732" y="296" width="28" height="28" style="opacity: 0"></use>
+</svg></div>
+<div class="actor arrNa" style="position: absolute; left: 39.0278%; top: 20.4%; width: 3.0556%"><svg viewBox="562 102 44 94" style="display: block; width: 100%; height: auto; overflow: visible"><path d="M584 190 V112" stroke="#000000" stroke-width="6" stroke-linecap="round"></path><path d="M568 130 L584 108 L600 130" stroke="#000000" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+<div class="actor arrK" style="position: absolute; left: 55.2778%; top: 68.2%; width: 2.7778%"><svg viewBox="796 341 40 87" style="display: block; width: 100%; height: auto; overflow: visible"><path d="M816 345 V420" stroke="#000000" stroke-width="6" stroke-linecap="round"></path><path d="M800 402 L816 424 L832 402" stroke="#000000" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+<div class="actor adpGo" style="position: absolute; left: 61.1111%; top: 80%; width: 3.8889%; opacity: 0"><svg viewBox="0 0 40 40" style="display: block; width: 100%; height: auto"><use href="#adp"></use></svg></div>
+<div class="actor atpGo" style="position: absolute; left: 61.1111%; top: 80%; width: 3.8889%; opacity: 0"><svg viewBox="0 0 40 40" style="display: block; width: 100%; height: auto"><use href="#atp"></use></svg></div>
+<div class="actor naA" style="position: absolute; left: 46.9444%; top: 0%; width: 2.5%; opacity: 0"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#na"></use></svg></div>
+<div class="actor naB" style="position: absolute; left: 47.7778%; top: 7%; width: 2.5%; opacity: 0"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#na"></use></svg></div>
+<div class="actor naC" style="position: absolute; left: 46.9444%; top: 14%; width: 2.5%; opacity: 0"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#na"></use></svg></div>
+<div class="actor kA" style="position: absolute; left: 46.8056%; top: 0%; width: 2.5%; opacity: 0"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#k"></use></svg></div>
+<div class="actor kB" style="position: absolute; left: 47.9167%; top: 7.2%; width: 2.5%; opacity: 0"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#k"></use></svg></div>
+<div class="actor bob" style="position: absolute; left: 9.722%; top: 10%; width: 4.444%"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#na"></use></svg></div>
+<div class="actor bob" style="position: absolute; left: 22.222%; top: 22%; width: 3.611%; animation-duration: 10s; animation-delay: -0.8s"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#na"></use></svg></div>
+<div class="actor bob" style="position: absolute; left: 29.861%; top: 6%; width: 4.028%; animation-delay: -1.6s"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#na"></use></svg></div>
+<div class="actor bob" style="position: absolute; left: 63.889%; top: 20%; width: 3.889%; animation-delay: -0.4s"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#na"></use></svg></div>
+<div class="actor bob" style="position: absolute; left: 73.611%; top: 8%; width: 4.444%; animation-duration: 7s; animation-delay: -2.2s"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#na"></use></svg></div>
+<div class="actor bob" style="position: absolute; left: 86.806%; top: 26%; width: 3.611%; animation-delay: -1.2s"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#na"></use></svg></div>
+<div class="actor bob" style="position: absolute; left: 29.167%; top: 78.4%; width: 4.167%; animation-duration: 9s; animation-delay: -1s"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#k"></use></svg></div>
+<div class="actor bob" style="position: absolute; left: 36.806%; top: 84%; width: 3.75%; animation-delay: -2.4s"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#k"></use></svg></div>
+<div class="actor bob" style="position: absolute; left: 69.444%; top: 82%; width: 4.167%; animation-duration: 7.6s; animation-delay: -0.6s"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#k"></use></svg></div>
+<div class="actor bob" style="position: absolute; left: 81.944%; top: 76%; width: 3.889%; animation-delay: -1.8s"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#k"></use></svg></div>
+<div class="actor bob" style="position: absolute; left: 90.972%; top: 86%; width: 3.472%; animation-duration: 11s; animation-delay: -2.8s"><svg viewBox="0 0 44 44" style="display: block; width: 100%; height: auto"><use href="#k"></use></svg></div>
+</div>
+</div>
 <div style="max-width: 1240px; margin: 0 auto; padding: 24px 24px 0; display: flex; flex-wrap: wrap; gap: 14px 20px; align-items: center; justify-content: space-between">
 <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px">
 <li class="s1 chip" style="border: 2px solid #000000; border-radius: 6px; padding: 8px 14px; font-weight: 800; font-size: 15px">1 · Связывание Na⁺</li>
@@ -245,400 +340,65 @@ a{color:#000000}a:hover{color:#000000}
 <button type="button" class="btn" id="pauseBtn" aria-pressed="false" style="min-height: 44px; padding: 0 22px; border-radius: 6px; border: 2px solid #000000; background: #FFC900; color: #000000; font: 800 15px 'Inter Tight', sans-serif; cursor: pointer">Пауза</button>
 </div>
 </div>
-<div style="max-width: 1240px; margin: 0 auto; padding: 18px 24px 0; display: flex; flex-wrap: wrap; gap: 24px; color: #000000; font-weight: 700; font-size: 16px">
-<span style="display: inline-flex; align-items: center; gap: 8px"><svg width="26" height="26" viewBox="0 0 44 44" aria-hidden="true"><use href="#na"></use></svg>Na⁺</span>
-<span style="display: inline-flex; align-items: center; gap: 8px"><svg width="26" height="26" viewBox="0 0 44 44" aria-hidden="true"><use href="#k"></use></svg>K⁺</span>
-<span style="display: inline-flex; align-items: center; gap: 8px"><svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true"><use href="#atp"></use></svg>АТФ</span>
-<span style="display: inline-flex; align-items: center; gap: 8px"><span style="width: 22px; height: 22px; box-sizing: border-box; border-radius: 6px; background: #2F6FEB; border: 2px solid #000000; display: inline-block"></span>Na⁺/K⁺-АТФаза</span>
 </div>
+</section>
 
-<section style="margin-top: 96px; background: #FFC900; border-top: 2px solid #000000; border-bottom: 2px solid #000000">
-<div style="max-width: 1240px; margin: 0 auto; padding: 72px 24px; display: flex; flex-wrap: wrap; gap: 24px">
-<div class="card" style="flex: 1 1 280px; background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 32px">
-<div style="font-weight: 900; font-size: 64px; line-height: 1; letter-spacing: -0.04em">140</div>
-<div style="font-weight: 800; margin-top: 12px">ммоль/л — концентрация Na⁺ в плазме крови</div>
-<div style="color: #333333; font-size: 16px; margin-top: 4px">в эритроцитах примерно в 12 раз ниже</div>
+<section class="panel" data-panel="game" aria-label="Мини-игра">
+<div class="wrap head">
+<h2 class="rv">Мини-игра «Пройди мембрану»</h2>
+<p class="rv" style="--d: .1s">Лети сквозь стенки мембраны и выбирай белок, который правда тебя пропустит. Не врежься в липиды.</p>
 </div>
-<div class="card" style="flex: 1 1 280px; background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 32px">
-<div style="font-weight: 900; font-size: 64px; line-height: 1; letter-spacing: -0.04em">10⁸</div>
-<div style="font-weight: 800; margin-top: 12px">частиц/с через один канал</div>
-<div style="color: #333333; font-size: 16px; margin-top: 4px">предельная скорость облегчённой диффузии</div>
+<div class="mid"><div class="target"></div></div>
+<div class="wrap cardrow">
+<a class="hero-link btn rv" href="game.html?hero=na" style="--d: .2s; background: #FFC900"><svg width="56" height="56" viewBox="0 0 44 44" aria-hidden="true"><use href="#na"></use></svg><div><b>Натрий Na⁺</b><span>Выберись из клетки против градиента →</span></div></a>
+<a class="hero-link btn rv" href="game.html?hero=k" style="--d: .3s; background: #90A8ED"><svg width="56" height="56" viewBox="0 0 44 44" aria-hidden="true"><use href="#k"></use></svg><div><b>Калий K⁺</b><span>Попади в клетку через насос →</span></div></a>
+<a class="hero-link btn rv" href="game.html?hero=atp" style="--d: .4s; background: #FF90E8"><svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true"><use href="#atp"></use></svg><div><b>АТФ</b><span>Заряжай насосы с тремя Na⁺ →</span></div></a>
 </div>
-<div class="card" style="flex: 1 1 280px; background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 32px">
-<div style="font-weight: 900; font-size: 64px; line-height: 1; letter-spacing: -0.04em">3 : 2</div>
-<div style="font-weight: 800; margin-top: 12px">стехиометрия цикла Na⁺/K⁺-АТФазы</div>
-<div style="color: #333333; font-size: 16px; margin-top: 4px">3 Na⁺ из клетки, 2 K⁺ в клетку на 1 АТФ</div>
+</section>
+
+<section class="panel" data-panel="ref" aria-label="Справочник">
+<div class="wrap head">
+<h2 class="rv">Справочник</h2>
+<p class="rv" style="--d: .1s">11 статей: каждый процесс разобран по шагам — что происходит, в каком порядке и зачем это клетке.</p>
+</div>
+<div class="wrap split">
+<div class="mid"><div class="target"></div></div>
+<div class="refgrid rv" style="--d: .2s; flex: 1 1 460px; align-content: center">
+<a href="spravochnik.html#a1"><small>01</small>Строение мембраны</a>
+<a href="spravochnik.html#a2"><small>02</small>Градиент концентрации</a>
+<a href="spravochnik.html#a3"><small>03</small>Простая диффузия</a>
+<a href="spravochnik.html#a4"><small>04</small>Облегчённая диффузия</a>
+<a href="spravochnik.html#a5"><small>05</small>Обменная диффузия и антипорт</a>
+<a href="spravochnik.html#a6"><small>06</small>Осмос и фильтрация</a>
+<a href="spravochnik.html#a7"><small>07</small>Активный транспорт и АТФ</a>
+<a href="spravochnik.html#a8"><small>08</small>Na⁺/K⁺-насос: полный цикл</a>
+<a href="spravochnik.html#a9"><small>09</small>Вторично-активный транспорт</a>
+<a href="spravochnik.html#a10"><small>10</small>Ионные каналы</a>
+<a href="spravochnik.html#a11"><small>11</small>Фаго-, пино-, экзоцитоз</a>
+<a href="spravochnik.html#glossary" style="background: #FFC900"><small>А–Я</small>Словарь терминов</a>
 </div>
 </div>
 </section>
 
-<section id="types" style="max-width: 1240px; margin: 0 auto; padding: 120px 24px 0">
-<div style="display: inline-block; background: #000000; color: #FFFFFF; border-radius: 6px; padding: 6px 14px; font-weight: 900; font-size: 18px">§16</div>
-<h2 style="font-weight: 900; font-size: clamp(36px, 5vw, 72px); line-height: 0.98; letter-spacing: -0.035em; margin: 18px 0 56px; max-width: 900px">Классификация видов транспорта</h2>
-<div style="display: flex; flex-wrap: wrap; gap: 28px">
-
-<article class="card" style="flex: 1 1 320px; background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; overflow: hidden">
-<svg viewBox="0 0 320 170" style="display: block; width: 100%; height: auto; border-bottom: 2px solid #000000; background: #FFC900" aria-hidden="true">
-<path d="M0 40 Q160 60 320 150" stroke="#000000" stroke-width="4" fill="none"></path>
-<g class="cardanim">
-<g class="roll">
-<path d="M98 42 H124 M92 54 H118 M100 66 H126" stroke="#000000" stroke-width="3" stroke-linecap="round"></path>
-<use class="spin" href="#na" x="140" y="37" width="40" height="40"></use>
-</g>
-<g class="roll" style="animation-delay: -2.25s">
-<path d="M98 42 H124 M92 54 H118 M100 66 H126" stroke="#000000" stroke-width="3" stroke-linecap="round"></path>
-<use class="spin" href="#na" x="140" y="37" width="40" height="40" style="animation-delay: -2.25s"></use>
-</g>
-</g>
-</svg>
-<div style="padding: 28px">
-<h3 style="font-weight: 900; font-size: 30px; letter-spacing: -0.03em; margin: 0 0 6px">Пассивный</h3>
-<p style="margin: 0 0 14px; color: #333333; font-weight: 500">По градиенту концентрации, без затрат АТФ</p>
-<ul style="margin: 0; padding-left: 20px">
-<li>простая диффузия</li>
-<li>облегчённая диффузия</li>
-<li>обменная диффузия</li>
-<li>осмос, фильтрация</li>
-</ul>
+<section class="panel" data-panel="quiz" aria-label="Вопросы">
+<div class="wrap head">
+<h2 class="rv">Проверь себя</h2>
+<p class="rv" style="--d: .1s">6 контрольных вопросов по §16–17. После каждого ответа — объяснение из учебника.</p>
 </div>
-</article>
-
-<article class="card" style="flex: 1 1 320px; background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; overflow: hidden">
-<svg viewBox="0 0 320 170" style="display: block; width: 100%; height: auto; border-bottom: 2px solid #000000; background: #FF90E8" aria-hidden="true">
-<path d="M0 150 Q160 60 320 40" stroke="#000000" stroke-width="4" fill="none"></path>
-<g class="cardanim">
-<g class="uphill">
-<use class="push" href="#atp" x="104" y="55" width="30" height="30"></use>
-<use class="spinUp" href="#na" x="140" y="37" width="40" height="40"></use>
-</g>
-</g>
-</svg>
-<div style="padding: 28px">
-<h3 style="font-weight: 900; font-size: 30px; letter-spacing: -0.03em; margin: 0 0 6px">Активный</h3>
-<p style="margin: 0 0 14px; color: #333333; font-weight: 500">Первично-активный: против градиента, за счёт гидролиза АТФ</p>
-<ul style="margin: 0; padding-left: 20px">
-<li>Na⁺/K⁺-насос</li>
-<li>Ca²⁺-насос</li>
-<li>протонная помпа</li>
-</ul>
-</div>
-</article>
-
-<article class="card" style="flex: 1 1 320px; background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; overflow: hidden">
-<svg viewBox="0 0 320 170" style="display: block; width: 100%; height: auto; border-bottom: 2px solid #000000; background: #90A8ED" aria-hidden="true">
-<path d="M0 150 L160 50 L320 150" stroke="#000000" stroke-width="4" fill="none" stroke-linejoin="round"></path>
-<g class="cardanim">
-<line class="ropeNa" x1="160" y1="46" x2="186" y2="62" stroke="#000000" stroke-width="3" stroke-linecap="round" vector-effect="non-scaling-stroke" style="transform-box: view-box; transform-origin: 160px 46px"></line>
-<line class="ropeGlu" x1="160" y1="46" x2="40" y2="127" stroke="#000000" stroke-width="3" stroke-linecap="round" vector-effect="non-scaling-stroke" style="transform-box: view-box; transform-origin: 160px 46px"></line>
-<g class="pulley">
-<circle cx="160" cy="40" r="12" fill="#FFFFFF" stroke="#000000" stroke-width="2.5"></circle>
-<path d="M160 30 V50 M150 40 H170" stroke="#000000" stroke-width="2.5" stroke-linecap="round"></path>
-</g>
-<use class="gluSlide" href="#glu" x="17" y="104" width="46" height="46"></use>
-<use class="naSlide" href="#na" x="166" y="42" width="40" height="40"></use>
-</g>
-</svg>
-<div style="padding: 28px">
-<h3 style="font-weight: 900; font-size: 30px; letter-spacing: -0.03em; margin: 0 0 6px">Сопряжённый</h3>
-<p style="margin: 0 0 14px; color: #333333; font-weight: 500">Вторично-активный: за счёт градиента Na⁺, созданного насосом</p>
-<ul style="margin: 0; padding-left: 20px">
-<li>Na⁺-зависимый перенос глюкозы</li>
-<li>Na⁺-зависимый перенос аминокислот</li>
-</ul>
-</div>
-</article>
-</div>
-
-<div style="margin-top: 40px; display: flex; flex-wrap: wrap; gap: 16px">
-<div class="chip" style="flex: 1 1 220px; background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 18px 20px"><span style="font-weight: 900; background: #FFC900; padding: 0 6px; border-radius: 4px">Унипорт</span> — перенос одного вещества</div>
-<div class="chip" style="flex: 1 1 220px; background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 18px 20px"><span style="font-weight: 900; background: #FF90E8; padding: 0 6px; border-radius: 4px">Симпорт</span> — два вещества в одном направлении</div>
-<div class="chip" style="flex: 1 1 220px; background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 18px 20px"><span style="font-weight: 900; background: #90A8ED; padding: 0 6px; border-radius: 4px">Антипорт</span> — в противоположных направлениях (Na⁺/Ca²⁺-обмен)</div>
+<div class="wrap split">
+<div class="mid"><div class="target"></div></div>
+<div class="qcard rv" id="quizRoot" style="--d: .2s"></div>
 </div>
 </section>
+</main>
 
-<section id="pump" style="margin-top: 120px; background: #FF90E8; border-top: 2px solid #000000; border-bottom: 2px solid #000000">
-<div style="max-width: 1240px; margin: 0 auto; padding: 96px 24px">
-<div style="display: inline-block; background: #000000; color: #FFFFFF; border-radius: 6px; padding: 6px 14px; font-weight: 900; font-size: 18px">§17</div>
-<h2 style="font-weight: 900; font-size: clamp(36px, 5vw, 72px); line-height: 0.98; letter-spacing: -0.035em; margin: 18px 0 56px; max-width: 960px">Na⁺/K⁺-АТФаза: цикл работы насоса</h2>
-
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px">
-
-<article class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; overflow: hidden">
-<svg viewBox="0 0 280 210" style="display: block; width: 100%; height: auto; border-bottom: 2px solid #000000" aria-hidden="true">
-<rect x="0" y="0" width="280" height="80" fill="#90A8ED"></rect>
-<rect x="0" y="130" width="280" height="80" fill="#FFC900"></rect>
-<g transform="translate(0,73)"><rect x="0" y="0" width="280" height="64" fill="url(#lipid)"></rect></g>
-<g transform="rotate(12 122 45)"><rect x="105" y="45" width="34" height="120" rx="16" fill="#2F6FEB" stroke="#000000" stroke-width="4"></rect></g>
-<g transform="rotate(-12 158 45)"><rect x="141" y="45" width="34" height="120" rx="16" fill="#2F6FEB" stroke="#000000" stroke-width="4"></rect></g>
-<use href="#na" x="118" y="118" width="30" height="30"></use>
-<use href="#na" x="136" y="146" width="30" height="30"></use>
-<use href="#na" x="98" y="164" width="30" height="30"></use>
-</svg>
-<div style="padding: 24px">
-<div style="display: inline-block; font-weight: 900; font-size: 14px; background: #FFC900; border: 2px solid #000000; border-radius: 4px; padding: 0 8px">1</div>
-<h3 style="font-weight: 900; font-size: 24px; letter-spacing: -0.02em; margin: 10px 0 6px">Связывание Na⁺</h3>
-<p style="margin: 0; color: #333333; font-size: 17px">3 Na⁺ связываются с белком со стороны цитоплазмы</p>
-</div>
-</article>
-
-<article class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; overflow: hidden">
-<svg viewBox="0 0 280 210" style="display: block; width: 100%; height: auto; border-bottom: 2px solid #000000" aria-hidden="true">
-<rect x="0" y="0" width="280" height="80" fill="#90A8ED"></rect>
-<rect x="0" y="130" width="280" height="80" fill="#FFC900"></rect>
-<g transform="translate(0,73)"><rect x="0" y="0" width="280" height="64" fill="url(#lipid)"></rect></g>
-<g transform="rotate(4 122 45)"><rect x="105" y="45" width="34" height="120" rx="16" fill="#2F6FEB" stroke="#000000" stroke-width="4"></rect></g>
-<g transform="rotate(-4 158 45)"><rect x="141" y="45" width="34" height="120" rx="16" fill="#2F6FEB" stroke="#000000" stroke-width="4"></rect></g>
-<use href="#na" x="124" y="78" width="28" height="28"></use>
-<use href="#na" x="126" y="104" width="28" height="28"></use>
-<use href="#na" x="124" y="130" width="28" height="28"></use>
-<use href="#pho" x="172" y="118" width="24" height="24"></use>
-<use href="#atp" x="214" y="156" width="34" height="34"></use>
-</svg>
-<div style="padding: 24px">
-<div style="display: inline-block; font-weight: 900; font-size: 14px; background: #FFC900; border: 2px solid #000000; border-radius: 4px; padding: 0 8px">2</div>
-<h3 style="font-weight: 900; font-size: 24px; letter-spacing: -0.02em; margin: 10px 0 6px">Фосфорилирование</h3>
-<p style="margin: 0; color: #333333; font-size: 17px">АТФ → АДФ + Ф; конформация белка меняется</p>
-</div>
-</article>
-
-<article class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; overflow: hidden">
-<svg viewBox="0 0 280 210" style="display: block; width: 100%; height: auto; border-bottom: 2px solid #000000" aria-hidden="true">
-<rect x="0" y="0" width="280" height="80" fill="#90A8ED"></rect>
-<rect x="0" y="130" width="280" height="80" fill="#FFC900"></rect>
-<g transform="translate(0,73)"><rect x="0" y="0" width="280" height="64" fill="url(#lipid)"></rect></g>
-<g transform="rotate(-12 122 165)"><rect x="105" y="45" width="34" height="120" rx="16" fill="#2F6FEB" stroke="#000000" stroke-width="4"></rect></g>
-<g transform="rotate(12 158 165)"><rect x="141" y="45" width="34" height="120" rx="16" fill="#2F6FEB" stroke="#000000" stroke-width="4"></rect></g>
-<use href="#pho" x="174" y="118" width="24" height="24"></use>
-<use href="#na" x="104" y="6" width="30" height="30"></use>
-<use href="#na" x="138" y="0" width="30" height="30"></use>
-<use href="#na" x="172" y="14" width="30" height="30"></use>
-<use href="#k" x="226" y="36" width="28" height="28"></use>
-<use href="#k" x="44" y="40" width="28" height="28"></use>
-</svg>
-<div style="padding: 24px">
-<div style="display: inline-block; font-weight: 900; font-size: 14px; background: #FFC900; border: 2px solid #000000; border-radius: 4px; padding: 0 8px">3</div>
-<h3 style="font-weight: 900; font-size: 24px; letter-spacing: -0.02em; margin: 10px 0 6px">Высвобождение Na⁺</h3>
-<p style="margin: 0; color: #333333; font-size: 17px">Полость открыта наружу; сродство к Na⁺ падает, к K⁺ растёт</p>
-</div>
-</article>
-
-<article class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; overflow: hidden">
-<svg viewBox="0 0 280 210" style="display: block; width: 100%; height: auto; border-bottom: 2px solid #000000" aria-hidden="true">
-<rect x="0" y="0" width="280" height="80" fill="#90A8ED"></rect>
-<rect x="0" y="130" width="280" height="80" fill="#FFC900"></rect>
-<g transform="translate(0,73)"><rect x="0" y="0" width="280" height="64" fill="url(#lipid)"></rect></g>
-<g transform="rotate(12 122 45)"><rect x="105" y="45" width="34" height="120" rx="16" fill="#2F6FEB" stroke="#000000" stroke-width="4"></rect></g>
-<g transform="rotate(-12 158 45)"><rect x="141" y="45" width="34" height="120" rx="16" fill="#2F6FEB" stroke="#000000" stroke-width="4"></rect></g>
-<use href="#k" x="116" y="150" width="30" height="30"></use>
-<use href="#k" x="144" y="166" width="30" height="30"></use>
-<use href="#pho" x="214" y="168" width="22" height="22"></use>
-</svg>
-<div style="padding: 24px">
-<div style="display: inline-block; font-weight: 900; font-size: 14px; background: #FFC900; border: 2px solid #000000; border-radius: 4px; padding: 0 8px">4</div>
-<h3 style="font-weight: 900; font-size: 24px; letter-spacing: -0.02em; margin: 10px 0 6px">Связывание K⁺</h3>
-<p style="margin: 0; color: #333333; font-size: 17px">Дефосфорилирование; 2 K⁺ высвобождаются в цитоплазму</p>
-</div>
-</article>
-</div>
-
-<div class="card" style="margin-top: 40px; background: #000000; color: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 36px; display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between">
-<div style="flex: 1 1 480px">
-<div style="font-weight: 900; font-size: clamp(28px, 3vw, 44px); line-height: 1.05; letter-spacing: -0.03em">Насос <span style="color: #FFC900">электрогенен</span></div>
-<p style="margin: 12px 0 0; color: #DADADA; max-width: 720px">За цикл из клетки выносится на один положительный заряд больше, чем поступает. Внутренняя сторона мембраны заряжается отрицательно.</p>
-</div>
-<svg width="72" height="72" viewBox="0 0 40 40" aria-hidden="true"><use href="#atp"></use></svg>
-</div>
-</div>
-</section>
-
-<section id="game" style="background: #90A8ED; border-bottom: 2px solid #000000">
-<div style="max-width: 1240px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: space-between">
-<div style="flex: 1 1 480px">
-<div style="display: inline-block; background: #000000; color: #FFFFFF; border-radius: 6px; padding: 6px 14px; font-weight: 900; font-size: 18px">Мини-игра</div>
-<h2 style="font-weight: 900; font-size: clamp(36px, 5vw, 72px); line-height: 0.98; letter-spacing: -0.035em; margin: 18px 0 16px">Пройди мембрану сам</h2>
-<p style="margin: 0 0 32px; max-width: 560px; font-weight: 500">Выбери героя — натрий, калий или АТФ — и лети сквозь клетку. В каждой стенке несколько белков: найди тот, что тебя пропустит, и не врежься в липиды.</p>
-<a href="game.html" class="btn" style="display: inline-flex; align-items: center; gap: 10px; min-height: 56px; padding: 0 28px; border-radius: 6px; background: #FF90E8; color: #000000; border: 2px solid #000000; font-weight: 800; text-decoration: none; font-size: 18px">Играть
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
-</a>
-</div>
-<div style="display: flex; gap: 16px; flex-wrap: wrap">
-<div class="card" style="background: #FFC900; border: 2px solid #000000; border-radius: 8px; padding: 18px; text-align: center; width: 120px">
-<svg width="72" height="72" viewBox="0 0 44 44" aria-hidden="true"><use href="#na"></use></svg>
-<div style="font-weight: 900; margin-top: 6px">Натрий</div>
-</div>
-<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 18px; text-align: center; width: 120px">
-<svg width="72" height="72" viewBox="0 0 44 44" aria-hidden="true"><use href="#k"></use></svg>
-<div style="font-weight: 900; margin-top: 6px">Калий</div>
-</div>
-<div class="card" style="background: #FF90E8; border: 2px solid #000000; border-radius: 8px; padding: 18px; text-align: center; width: 120px">
-<svg width="72" height="72" viewBox="0 0 40 40" aria-hidden="true"><use href="#atp"></use></svg>
-<div style="font-weight: 900; margin-top: 6px">АТФ</div>
-</div>
-</div>
-</div>
-</section>
-
-<section id="quiz" style="max-width: 1240px; margin: 0 auto; padding: 120px 24px">
-<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: clamp(28px, 4vw, 56px); display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
-<div id="quizRoot" style="flex: 1 1 360px; min-width: 0"></div>
-<div style="position: relative; flex: 0 1 300px; width: 300px; max-width: 100%" aria-hidden="true">
-<svg viewBox="0 0 300 260" style="display: block; width: 100%; height: auto">
-<circle cx="150" cy="140" r="110" id="quizCircle" fill="#FFC900" stroke="#000000" stroke-width="2.5"></circle>
-<use href="#na" x="70" y="60" width="150" height="150"></use>
-</svg>
-<span style="position: absolute; right: 4%; top: 0; font-weight: 900; font-size: 64px; line-height: 1" id="quizMark">?</span>
-</div>
-</div>
-</section>
-
-<footer style="background: #000000; color: #FFFFFF">
-<div style="max-width: 1240px; margin: 0 auto; padding: 40px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 15px">
-<span style="font-weight: 900; font-size: 20px; letter-spacing: -0.02em">мембранный транспорт</span>
-<span style="color: #DADADA">Источник: учебник биологии для 11 класса, глава 3, §16–17, с. 88–96</span>
-</div>
-</footer>
-</div>
-<script>
-
-class DCLogic {
-  constructor(props) { this.props = props || {}; this.state = {}; }
-  setState(p) { Object.assign(this.state, typeof p === 'function' ? p(this.state) : p); if (this._ui) this._ui(); }
-}
-
-class Component extends DCLogic {
-constructor(props) {
-super(props);
-this.state = { paused: false, q: 0, picked: -1, answers: [], done: false };
-this.Q = [
-{ t: 'В каком направлении Na⁺/K⁺-АТФаза переносит ионы натрия?', o: ['В цитоплазму, по градиенту', 'Во внеклеточную среду, против градиента', 'Не переносит, только связывает'], c: 1, e: 'За один цикл насос выводит 3 Na⁺ из клетки — против градиента концентрации, за счёт энергии АТФ.' },
-{ t: 'Сколько ионов переносит насос за один цикл?', o: ['2 Na⁺ из клетки и 3 K⁺ в клетку', '3 Na⁺ из клетки и 2 K⁺ в клетку', 'По одному иону в каждую сторону'], c: 1, e: '3 Na⁺ выходят из клетки, 2 K⁺ заходят внутрь — и всё это за одну молекулу АТФ.' },
-{ t: 'Какой вид транспорта не требует затрат АТФ?', o: ['Na⁺/K⁺-насос', 'Облегчённая диффузия', 'Протонная помпа'], c: 1, e: 'Облегчённая диффузия — пассивный транспорт: вещество идёт по градиенту концентрации с помощью белка-переносчика, энергия не тратится.' },
-{ t: 'Что такое антипорт?', o: ['Перенос одного вещества', 'Перенос двух веществ в одном направлении', 'Перенос двух веществ в противоположных направлениях'], c: 2, e: 'Пример — Na⁺/Ca²⁺-обмен в клетках сердца: на 3 входящих Na⁺ из клетки выводится 1 Ca²⁺.' },
-{ t: 'За счёт чего идёт вторично-активный (сопряжённый) транспорт глюкозы?', o: ['Прямого гидролиза АТФ', 'Градиента Na⁺, созданного насосом', 'Осмотического давления'], c: 1, e: 'Глюкоза поднимается против своего градиента вместе с Na⁺, который идёт по своему. Сам градиент Na⁺ поддерживает Na⁺/K⁺-АТФаза.' },
-{ t: 'Почему внутренняя сторона мембраны заряжена отрицательно?', o: ['Насос выносит больше положительных зарядов, чем заносит', 'Калий свободно проходит через липидный бислой', 'В цитоплазме накапливается АДФ'], c: 0, e: '3 Na⁺ наружу против 2 K⁺ внутрь: за каждый цикл клетка теряет один положительный заряд — насос электрогенен.' }
-];
-}
-quizPick(i) {
-if (this.state.picked >= 0 || this.state.done) return;
-const ok = i === this.Q[this.state.q].c;
-this.setState({ picked: i, answers: this.state.answers.concat([ok]) });
-}
-quizNext() {
-if (this.state.picked < 0) return;
-if (this.state.q + 1 >= this.Q.length) this.setState({ done: true });
-else this.setState({ q: this.state.q + 1, picked: -1 });
-}
-quizRestart() {
-this.setState({ q: 0, picked: -1, answers: [], done: false });
-}
-quizVals() {
-const st = this.state, Q = this.Q, cur = Q[Math.min(st.q, Q.length - 1)];
-const answered = st.picked >= 0;
-const ok = answered && st.picked === cur.c;
-const score = st.answers.filter((a) => a).length;
-const letters = ['А', 'Б', 'В', 'Г'];
-return {
-qActive: !st.done,
-qDone: st.done,
-qNum: st.q + 1,
-qTotal: Q.length,
-qText: cur.t,
-qDots: Q.map((_, i) => ({ bg: i < st.answers.length ? (st.answers[i] ? '#7CE0B0' : '#FF90E8') : (i === st.q ? '#FFC900' : '#FFFFFF') })),
-qOptions: cur.o.map((text, i) => {
-const isRight = answered && i === cur.c;
-const isWrong = answered && i === st.picked && !ok;
-return {
-text: text,
-badge: isRight ? '✓' : (isWrong ? '✕' : letters[i]),
-bg: isRight ? '#7CE0B0' : (isWrong ? '#FF90E8' : '#FFFFFF'),
-pressed: i === st.picked ? 'true' : 'false',
-pick: () => this.quizPick(i)
-};
-}),
-qAnswered: answered,
-qFeedBg: ok ? '#7CE0B0' : '#FF90E8',
-qFeedTitle: ok ? 'Верно!' : 'Неверно',
-qExplain: cur.e,
-qNext: () => this.quizNext(),
-qNextLabel: st.q + 1 >= Q.length ? 'Посмотреть результат →' : 'Следующий вопрос →',
-qScore: score,
-qVerdict: score === Q.length ? 'Отлично! Ты уверенно разбираешься в мембранном транспорте.' : (score >= 4 ? 'Хорошо! Разбери ошибки — и будет идеально.' : 'Стоит ещё раз пролистать §16–17 и поиграть в мини-игру.'),
-qRestart: () => this.quizRestart(),
-qCircle: st.done ? '#FFC900' : (answered ? (ok ? '#7CE0B0' : '#FF90E8') : '#FFC900'),
-qMark: st.done ? '!' : (answered ? (ok ? '✓' : '✕') : '?')
-};
-}
-renderVals() {
-const paused = !!(this.state && this.state.paused);
-return Object.assign(this.quizVals(), {
-animClass: paused ? 'scene paused' : 'scene',
-pauseLabel: paused ? 'Запустить' : 'Пауза',
-pausedAttr: paused ? 'true' : 'false',
-cycle: (this.props.cycle ?? 14) + 's',
-togglePause: () => this.setState({ paused: !paused }),
-na: this.props.na ?? '#FF9A2E',
-k: this.props.k ?? '#A77BFF',
-membrane: this.props.membrane ?? '#23A094'
-});
-}
-}
-
-(function () {
-  var c = new Component({});
-  var scene = document.getElementById('scene');
-  var pauseBtn = document.getElementById('pauseBtn');
-  var root = document.getElementById('quizRoot');
-  var circle = document.getElementById('quizCircle');
-  var mark = document.getElementById('quizMark');
-  var OPT = "min-height: 56px; text-align: left; padding: 10px 16px; border-radius: 6px; border: 2px solid #000000; color: #000000; font: 700 18px 'Inter Tight', sans-serif; cursor: pointer; display: flex; align-items: center; gap: 14px";
-  var BADGE = "flex: 0 0 auto; width: 32px; height: 32px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900; font-size: 15px";
-  var PILL = "display: inline-block; border: 2px solid #000000; border-radius: 6px; padding: 4px 12px; font-weight: 900; font-size: 15px";
-  var ACT = "min-height: 52px; padding: 0 24px; border-radius: 6px; border: 2px solid #000000; color: #000000; font: 800 17px 'Inter Tight', sans-serif; cursor: pointer";
-
-  function ui() {
-    var v = c.renderVals();
-    scene.className = v.animClass;
-    pauseBtn.textContent = v.pauseLabel;
-    pauseBtn.setAttribute('aria-pressed', v.pausedAttr);
-    circle.setAttribute('fill', v.qCircle);
-    mark.textContent = v.qMark;
-    var h = '';
-    if (v.qActive) {
-      var dots = v.qDots.map(function (d) {
-        return '<span style="width: 22px; height: 10px; border: 2px solid #000000; border-radius: 3px; background: ' + d.bg + '; display: inline-block"></span>';
-      }).join('');
-      var opts = v.qOptions.map(function (o, i) {
-        return '<button type="button" class="btn" data-opt="' + i + '" aria-pressed="' + o.pressed + '" style="' + OPT + '; background: ' + o.bg + '"><span style="' + BADGE + '">' + o.badge + '</span><span>' + o.text + '</span></button>';
-      }).join('');
-      h += '<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px"><div style="' + PILL + '; background: #90A8ED">Контрольный вопрос ' + v.qNum + ' из ' + v.qTotal + '</div><div style="display: flex; gap: 6px" aria-hidden="true">' + dots + '</div></div>';
-      h += '<h2 style="font-weight: 900; font-size: clamp(26px, 3vw, 40px); line-height: 1.08; letter-spacing: -0.03em; margin: 18px 0 28px">' + v.qText + '</h2>';
-      h += '<div role="group" aria-label="Варианты ответа" style="display: flex; flex-direction: column; gap: 14px; max-width: 580px">' + opts + '</div>';
-      if (v.qAnswered) {
-        h += '<div role="status" style="margin-top: 24px; max-width: 580px; box-sizing: border-box; background: ' + v.qFeedBg + '; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><div style="font-weight: 900; font-size: 20px">' + v.qFeedTitle + '</div><p style="margin: 6px 0 0; font-weight: 500">' + v.qExplain + '</p></div>';
-        h += '<button type="button" class="btn" data-q="next" style="margin-top: 20px; ' + ACT + '; background: #FFC900">' + v.qNextLabel + '</button>';
-      }
-    } else {
-      h += '<div style="' + PILL + '; background: #FFC900">Результат</div>';
-      h += '<h2 style="font-weight: 900; font-size: clamp(48px, 6vw, 88px); line-height: 1; letter-spacing: -0.04em; margin: 18px 0 12px">' + v.qScore + ' из ' + v.qTotal + '</h2>';
-      h += '<p style="margin: 0 0 28px; max-width: 520px; font-weight: 500; font-size: 20px">' + v.qVerdict + '</p>';
-      h += '<div style="display: flex; flex-wrap: wrap; gap: 14px"><button type="button" class="btn" data-q="restart" style="' + ACT + '; background: #FF90E8">Пройти ещё раз</button><a href="game.html" class="btn" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; border-radius: 6px; border: 2px solid #000000; background: #FFFFFF; color: #000000; font-weight: 800; font-size: 17px; text-decoration: none">Сыграть в мини-игру</a></div>';
-    }
-    root.innerHTML = h;
-  }
-
-  c._ui = ui;
-  root.addEventListener('click', function (e) {
-    var b = e.target.closest('[data-opt],[data-q]');
-    if (!b) return;
-    var v = c.renderVals();
-    if (b.hasAttribute('data-opt')) v.qOptions[+b.getAttribute('data-opt')].pick();
-    else if (b.getAttribute('data-q') === 'next') v.qNext();
-    else if (b.getAttribute('data-q') === 'restart') v.qRestart();
-  });
-  pauseBtn.addEventListener('click', function () { c.renderVals().togglePause(); });
-  ui();
-})();
-
-</script>
+<nav class="dock" role="tablist" aria-label="Разделы">
+<button type="button" role="tab" data-go="types" aria-selected="false">§16 Типы</button>
+<button type="button" role="tab" data-go="pump" aria-selected="false">§17 Насос</button>
+<button type="button" role="tab" data-go="game" aria-selected="false">Игра</button>
+<button type="button" role="tab" data-go="ref" aria-selected="false">Справочник</button>
+<button type="button" role="tab" data-go="quiz" aria-selected="false">Вопросы</button>
+</nav>
+<script src="app.js"></script>
 </body>
 </html>
