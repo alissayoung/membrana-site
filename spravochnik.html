@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Справочник — мембранный транспорт</title>
+<meta name="description" content="Справочник: пошаговое объяснение мембранного транспорта — диффузия, осмос, активный транспорт, Na+/K+-насос.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#000000}a:hover{color:#000000}
+.btn{box-shadow:4px 4px 0 #000000;transition:transform .12s ease,box-shadow .12s ease}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 #000000}
+.btn:active{transform:translate(4px,4px);box-shadow:0 0 0 #000000}
+.card{box-shadow:6px 6px 0 #000000}
+.toc{box-shadow:4px 4px 0 #000000;transition:transform .12s ease,box-shadow .12s ease}
+.toc:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 #000000}
+@media (prefers-reduced-motion: reduce){.btn,.toc{transition:none}}
+</style>
+</head>
+<body>
+<div style="background: #FFFFFF; color: #000000; font-family: 'Inter Tight', system-ui, sans-serif; font-size: 18px; line-height: 1.55">
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+<defs>
+<pattern id="lip" width="22" height="64" patternUnits="userSpaceOnUse">
+<line x1="8" y1="16" x2="8" y2="30" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"></line>
+<line x1="14" y1="16" x2="14" y2="30" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"></line>
+<line x1="8" y1="34" x2="8" y2="48" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"></line>
+<line x1="14" y1="34" x2="14" y2="48" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"></line>
+<circle cx="11" cy="9" r="8" fill="#23A094" stroke="#000000" stroke-width="1.6"></circle>
+<circle cx="11" cy="55" r="8" fill="#23A094" stroke="#000000" stroke-width="1.6"></circle>
+</pattern>
+<symbol id="na" viewBox="0 0 44 44">
+<circle cx="20" cy="24" r="16.5" fill="#FF9A2E" stroke="#000000" stroke-width="2.5"></circle>
+<circle cx="14" cy="21" r="3.6" fill="#FFFFFF"></circle>
+<circle cx="26" cy="21" r="3.6" fill="#FFFFFF"></circle>
+<circle cx="14.8" cy="21.8" r="1.8" fill="#000000"></circle>
+<circle cx="26.8" cy="21.8" r="1.8" fill="#000000"></circle>
+<path d="M15 29 Q20 33 25 29" stroke="#000000" stroke-width="2.2" fill="none" stroke-linecap="round"></path>
+<circle cx="35" cy="9" r="7" fill="#FFFFFF" stroke="#000000" stroke-width="1.8"></circle>
+<path d="M35 5.8 V12.2 M31.8 9 H38.2" stroke="#000000" stroke-width="2.2" stroke-linecap="round"></path>
+</symbol>
+<symbol id="k" viewBox="0 0 44 44">
+<rect x="3.5" y="7.5" width="33" height="33" rx="13" fill="#A77BFF" stroke="#000000" stroke-width="2.5"></rect>
+<circle cx="14" cy="21" r="3.6" fill="#FFFFFF"></circle>
+<circle cx="26" cy="21" r="3.6" fill="#FFFFFF"></circle>
+<circle cx="13.4" cy="20.4" r="1.8" fill="#000000"></circle>
+<circle cx="25.4" cy="20.4" r="1.8" fill="#000000"></circle>
+<path d="M16 30 H24" stroke="#000000" stroke-width="2.4" stroke-linecap="round"></path>
+<circle cx="35" cy="9" r="7" fill="#FFFFFF" stroke="#000000" stroke-width="1.8"></circle>
+<path d="M35 5.8 V12.2 M31.8 9 H38.2" stroke="#000000" stroke-width="2.2" stroke-linecap="round"></path>
+</symbol>
+<symbol id="atp" viewBox="0 0 40 40">
+<rect x="2.5" y="2.5" width="35" height="35" rx="8" fill="#FF5A4E" stroke="#000000" stroke-width="2.5"></rect>
+<path d="M22 7 L11 23 H19 L17 34 L29 17 H21 Z" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" stroke-linejoin="round"></path>
+</symbol>
+<symbol id="glu" viewBox="0 0 44 44">
+<path d="M22 3.5 L38.5 13.2 V30.8 L22 40.5 L5.5 30.8 V13.2 Z" fill="#23A094" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"></path>
+<circle cx="16" cy="20" r="3.4" fill="#FFFFFF"></circle>
+<circle cx="28" cy="20" r="3.4" fill="#FFFFFF"></circle>
+<circle cx="16.6" cy="20.6" r="1.7" fill="#000000"></circle>
+<circle cx="28.6" cy="20.6" r="1.7" fill="#000000"></circle>
+<path d="M17 28 Q22 32 27 28" stroke="#000000" stroke-width="2.2" fill="none" stroke-linecap="round"></path>
+</symbol>
+<symbol id="ca" viewBox="0 0 44 44">
+<circle cx="22" cy="22" r="18" fill="#E8E8E8" stroke="#000000" stroke-width="2.5"></circle>
+<text x="22" y="28" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="15" font-weight="900" fill="#000000">Ca</text>
+</symbol>
+<symbol id="h2o" viewBox="0 0 44 44">
+<circle cx="22" cy="22" r="14" fill="#5BC8F5" stroke="#000000" stroke-width="2.5"></circle>
+<circle cx="10" cy="12" r="6" fill="#FFFFFF" stroke="#000000" stroke-width="2"></circle>
+<circle cx="34" cy="12" r="6" fill="#FFFFFF" stroke="#000000" stroke-width="2"></circle>
+</symbol>
+<symbol id="o2" viewBox="0 0 44 44">
+<circle cx="15" cy="22" r="11" fill="#FFFFFF" stroke="#000000" stroke-width="2.5"></circle>
+<circle cx="29" cy="22" r="11" fill="#FFFFFF" stroke="#000000" stroke-width="2.5"></circle>
+</symbol>
+<marker id="ar" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#000000"></path></marker>
+</defs>
+</svg>
+
+<header style="border-bottom: 2px solid #000000; background: #FFFFFF">
+<div style="max-width: 1240px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<a href="index.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #000000">
+<svg width="36" height="36" viewBox="0 0 44 44" aria-hidden="true"><use href="#na"></use></svg>
+<span style="font-weight: 900; font-size: 20px; letter-spacing: -0.02em">мембранный транспорт</span>
+</a>
+<nav aria-label="Разделы" style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
+<a href="index.html" style="color: #000000; text-decoration: none; padding: 10px 14px; font-weight: 700">Главная</a>
+<a href="game.html" style="color: #000000; text-decoration: none; padding: 10px 14px; font-weight: 700">Игра</a>
+<a href="#glossary" class="btn" style="color: #000000; background: #FFC900; border: 2px solid #000000; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: 800">Словарь</a>
+</nav>
+</div>
+</header>
+
+<section style="border-bottom: 2px solid #000000">
+<div style="max-width: 1240px; margin: 0 auto; padding: 72px 24px 64px">
+<div style="display: inline-block; background: #000000; color: #FFFFFF; border-radius: 6px; padding: 6px 14px; font-weight: 900; font-size: 16px">Справочник</div>
+<h1 style="font-weight: 900; font-size: clamp(40px, 6vw, 92px); line-height: 1; letter-spacing: -0.04em; margin: 18px 0 18px; max-width: 1100px">Как вещества проходят через <span style="background: #90A8ED; padding: 0 0.12em; border-radius: 0.08em; box-decoration-break: clone; -webkit-box-decoration-break: clone">мембрану</span></h1>
+<p style="margin: 0 0 40px; max-width: 720px; color: #333333; font-weight: 500; font-size: 20px">Каждый процесс разобран по шагам: что происходит, в каком порядке и зачем это клетке. По материалам §16–17.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px">
+<a href="#a1" class="toc" style="display: block; background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 14px 16px; text-decoration: none; color: #000000"><span style="font-weight: 900; color: #333333; font-size: 14px">01 · основа</span><span style="display: block; font-weight: 800">Строение мембраны</span></a>
+<a href="#a2" class="toc" style="display: block; background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 14px 16px; text-decoration: none; color: #000000"><span style="font-weight: 900; color: #333333; font-size: 14px">02 · основа</span><span style="display: block; font-weight: 800">Градиент концентрации</span></a>
+<a href="#a3" class="toc" style="display: block; background: #FFC900; border: 2px solid #000000; border-radius: 8px; padding: 14px 16px; text-decoration: none; color: #000000"><span style="font-weight: 900; font-size: 14px">03 · пассивный</span><span style="display: block; font-weight: 800">Простая диффузия</span></a>
+<a href="#a4" class="toc" style="display: block; background: #FFC900; border: 2px solid #000000; border-radius: 8px; padding: 14px 16px; text-decoration: none; color: #000000"><span style="font-weight: 900; font-size: 14px">04 · пассивный</span><span style="display: block; font-weight: 800">Облегчённая диффузия</span></a>
+<a href="#a5" class="toc" style="display: block; background: #FFC900; border: 2px solid #000000; border-radius: 8px; padding: 14px 16px; text-decoration: none; color: #000000"><span style="font-weight: 900; font-size: 14px">05 · пассивный</span><span style="display: block; font-weight: 800">Обменная диффузия и антипорт</span></a>
+<a href="#a6" class="toc" style="display: block; background: #FFC900; border: 2px solid #000000; border-radius: 8px; padding: 14px 16px; text-decoration: none; color: #000000"><span style="font-weight: 900; font-size: 14px">06 · пассивный</span><span style="display: block; font-weight: 800">Осмос и фильтрация</span></a>
+<a href="#a7" class="toc" style="display: block; background: #FF90E8; border: 2px solid #000000; border-radius: 8px; padding: 14px 16px; text-decoration: none; color: #000000"><span style="font-weight: 900; font-size: 14px">07 · активный</span><span style="display: block; font-weight: 800">Активный транспорт и АТФ</span></a>
+<a href="#a8" class="toc" style="display: block; background: #FF90E8; border: 2px solid #000000; border-radius: 8px; padding: 14px 16px; text-decoration: none; color: #000000"><span style="font-weight: 900; font-size: 14px">08 · активный</span><span style="display: block; font-weight: 800">Na⁺/K⁺-насос: полный цикл</span></a>
+<a href="#a9" class="toc" style="display: block; background: #90A8ED; border: 2px solid #000000; border-radius: 8px; padding: 14px 16px; text-decoration: none; color: #000000"><span style="font-weight: 900; font-size: 14px">09 · сопряжённый</span><span style="display: block; font-weight: 800">Вторично-активный транспорт</span></a>
+<a href="#a10" class="toc" style="display: block; background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 14px 16px; text-decoration: none; color: #000000"><span style="font-weight: 900; color: #333333; font-size: 14px">10 · каналы</span><span style="display: block; font-weight: 800">Ионные каналы</span></a>
+<a href="#a11" class="toc" style="display: block; background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 14px 16px; text-decoration: none; color: #000000"><span style="font-weight: 900; color: #333333; font-size: 14px">11 · крупные частицы</span><span style="display: block; font-weight: 800">Фагоцитоз, пиноцитоз, экзоцитоз</span></a>
+</div>
+</div>
+</section>
+
+<article id="a1" style="border-bottom: 2px solid #000000">
+<div style="max-width: 1240px; margin: 0 auto; padding: 72px 24px; display: flex; flex-wrap: wrap; gap: 40px">
+<div style="flex: 1 1 540px; min-width: 0">
+<div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap"><span style="font-weight: 900; font-size: 15px; background: #000000; color: #FFFFFF; padding: 4px 10px; border-radius: 4px">01</span><span style="font-weight: 800; font-size: 15px; border: 2px solid #000000; padding: 2px 10px; border-radius: 4px">основа</span></div>
+<h2 style="font-weight: 900; font-size: clamp(32px, 4vw, 56px); line-height: 1.02; letter-spacing: -0.035em; margin: 16px 0 20px">Строение мембраны</h2>
+<div style="background: #FFC900; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px; margin-bottom: 28px"><span style="font-weight: 900">Коротко.</span> Мембрана — двойной слой липидов со встроенными белками. Она пропускает вещества избирательно.</div>
+<div style="font-weight: 900; font-size: 20px; margin-bottom: 14px">Как устроена — по шагам</div>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px">
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">1</span><div><span style="font-weight: 800">Липиды.</span> Каждая молекула — «головка», которая любит воду, и два «хвоста», которые воду не любят.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">2</span><div><span style="font-weight: 800">Бислой.</span> Хвосты прячутся внутрь, головки смотрят в воду снаружи и внутри клетки. Получается двойной слой.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">3</span><div><span style="font-weight: 800">Белки.</span> В бислой встроены белки-каналы, белки-переносчики и насосы. Именно через них идёт большая часть транспорта.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">4</span><div><span style="font-weight: 800">Кто где проходит.</span> Жирорастворимые неполярные вещества легко диффундируют сквозь липиды. Вода и водорастворимые полярные вещества — только через каналы. Чем крупнее молекула и сильнее заряд, тем труднее ей пройти.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">5</span><div><span style="font-weight: 800">Крупные частицы</span> через каналы не помещаются — для них есть фагоцитоз, пиноцитоз и экзоцитоз (статья 11).</div></li>
+</ol>
+</div>
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<figure class="card" style="margin: 0; border: 2px solid #000000; border-radius: 8px; overflow: hidden; background: #FFFFFF">
+<svg viewBox="0 0 520 240" style="display: block; width: 100%; height: auto; border-bottom: 2px solid #000000" role="img" aria-label="Схема мембраны: липидный бислой с белком-каналом и насосом">
+<rect x="0" y="0" width="520" height="88" fill="#90A8ED"></rect>
+<rect x="0" y="152" width="520" height="88" fill="#FFC900"></rect>
+<g transform="translate(0,88)"><rect x="0" y="0" width="520" height="64" fill="url(#lip)"></rect></g>
+<rect x="150" y="70" width="30" height="100" rx="12" fill="#A77BFF" stroke="#000000" stroke-width="3"></rect>
+<rect x="196" y="70" width="30" height="100" rx="12" fill="#A77BFF" stroke="#000000" stroke-width="3"></rect>
+<rect x="320" y="64" width="40" height="112" rx="18" fill="#2F6FEB" stroke="#000000" stroke-width="3"></rect>
+<rect x="366" y="64" width="40" height="112" rx="18" fill="#2F6FEB" stroke="#000000" stroke-width="3"></rect>
+<g font-family="Inter Tight, sans-serif" font-weight="800" font-size="14" fill="#000000">
+<rect x="10" y="20" width="130" height="28" rx="4" fill="#FFFFFF" stroke="#000000" stroke-width="2"></rect><text x="75" y="39" text-anchor="middle">снаружи клетки</text>
+<rect x="10" y="198" width="104" height="28" rx="4" fill="#FFFFFF" stroke="#000000" stroke-width="2"></rect><text x="62" y="217" text-anchor="middle">цитоплазма</text>
+<rect x="140" y="20" width="100" height="28" rx="4" fill="#FFFFFF" stroke="#000000" stroke-width="2"></rect><text x="190" y="39" text-anchor="middle">белок-канал</text>
+<rect x="318" y="20" width="90" height="28" rx="4" fill="#FFFFFF" stroke="#000000" stroke-width="2"></rect><text x="363" y="39" text-anchor="middle">насос</text>
+<rect x="420" y="198" width="90" height="28" rx="4" fill="#FFFFFF" stroke="#000000" stroke-width="2"></rect><text x="465" y="217" text-anchor="middle">бислой</text>
+</g>
+<path d="M465 196 V156" stroke="#000000" stroke-width="3" marker-end="url(#ar)"></path>
+</svg>
+<figcaption style="padding: 12px 16px; font-size: 15px; font-weight: 600">Рис. 1. Липидный бислой с белками</figcaption>
+</figure>
+<div style="background: #FF90E8; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><span style="font-weight: 900">Запомни.</span> Мембрана избирательно проницаема: что-то проходит сквозь липиды, что-то — только через белки.</div>
+</div>
+</div>
+</article>
+
+<article id="a2" style="border-bottom: 2px solid #000000">
+<div style="max-width: 1240px; margin: 0 auto; padding: 72px 24px; display: flex; flex-wrap: wrap; gap: 40px">
+<div style="flex: 1 1 540px; min-width: 0">
+<div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap"><span style="font-weight: 900; font-size: 15px; background: #000000; color: #FFFFFF; padding: 4px 10px; border-radius: 4px">02</span><span style="font-weight: 800; font-size: 15px; border: 2px solid #000000; padding: 2px 10px; border-radius: 4px">основа</span></div>
+<h2 style="font-weight: 900; font-size: clamp(32px, 4vw, 56px); line-height: 1.02; letter-spacing: -0.035em; margin: 16px 0 20px">Градиент концентрации</h2>
+<div style="background: #FFC900; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px; margin-bottom: 28px"><span style="font-weight: 900">Коротко.</span> Градиент — разница концентраций вещества по обе стороны мембраны. Сам по себе поток идёт «под горку»: туда, где вещества меньше.</div>
+<div style="font-weight: 900; font-size: 20px; margin-bottom: 14px">Как работает — по шагам</div>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px">
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">1</span><div><span style="font-weight: 800">Разный состав.</span> Снаружи клетки много Na⁺, внутри много K⁺. Градиенты есть и между органеллами и цитоплазмой.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">2</span><div><span style="font-weight: 800">Пример.</span> В плазме крови около 140 ммоль/л Na⁺, а в эритроцитах примерно в 12 раз меньше.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">3</span><div><span style="font-weight: 800">Движущая сила.</span> Частицы хаотично двигаются за счёт тепловой энергии и чаще переходят туда, где их меньше. Так градиент создаёт поток.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">4</span><div><span style="font-weight: 800">Два направления.</span> Пассивный транспорт уменьшает градиент, пока он не станет нулевым. Активный — увеличивает его, тратя энергию.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">5</span><div><span style="font-weight: 800">Запас энергии.</span> Градиент ионов — потенциальная энергия клетки. Если открыть каналы, по нему пойдут ионные токи.</div></li>
+</ol>
+</div>
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<figure class="card" style="margin: 0; border: 2px solid #000000; border-radius: 8px; overflow: hidden; background: #FFFFFF">
+<svg viewBox="0 0 520 240" style="display: block; width: 100%; height: auto; border-bottom: 2px solid #000000" role="img" aria-label="Схема градиента: снаружи много ионов натрия, внутри мало, стрелка показывает направление потока">
+<rect x="0" y="0" width="520" height="104" fill="#90A8ED"></rect>
+<rect x="0" y="136" width="520" height="104" fill="#FFC900"></rect>
+<g transform="translate(0,104) scale(1,0.5)"><rect x="0" y="0" width="520" height="64" fill="url(#lip)"></rect></g>
+<use href="#na" x="30" y="16" width="40" height="40"></use>
+<use href="#na" x="90" y="50" width="40" height="40"></use>
+<use href="#na" x="150" y="12" width="40" height="40"></use>
+<use href="#na" x="210" y="48" width="40" height="40"></use>
+<use href="#na" x="300" y="14" width="40" height="40"></use>
+<use href="#na" x="360" y="52" width="40" height="40"></use>
+<use href="#na" x="440" y="20" width="40" height="40"></use>
+<use href="#na" x="120" y="170" width="40" height="40"></use>
+<g font-family="Inter Tight, sans-serif" font-weight="900" font-size="16" fill="#000000"><text x="300" y="196">мало Na⁺</text></g>
+<path d="M260 70 V200" stroke="#000000" stroke-width="5" marker-end="url(#ar)"></path>
+</svg>
+<figcaption style="padding: 12px 16px; font-size: 15px; font-weight: 600">Рис. 2. Поток идёт из большей концентрации в меньшую</figcaption>
+</figure>
+<div style="background: #FF90E8; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><span style="font-weight: 900">Запомни.</span> «По градиенту» — без энергии. «Против градиента» — только с затратой энергии.</div>
+</div>
+</div>
+</article>
+
+<article id="a3" style="border-bottom: 2px solid #000000; background: #FFFBEA">
+<div style="max-width: 1240px; margin: 0 auto; padding: 72px 24px; display: flex; flex-wrap: wrap; gap: 40px">
+<div style="flex: 1 1 540px; min-width: 0">
+<div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap"><span style="font-weight: 900; font-size: 15px; background: #000000; color: #FFFFFF; padding: 4px 10px; border-radius: 4px">03</span><span style="font-weight: 800; font-size: 15px; border: 2px solid #000000; padding: 2px 10px; border-radius: 4px; background: #FFC900">пассивный</span></div>
+<h2 style="font-weight: 900; font-size: clamp(32px, 4vw, 56px); line-height: 1.02; letter-spacing: -0.035em; margin: 16px 0 20px">Простая диффузия</h2>
+<div style="background: #FFC900; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px; margin-bottom: 28px"><span style="font-weight: 900">Коротко.</span> Вещество само проходит через мембрану по градиенту — без белков-переносчиков и без затрат энергии клетки.</div>
+<div style="font-weight: 900; font-size: 20px; margin-bottom: 14px">Как идёт процесс — по шагам</div>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px">
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">1</span><div><span style="font-weight: 800">Есть градиент.</span> С одной стороны мембраны вещества больше — например, кислорода снаружи больше, чем внутри.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">2</span><div><span style="font-weight: 800">Тепловое движение.</span> Молекулы хаотично двигаются и ударяются о мембрану.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">3</span><div><span style="font-weight: 800">Проход.</span> Неполярные жирорастворимые молекулы растворяются в липидном слое и проходят его насквозь.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">4</span><div><span style="font-weight: 800">Ионы — медленно.</span> Для ионов мембрана почти непроницаема: Na⁺ из плазмы входит в эритроциты медленно, K⁺ проходит гораздо легче.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">5</span><div><span style="font-weight: 800">Выравнивание.</span> Поток идёт, пока концентрации по обе стороны не сравняются.</div></li>
+</ol>
+</div>
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<figure class="card" style="margin: 0; border: 2px solid #000000; border-radius: 8px; overflow: hidden; background: #FFFFFF">
+<svg viewBox="0 0 520 240" style="display: block; width: 100%; height: auto; border-bottom: 2px solid #000000" role="img" aria-label="Схема простой диффузии: молекулы кислорода проходят сквозь липидный бислой сверху вниз">
+<rect x="0" y="0" width="520" height="88" fill="#90A8ED"></rect>
+<rect x="0" y="152" width="520" height="88" fill="#FFC900"></rect>
+<g transform="translate(0,88)"><rect x="0" y="0" width="520" height="64" fill="url(#lip)"></rect></g>
+<use href="#o2" x="60" y="20" width="44" height="44"></use>
+<use href="#o2" x="150" y="30" width="44" height="44"></use>
+<use href="#o2" x="350" y="18" width="44" height="44"></use>
+<use href="#o2" x="430" y="34" width="44" height="44"></use>
+<use href="#o2" x="250" y="98" width="44" height="44"></use>
+<use href="#o2" x="250" y="176" width="44" height="44"></use>
+<path d="M272 60 V92" stroke="#000000" stroke-width="4" stroke-dasharray="6 6"></path>
+<path d="M272 146 V172" stroke="#000000" stroke-width="4" marker-end="url(#ar)"></path>
+<g font-family="Inter Tight, sans-serif" font-weight="900" font-size="16" fill="#000000"><text x="320" y="214">O₂ проходит сквозь липиды</text></g>
+</svg>
+<figcaption style="padding: 12px 16px; font-size: 15px; font-weight: 600">Рис. 3. Простая диффузия через липидный бислой</figcaption>
+</figure>
+<div style="background: #FF90E8; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><span style="font-weight: 900">Запомни.</span> Энергия клетки на простую диффузию не тратится — работает только градиент.</div>
+</div>
+</div>
+</article>
+
+<article id="a4" style="border-bottom: 2px solid #000000; background: #FFFBEA">
+<div style="max-width: 1240px; margin: 0 auto; padding: 72px 24px; display: flex; flex-wrap: wrap; gap: 40px">
+<div style="flex: 1 1 540px; min-width: 0">
+<div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap"><span style="font-weight: 900; font-size: 15px; background: #000000; color: #FFFFFF; padding: 4px 10px; border-radius: 4px">04</span><span style="font-weight: 800; font-size: 15px; border: 2px solid #000000; padding: 2px 10px; border-radius: 4px; background: #FFC900">пассивный</span></div>
+<h2 style="font-weight: 900; font-size: clamp(32px, 4vw, 56px); line-height: 1.02; letter-spacing: -0.035em; margin: 16px 0 20px">Облегчённая диффузия</h2>
+<div style="background: #FFC900; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px; margin-bottom: 28px"><span style="font-weight: 900">Коротко.</span> Перенос по градиенту с помощью белка-переносчика. Энергия не нужна, но без белка вещество не пройдёт.</div>
+<div style="font-weight: 900; font-size: 20px; margin-bottom: 14px">Как идёт процесс — по шагам</div>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px">
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">1</span><div><span style="font-weight: 800">Состояние «a».</span> Белок-переносчик пронизывает мембрану и образует пору, открытую к одной стороне. Его места связывания повёрнуты к веществу.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">2</span><div><span style="font-weight: 800">Связывание.</span> Молекула (например, глюкоза) обратимо связывается с белком.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">3</span><div><span style="font-weight: 800">Состояние «b».</span> Связавшись, белок меняет конформацию — форму. Теперь пора открыта на другую сторону.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">4</span><div><span style="font-weight: 800">Освобождение.</span> В новой форме белок теряет сродство к веществу и отпускает его по другую сторону мембраны.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">5</span><div><span style="font-weight: 800">Возврат.</span> Белок возвращается в состояние «a» и готов к следующей молекуле. Такой перенос одного вещества называют унипортом.</div></li>
+</ol>
+<p style="margin: 20px 0 0; font-weight: 500"><span style="font-weight: 800">Где встречается:</span> глюкоза входит в клетки и из крови в мозг, в кишечнике всасываются аминокислоты и моносахариды, в почках они возвращаются в кровь из первичной мочи. Скорость — до 10⁸ частиц в секунду через один канал.</p>
+</div>
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<figure class="card" style="margin: 0; border: 2px solid #000000; border-radius: 8px; overflow: hidden; background: #FFFFFF">
+<svg viewBox="0 0 520 240" style="display: block; width: 100%; height: auto; border-bottom: 2px solid #000000" role="img" aria-label="Схема облегчённой диффузии: белок-переносчик в состояниях a и b переносит глюкозу">
+<rect x="0" y="0" width="520" height="88" fill="#90A8ED"></rect>
+<rect x="0" y="152" width="520" height="88" fill="#FFC900"></rect>
+<g transform="translate(0,88)"><rect x="0" y="0" width="520" height="64" fill="url(#lip)"></rect></g>
+<g transform="rotate(-8 110 60)"><rect x="82" y="60" width="30" height="110" rx="12" fill="#23A094" stroke="#000000" stroke-width="3"></rect></g>
+<g transform="rotate(8 148 60)"><rect x="134" y="60" width="30" height="110" rx="12" fill="#23A094" stroke="#000000" stroke-width="3"></rect></g>
+<use href="#glu" x="102" y="14" width="40" height="40"></use>
+<g transform="rotate(8 380 180)"><rect x="352" y="70" width="30" height="110" rx="12" fill="#23A094" stroke="#000000" stroke-width="3"></rect></g>
+<g transform="rotate(-8 418 180)"><rect x="404" y="70" width="30" height="110" rx="12" fill="#23A094" stroke="#000000" stroke-width="3"></rect></g>
+<use href="#glu" x="374" y="186" width="40" height="40"></use>
+<path d="M200 120 H310" stroke="#000000" stroke-width="4" marker-end="url(#ar)"></path>
+<g font-family="Inter Tight, sans-serif" font-weight="900" font-size="18" fill="#000000"><text x="40" y="214">a</text><text x="470" y="40">b</text></g>
+</svg>
+<figcaption style="padding: 12px 16px; font-size: 15px; font-weight: 600">Рис. 4. Переносчик меняет форму: «a» → «b»</figcaption>
+</figure>
+<div style="background: #FF90E8; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><span style="font-weight: 900">Запомни.</span> Облегчённая диффузия — всё ещё пассивный транспорт: по градиенту и без АТФ.</div>
+</div>
+</div>
+</article>
+
+<article id="a5" style="border-bottom: 2px solid #000000; background: #FFFBEA">
+<div style="max-width: 1240px; margin: 0 auto; padding: 72px 24px; display: flex; flex-wrap: wrap; gap: 40px">
+<div style="flex: 1 1 540px; min-width: 0">
+<div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap"><span style="font-weight: 900; font-size: 15px; background: #000000; color: #FFFFFF; padding: 4px 10px; border-radius: 4px">05</span><span style="font-weight: 800; font-size: 15px; border: 2px solid #000000; padding: 2px 10px; border-radius: 4px; background: #FFC900">пассивный</span></div>
+<h2 style="font-weight: 900; font-size: clamp(32px, 4vw, 56px); line-height: 1.02; letter-spacing: -0.035em; margin: 16px 0 20px">Обменная диффузия и антипорт</h2>
+<div style="background: #FFC900; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px; margin-bottom: 28px"><span style="font-weight: 900">Коротко.</span> Молекулы по разные стороны мембраны меняются местами. Если меняются разные вещества и в разные стороны — это антипорт.</div>
+<div style="font-weight: 900; font-size: 20px; margin-bottom: 14px">Как идёт процесс — по шагам</div>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px">
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">1</span><div><span style="font-weight: 800">Простой обмен.</span> Молекулы одного и того же вещества меняются местами. Концентрация с каждой стороны остаётся прежней.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">2</span><div><span style="font-weight: 800">Обмен разных веществ.</span> Одно вещество обменивается на одно или несколько молекул другого.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">3</span><div><span style="font-weight: 800">Пример.</span> В клетках сердца и гладких мышцах сосудов и бронхов Na⁺ входит в клетку по градиенту.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">4</span><div><span style="font-weight: 800">3 : 1.</span> На каждые 3 входящих Na⁺ из клетки выводится 1 Ca²⁺ — вещества движутся навстречу друг другу.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">5</span><div><span style="font-weight: 800">Результат.</span> Клетка избавляется от лишнего Ca²⁺ — это нужно, чтобы мышечные клетки могли расслабиться.</div></li>
+</ol>
+</div>
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<figure class="card" style="margin: 0; border: 2px solid #000000; border-radius: 8px; overflow: hidden; background: #FFFFFF">
+<svg viewBox="0 0 520 240" style="display: block; width: 100%; height: auto; border-bottom: 2px solid #000000" role="img" aria-label="Схема антипорта: три иона натрия входят в клетку, один ион кальция выходит">
+<rect x="0" y="0" width="520" height="88" fill="#90A8ED"></rect>
+<rect x="0" y="152" width="520" height="88" fill="#FFC900"></rect>
+<g transform="translate(0,88)"><rect x="0" y="0" width="520" height="64" fill="url(#lip)"></rect></g>
+<rect x="226" y="66" width="32" height="108" rx="12" fill="#E8E8E8" stroke="#000000" stroke-width="3"></rect>
+<rect x="264" y="66" width="32" height="108" rx="12" fill="#E8E8E8" stroke="#000000" stroke-width="3"></rect>
+<use href="#na" x="70" y="16" width="38" height="38"></use>
+<use href="#na" x="118" y="30" width="38" height="38"></use>
+<use href="#na" x="166" y="14" width="38" height="38"></use>
+<path d="M196 50 Q238 80 238 180" stroke="#000000" stroke-width="4" fill="none" marker-end="url(#ar)"></path>
+<use href="#ca" x="372" y="176" width="44" height="44"></use>
+<path d="M368 190 Q286 170 286 64" stroke="#000000" stroke-width="4" fill="none" marker-end="url(#ar)"></path>
+<g font-family="Inter Tight, sans-serif" font-weight="900" font-size="16" fill="#000000"><text x="40" y="214">3 Na⁺ внутрь</text><text x="330" y="40">1 Ca²⁺ наружу</text></g>
+</svg>
+<figcaption style="padding: 12px 16px; font-size: 15px; font-weight: 600">Рис. 5. Na⁺/Ca²⁺-обмен — антипорт</figcaption>
+</figure>
+<div style="background: #FF90E8; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><span style="font-weight: 900">Запомни.</span> Антипорт — два вещества в противоположных направлениях. Симпорт — в одном.</div>
+</div>
+</div>
+</article>
+
+<article id="a6" style="border-bottom: 2px solid #000000; background: #FFFBEA">
+<div style="max-width: 1240px; margin: 0 auto; padding: 72px 24px; display: flex; flex-wrap: wrap; gap: 40px">
+<div style="flex: 1 1 540px; min-width: 0">
+<div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap"><span style="font-weight: 900; font-size: 15px; background: #000000; color: #FFFFFF; padding: 4px 10px; border-radius: 4px">06</span><span style="font-weight: 800; font-size: 15px; border: 2px solid #000000; padding: 2px 10px; border-radius: 4px; background: #FFC900">пассивный</span></div>
+<h2 style="font-weight: 900; font-size: clamp(32px, 4vw, 56px); line-height: 1.02; letter-spacing: -0.035em; margin: 16px 0 20px">Осмос и фильтрация</h2>
+<div style="background: #FFC900; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px; margin-bottom: 28px"><span style="font-weight: 900">Коротко.</span> Осмос — переход воды через мембрану туда, где растворённых веществ больше. Фильтрация — проход воды и мелких молекул через поры под давлением.</div>
+<div style="font-weight: 900; font-size: 20px; margin-bottom: 14px">Осмос — по шагам</div>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px">
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">1</span><div><span style="font-weight: 800">Полупроницаемость.</span> Мембрана пропускает воду, но задерживает растворённые вещества.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">2</span><div><span style="font-weight: 800">Разная концентрация.</span> С одной стороны растворённых веществ больше, а воды, значит, относительно меньше.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">3</span><div><span style="font-weight: 800">Вода идёт по своему градиенту</span> — туда, где растворённых веществ больше.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">4</span><div><span style="font-weight: 800">Осмотическое давление.</span> Поток воды создаёт давление. Поэтому клетке важно регулировать состав цитоплазмы — иначе она набухнет или сморщится.</div></li>
+</ol>
+<p style="margin: 20px 0 0; font-weight: 500"><span style="font-weight: 800">Фильтрация:</span> вода и мелкие молекулы продавливаются через поры под действием давления — например, при образовании первичной мочи в почках.</p>
+</div>
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<figure class="card" style="margin: 0; border: 2px solid #000000; border-radius: 8px; overflow: hidden; background: #FFFFFF">
+<svg viewBox="0 0 520 240" style="display: block; width: 100%; height: auto; border-bottom: 2px solid #000000" role="img" aria-label="Схема осмоса: вода проходит через мембрану в сторону, где больше растворённых веществ">
+<rect x="0" y="0" width="520" height="88" fill="#90A8ED"></rect>
+<rect x="0" y="152" width="520" height="88" fill="#FFC900"></rect>
+<g transform="translate(0,88)"><rect x="0" y="0" width="520" height="64" fill="url(#lip)"></rect></g>
+<rect x="244" y="74" width="32" height="92" rx="12" fill="#5BC8F5" stroke="#000000" stroke-width="3"></rect>
+<use href="#h2o" x="60" y="20" width="36" height="36"></use>
+<use href="#h2o" x="130" y="36" width="36" height="36"></use>
+<use href="#h2o" x="200" y="14" width="36" height="36"></use>
+<use href="#h2o" x="330" y="30" width="36" height="36"></use>
+<use href="#h2o" x="410" y="16" width="36" height="36"></use>
+<use href="#glu" x="80" y="176" width="36" height="36"></use>
+<use href="#glu" x="150" y="190" width="36" height="36"></use>
+<use href="#glu" x="350" y="180" width="36" height="36"></use>
+<use href="#glu" x="420" y="192" width="36" height="36"></use>
+<path d="M260 50 V196" stroke="#000000" stroke-width="5" marker-end="url(#ar)"></path>
+<g font-family="Inter Tight, sans-serif" font-weight="900" font-size="15" fill="#000000"><text x="270" y="232">вода → туда, где больше растворённого</text></g>
+</svg>
+<figcaption style="padding: 12px 16px; font-size: 15px; font-weight: 600">Рис. 6. Осмос через аквапорин</figcaption>
+</figure>
+<div style="background: #FF90E8; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><span style="font-weight: 900">Запомни.</span> При осмосе движется вода, а не растворённое вещество.</div>
+</div>
+</div>
+</article>
+
+<article id="a7" style="border-bottom: 2px solid #000000; background: #FFF0FB">
+<div style="max-width: 1240px; margin: 0 auto; padding: 72px 24px; display: flex; flex-wrap: wrap; gap: 40px">
+<div style="flex: 1 1 540px; min-width: 0">
+<div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap"><span style="font-weight: 900; font-size: 15px; background: #000000; color: #FFFFFF; padding: 4px 10px; border-radius: 4px">07</span><span style="font-weight: 800; font-size: 15px; border: 2px solid #000000; padding: 2px 10px; border-radius: 4px; background: #FF90E8">активный</span></div>
+<h2 style="font-weight: 900; font-size: clamp(32px, 4vw, 56px); line-height: 1.02; letter-spacing: -0.035em; margin: 16px 0 20px">Активный транспорт и АТФ</h2>
+<div style="background: #FFC900; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px; margin-bottom: 28px"><span style="font-weight: 900">Коротко.</span> Перенос против градиента. Энергию даёт расщепление АТФ: <span style="font-weight: 800; white-space: nowrap">АТФ → АДФ + Ф + энергия</span>.</div>
+<div style="font-weight: 900; font-size: 20px; margin-bottom: 14px">Как идёт процесс — по шагам</div>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px">
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">1</span><div><span style="font-weight: 800">Задача.</span> Вещество нужно перенести туда, где его и так больше. Само оно туда не пойдёт.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">2</span><div><span style="font-weight: 800">Насос связывает вещество.</span> Этим занимаются белки-переносчики — транспортные АТФ-азы.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">3</span><div><span style="font-weight: 800">Расщепление АТФ.</span> Фермент разрывает АТФ на АДФ и фосфат — выделяется энергия.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">4</span><div><span style="font-weight: 800">Работа.</span> Энергия идёт на смену формы белка — вещество оказывается на другой стороне.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">5</span><div><span style="font-weight: 800">Итог.</span> Разница концентраций растёт — именно этим активный транспорт отличается от пассивного.</div></li>
+</ol>
+<p style="margin: 20px 0 0; font-weight: 500"><span style="font-weight: 800">Виды:</span> первично-активный — энергию даёт сам АТФ (насосы); вторично-активный — энергию даёт градиент, созданный насосом (статья 09). В клетке известны 4 системы активного транспорта ионов: три переносят Na⁺, K⁺, Ca²⁺ и H⁺ через мембраны, четвёртая переносит протоны в дыхательной цепи митохондрий. Их называют насосами, или помпами.</p>
+</div>
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<figure class="card" style="margin: 0; border: 2px solid #000000; border-radius: 8px; overflow: hidden; background: #FFFFFF">
+<svg viewBox="0 0 520 240" style="display: block; width: 100%; height: auto; border-bottom: 2px solid #000000" role="img" aria-label="Схема активного транспорта: насос за счёт АТФ переносит ион против градиента">
+<rect x="0" y="0" width="520" height="88" fill="#90A8ED"></rect>
+<rect x="0" y="152" width="520" height="88" fill="#FFC900"></rect>
+<g transform="translate(0,88)"><rect x="0" y="0" width="520" height="64" fill="url(#lip)"></rect></g>
+<rect x="216" y="64" width="40" height="112" rx="18" fill="#2F6FEB" stroke="#000000" stroke-width="3"></rect>
+<rect x="262" y="64" width="40" height="112" rx="18" fill="#2F6FEB" stroke="#000000" stroke-width="3"></rect>
+<use href="#na" x="60" y="16" width="38" height="38"></use>
+<use href="#na" x="120" y="34" width="38" height="38"></use>
+<use href="#na" x="360" y="20" width="38" height="38"></use>
+<use href="#na" x="420" y="40" width="38" height="38"></use>
+<use href="#na" x="240" y="188" width="38" height="38"></use>
+<path d="M259 184 V40" stroke="#000000" stroke-width="5" marker-end="url(#ar)"></path>
+<use href="#atp" x="330" y="180" width="40" height="40"></use>
+<g font-family="Inter Tight, sans-serif" font-weight="900" font-size="15" fill="#000000"><text x="380" y="206">АТФ → АДФ + Ф</text><text x="30" y="214">против градиента</text></g>
+</svg>
+<figcaption style="padding: 12px 16px; font-size: 15px; font-weight: 600">Рис. 7. Насос «поднимает» ион против градиента</figcaption>
+</figure>
+<div style="background: #FF90E8; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><span style="font-weight: 900">Запомни.</span> Пассивный транспорт уменьшает разницу концентраций, активный — увеличивает её и всегда требует энергии.</div>
+</div>
+</div>
+</article>
+
+<article id="a8" style="border-bottom: 2px solid #000000; background: #FFF0FB">
+<div style="max-width: 1240px; margin: 0 auto; padding: 72px 24px">
+<div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap"><span style="font-weight: 900; font-size: 15px; background: #000000; color: #FFFFFF; padding: 4px 10px; border-radius: 4px">08</span><span style="font-weight: 800; font-size: 15px; border: 2px solid #000000; padding: 2px 10px; border-radius: 4px; background: #FF90E8">активный</span></div>
+<h2 style="font-weight: 900; font-size: clamp(32px, 4vw, 56px); line-height: 1.02; letter-spacing: -0.035em; margin: 16px 0 20px">Na⁺/K⁺-насос: полный цикл</h2>
+<div style="background: #FFC900; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px; margin-bottom: 28px; max-width: 880px"><span style="font-weight: 900">Коротко.</span> Фермент Na⁺/K⁺-АТФаза — интегральный белок мембраны. За один цикл он выводит из клетки <span style="font-weight: 800">3 Na⁺</span>, заводит <span style="font-weight: 800">2 K⁺</span> и тратит <span style="font-weight: 800">1 АТФ</span>. Включается, когда внутри клетки растёт концентрация Na⁺ или снаружи — K⁺.</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px">
+<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 20px">
+<span style="display: inline-flex; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFC900; align-items: center; justify-content: center; font-weight: 900">1</span>
+<div style="font-weight: 900; font-size: 20px; margin: 10px 0 6px">Насос открыт внутрь</div>
+<p style="margin: 0; font-weight: 500">Исходное состояние: полость белка обращена в цитоплазму, места связывания «любят» Na⁺.</p>
+</div>
+<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 20px">
+<span style="display: inline-flex; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFC900; align-items: center; justify-content: center; font-weight: 900">2</span>
+<div style="font-weight: 900; font-size: 20px; margin: 10px 0 6px">Связывание 3 Na⁺</div>
+<p style="margin: 0; font-weight: 500">Три иона натрия садятся в места связывания. Это нарушает водородные связи белка — он начинает менять форму.</p>
+</div>
+<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 20px">
+<span style="display: inline-flex; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFC900; align-items: center; justify-content: center; font-weight: 900">3</span>
+<div style="font-weight: 900; font-size: 20px; margin: 10px 0 6px">Фосфорилирование</div>
+<p style="margin: 0; font-weight: 500">После связывания Na⁺ расщепляется АТФ: <span style="white-space: nowrap">АТФ → АДФ + Ф</span>. Фосфат присоединяется к белку, энергия идёт на смену конформации.</p>
+</div>
+<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 20px">
+<span style="display: inline-flex; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFC900; align-items: center; justify-content: center; font-weight: 900">4</span>
+<div style="font-weight: 900; font-size: 20px; margin: 10px 0 6px">Выход Na⁺ наружу</div>
+<p style="margin: 0; font-weight: 500">Образуется узкая полость, открытая наружу. Через неё выходят ионы натрия, а калий протиснуться наружу не может.</p>
+</div>
+<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 20px">
+<span style="display: inline-flex; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFC900; align-items: center; justify-content: center; font-weight: 900">5</span>
+<div style="font-weight: 900; font-size: 20px; margin: 10px 0 6px">Связывание 2 K⁺</div>
+<p style="margin: 0; font-weight: 500">В новой форме места связывания плохо удерживают Na⁺ и хорошо — K⁺. Два иона калия занимают место натрия.</p>
+</div>
+<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 20px">
+<span style="display: inline-flex; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFC900; align-items: center; justify-content: center; font-weight: 900">6</span>
+<div style="font-weight: 900; font-size: 20px; margin: 10px 0 6px">Дефосфорилирование</div>
+<p style="margin: 0; font-weight: 500">Связывание K⁺ отщепляет фосфат. Белок возвращается в исходную форму и отпускает K⁺ в цитоплазму. Цикл начинается заново.</p>
+</div>
+</div>
+<div style="margin-top: 32px; display: flex; flex-wrap: wrap; gap: 20px">
+<div class="card" style="flex: 1 1 380px; background: #000000; color: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 24px">
+<div style="font-weight: 900; font-size: 24px">Почему внутри «минус»</div>
+<p style="margin: 8px 0 0; color: #DADADA">Насос выносит 3 положительных заряда, а заносит 2. На мембране накапливается разность потенциалов: внутренняя сторона заряжена отрицательно. Поэтому насос называют электрогенным.</p>
+</div>
+<div class="card" style="flex: 1 1 380px; background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 24px">
+<div style="font-weight: 900; font-size: 24px">Зачем он клетке</div>
+<ul style="margin: 8px 0 0; padding-left: 20px; font-weight: 500">
+<li>сохраняет объём клетки (осморегуляция)</li>
+<li>поддерживает электрическую активность нервов и мышц</li>
+<li>создаёт градиент Na⁺ для переноса сахаров и аминокислот</li>
+<li>K⁺ в клетке нужен для синтеза белка, гликолиза, фотосинтеза</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+<article id="a9" style="border-bottom: 2px solid #000000; background: #F0F4FF">
+<div style="max-width: 1240px; margin: 0 auto; padding: 72px 24px; display: flex; flex-wrap: wrap; gap: 40px">
+<div style="flex: 1 1 540px; min-width: 0">
+<div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap"><span style="font-weight: 900; font-size: 15px; background: #000000; color: #FFFFFF; padding: 4px 10px; border-radius: 4px">09</span><span style="font-weight: 800; font-size: 15px; border: 2px solid #000000; padding: 2px 10px; border-radius: 4px; background: #90A8ED">сопряжённый</span></div>
+<h2 style="font-weight: 900; font-size: clamp(32px, 4vw, 56px); line-height: 1.02; letter-spacing: -0.035em; margin: 16px 0 20px">Вторично-активный транспорт</h2>
+<div style="background: #FFC900; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px; margin-bottom: 28px"><span style="font-weight: 900">Коротко.</span> Вещество идёт против своего градиента «в паре» с Na⁺, который идёт по своему. Энергию даёт градиент натрия, а не АТФ напрямую.</div>
+<div style="font-weight: 900; font-size: 20px; margin-bottom: 14px">Как идёт процесс — по шагам</div>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px">
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">1</span><div><span style="font-weight: 800">Подготовка.</span> Na⁺/K⁺-насос тратит АТФ и выкачивает натрий — снаружи клетки Na⁺ становится много.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">2</span><div><span style="font-weight: 800">Связывание.</span> Белок-переносчик снаружи связывает сразу ион Na⁺ и молекулу глюкозы (или аминокислоты).</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">3</span><div><span style="font-weight: 800">Натрий тянет.</span> Na⁺ стремится внутрь по своему градиенту — эта энергия меняет форму переносчика.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">4</span><div><span style="font-weight: 800">Перенос.</span> Оба оказываются внутри клетки: Na⁺ — по градиенту, глюкоза — против своего градиента. Оба вещества идут в одну сторону — это симпорт.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">5</span><div><span style="font-weight: 800">Круговорот.</span> Попавший внутрь Na⁺ снова выкачивает насос — и всё повторяется.</div></li>
+</ol>
+<p style="margin: 20px 0 0; font-weight: 500"><span style="font-weight: 800">Где встречается:</span> всасывание глюкозы в кишечнике и её обратное всасывание в почках.</p>
+</div>
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<figure class="card" style="margin: 0; border: 2px solid #000000; border-radius: 8px; overflow: hidden; background: #FFFFFF">
+<svg viewBox="0 0 520 240" style="display: block; width: 100%; height: auto; border-bottom: 2px solid #000000" role="img" aria-label="Схема сопряжённого транспорта: насос выкачивает натрий, переносчик заводит натрий вместе с глюкозой">
+<rect x="0" y="0" width="520" height="88" fill="#90A8ED"></rect>
+<rect x="0" y="152" width="520" height="88" fill="#FFC900"></rect>
+<g transform="translate(0,88)"><rect x="0" y="0" width="520" height="64" fill="url(#lip)"></rect></g>
+<rect x="70" y="64" width="36" height="112" rx="16" fill="#2F6FEB" stroke="#000000" stroke-width="3"></rect>
+<rect x="112" y="64" width="36" height="112" rx="16" fill="#2F6FEB" stroke="#000000" stroke-width="3"></rect>
+<path d="M109 184 V44" stroke="#000000" stroke-width="4" marker-end="url(#ar)"></path>
+<use href="#atp" x="30" y="186" width="36" height="36"></use>
+<use href="#na" x="150" y="14" width="36" height="36"></use>
+<rect x="320" y="64" width="36" height="112" rx="16" fill="#23A094" stroke="#000000" stroke-width="3"></rect>
+<rect x="362" y="64" width="36" height="112" rx="16" fill="#23A094" stroke="#000000" stroke-width="3"></rect>
+<use href="#na" x="300" y="10" width="38" height="38"></use>
+<use href="#glu" x="382" y="10" width="38" height="38"></use>
+<path d="M359 54 V200" stroke="#000000" stroke-width="4" marker-end="url(#ar)"></path>
+<g font-family="Inter Tight, sans-serif" font-weight="900" font-size="15" fill="#000000"><text x="186" y="214">насос</text><text x="410" y="214">симпорт</text></g>
+</svg>
+<figcaption style="padding: 12px 16px; font-size: 15px; font-weight: 600">Рис. 9. Насос создаёт градиент Na⁺, переносчик его использует</figcaption>
+</figure>
+<div style="background: #FF90E8; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><span style="font-weight: 900">Запомни.</span> Без работы Na⁺/K⁺-насоса сопряжённый транспорт остановится: нечему будет «тянуть» глюкозу.</div>
+</div>
+</div>
+</article>
+
+<article id="a10" style="border-bottom: 2px solid #000000">
+<div style="max-width: 1240px; margin: 0 auto; padding: 72px 24px; display: flex; flex-wrap: wrap; gap: 40px">
+<div style="flex: 1 1 540px; min-width: 0">
+<div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap"><span style="font-weight: 900; font-size: 15px; background: #000000; color: #FFFFFF; padding: 4px 10px; border-radius: 4px">10</span><span style="font-weight: 800; font-size: 15px; border: 2px solid #000000; padding: 2px 10px; border-radius: 4px">каналы</span></div>
+<h2 style="font-weight: 900; font-size: clamp(32px, 4vw, 56px); line-height: 1.02; letter-spacing: -0.035em; margin: 16px 0 20px">Ионные каналы</h2>
+<div style="background: #FFC900; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px; margin-bottom: 28px"><span style="font-weight: 900">Коротко.</span> Белковые поры в мембране, через которые ионы текут по градиенту. Так клетка «тратит» запас, созданный насосами.</div>
+<div style="font-weight: 900; font-size: 20px; margin-bottom: 14px">Как работает — по шагам</div>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px">
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">1</span><div><span style="font-weight: 800">Запас.</span> Насосы создают градиент ионов — это потенциальная энергия клетки.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">2</span><div><span style="font-weight: 800">Пора.</span> Трансмембранные белки образуют отверстия, соединяющие внеклеточную среду и цитоплазму.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">3</span><div><span style="font-weight: 800">Ток.</span> Когда канал открыт, ионы текут через него по градиенту — возникает ионный ток.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">4</span><div><span style="font-weight: 800">Избирательность.</span> Канал пропускает свой ион: K⁺-канал выпускает калий из клетки, Na⁺-канал впускает натрий.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">5</span><div><span style="font-weight: 800">Ответ клетки.</span> Ионные токи позволяют клетке быстро реагировать на раздражители. Вход Ca²⁺ запускает сокращение мышц и выделение медиаторов в синапсах.</div></li>
+</ol>
+</div>
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<figure class="card" style="margin: 0; border: 2px solid #000000; border-radius: 8px; overflow: hidden; background: #FFFFFF">
+<svg viewBox="0 0 520 240" style="display: block; width: 100%; height: auto; border-bottom: 2px solid #000000" role="img" aria-label="Схема калиевого канала: ионы калия выходят из клетки по градиенту">
+<rect x="0" y="0" width="520" height="88" fill="#90A8ED"></rect>
+<rect x="0" y="152" width="520" height="88" fill="#FFC900"></rect>
+<g transform="translate(0,88)"><rect x="0" y="0" width="520" height="64" fill="url(#lip)"></rect></g>
+<rect x="228" y="68" width="30" height="104" rx="12" fill="#A77BFF" stroke="#000000" stroke-width="3"></rect>
+<rect x="276" y="68" width="30" height="104" rx="12" fill="#A77BFF" stroke="#000000" stroke-width="3"></rect>
+<use href="#k" x="60" y="176" width="38" height="38"></use>
+<use href="#k" x="130" y="190" width="38" height="38"></use>
+<use href="#k" x="360" y="178" width="38" height="38"></use>
+<use href="#k" x="430" y="192" width="38" height="38"></use>
+<use href="#k" x="248" y="186" width="38" height="38"></use>
+<use href="#k" x="248" y="20" width="38" height="38"></use>
+<path d="M267 184 V64" stroke="#000000" stroke-width="5" marker-end="url(#ar)"></path>
+<g font-family="Inter Tight, sans-serif" font-weight="900" font-size="15" fill="#000000"><text x="30" y="40">K⁺ выходит по градиенту</text></g>
+</svg>
+<figcaption style="padding: 12px 16px; font-size: 15px; font-weight: 600">Рис. 10. Калиевый канал</figcaption>
+</figure>
+<div style="background: #FF90E8; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><span style="font-weight: 900">Запомни.</span> Насос создаёт градиент (тратит АТФ), канал его использует (энергия не нужна).</div>
+</div>
+</div>
+</article>
+
+<article id="a11" style="border-bottom: 2px solid #000000">
+<div style="max-width: 1240px; margin: 0 auto; padding: 72px 24px; display: flex; flex-wrap: wrap; gap: 40px">
+<div style="flex: 1 1 540px; min-width: 0">
+<div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap"><span style="font-weight: 900; font-size: 15px; background: #000000; color: #FFFFFF; padding: 4px 10px; border-radius: 4px">11</span><span style="font-weight: 800; font-size: 15px; border: 2px solid #000000; padding: 2px 10px; border-radius: 4px">крупные частицы</span></div>
+<h2 style="font-weight: 900; font-size: clamp(32px, 4vw, 56px); line-height: 1.02; letter-spacing: -0.035em; margin: 16px 0 20px">Фагоцитоз, пиноцитоз, экзоцитоз</h2>
+<div style="background: #FFC900; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px; margin-bottom: 28px"><span style="font-weight: 900">Коротко.</span> Крупные молекулы и частицы не проходят через каналы. Мембрана упаковывает их в пузырьки.</div>
+<div style="font-weight: 900; font-size: 20px; margin-bottom: 14px">Как идёт процесс — по шагам</div>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px">
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">1</span><div><span style="font-weight: 800">Контакт.</span> Крупная частица оказывается у поверхности клетки.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">2</span><div><span style="font-weight: 800">Фагоцитоз.</span> Мембрана прогибается и обхватывает твёрдую частицу.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">3</span><div><span style="font-weight: 800">Пузырёк.</span> Края мембраны смыкаются — частица оказывается внутри клетки в пузырьке. Пиноцитоз устроен так же, только захватываются капли жидкости.</div></li>
+<li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid #000000; border-radius: 4px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 900">4</span><div><span style="font-weight: 800">Экзоцитоз — обратный путь.</span> Пузырёк изнутри подходит к мембране, сливается с ней и выбрасывает содержимое наружу.</div></li>
+</ol>
+</div>
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<figure class="card" style="margin: 0; border: 2px solid #000000; border-radius: 8px; overflow: hidden; background: #FFFFFF">
+<svg viewBox="0 0 520 240" style="display: block; width: 100%; height: auto; border-bottom: 2px solid #000000" role="img" aria-label="Схема фагоцитоза и экзоцитоза: мембрана образует пузырьки">
+<rect x="0" y="0" width="520" height="240" fill="#FFC900"></rect>
+<path d="M0 70 H120 Q130 70 132 90 Q140 170 190 170 Q240 170 248 90 Q250 70 260 70 H520 V0 H0 Z" fill="#90A8ED" stroke="#000000" stroke-width="4"></path>
+<circle cx="190" cy="128" r="26" fill="#FF5A4E" stroke="#000000" stroke-width="3"></circle>
+<circle cx="400" cy="160" r="38" fill="#FFFFFF" stroke="#23A094" stroke-width="10"></circle>
+<circle cx="400" cy="160" r="44" fill="none" stroke="#000000" stroke-width="2"></circle>
+<circle cx="400" cy="160" r="32" fill="none" stroke="#000000" stroke-width="2"></circle>
+<circle cx="390" cy="152" r="6" fill="#5BC8F5" stroke="#000000" stroke-width="2"></circle>
+<circle cx="408" cy="166" r="6" fill="#5BC8F5" stroke="#000000" stroke-width="2"></circle>
+<path d="M400 112 V80" stroke="#000000" stroke-width="4" marker-end="url(#ar)"></path>
+<g font-family="Inter Tight, sans-serif" font-weight="900" font-size="15" fill="#000000"><text x="30" y="214">фагоцитоз: частица втягивается</text><text x="320" y="40">экзоцитоз</text></g>
+</svg>
+<figcaption style="padding: 12px 16px; font-size: 15px; font-weight: 600">Рис. 11. Транспорт в пузырьках</figcaption>
+</figure>
+<div style="background: #FF90E8; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><span style="font-weight: 900">Запомни.</span> Фаго- и пиноцитоз — внутрь клетки, экзоцитоз — наружу.</div>
+</div>
+</div>
+</article>
+
+<section id="glossary" style="background: #FFC900; border-bottom: 2px solid #000000">
+<div style="max-width: 1240px; margin: 0 auto; padding: 80px 24px">
+<div style="display: inline-block; background: #000000; color: #FFFFFF; border-radius: 6px; padding: 6px 14px; font-weight: 900; font-size: 16px">Словарь</div>
+<h2 style="font-weight: 900; font-size: clamp(32px, 4vw, 56px); line-height: 1.02; letter-spacing: -0.035em; margin: 16px 0 32px">Термины от А до Я</h2>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px">
+<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><dt style="font-weight: 900">Активный транспорт</dt><dd style="margin: 4px 0 0; font-weight: 500">Перенос против градиента с затратой энергии.</dd></div>
+<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><dt style="font-weight: 900">Антипорт</dt><dd style="margin: 4px 0 0; font-weight: 500">Перенос двух веществ в противоположных направлениях.</dd></div>
+<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><dt style="font-weight: 900">АТФ-аза</dt><dd style="margin: 4px 0 0; font-weight: 500">Фермент-переносчик, который расщепляет АТФ и тратит энергию на транспорт.</dd></div>
+<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><dt style="font-weight: 900">Градиент</dt><dd style="margin: 4px 0 0; font-weight: 500">Разница концентраций (или зарядов) по обе стороны мембраны.</dd></div>
+<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><dt style="font-weight: 900">Диффузия</dt><dd style="margin: 4px 0 0; font-weight: 500">Хаотичное перемещение частиц за счёт тепловых колебаний.</dd></div>
+<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><dt style="font-weight: 900">Ионный канал</dt><dd style="margin: 4px 0 0; font-weight: 500">Белковая пора, через которую ионы текут по градиенту.</dd></div>
+<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><dt style="font-weight: 900">Конформация</dt><dd style="margin: 4px 0 0; font-weight: 500">Пространственная форма белка. Её смена — основа работы переносчиков и насосов.</dd></div>
+<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><dt style="font-weight: 900">Осмос</dt><dd style="margin: 4px 0 0; font-weight: 500">Переход воды через мембрану туда, где больше растворённых веществ.</dd></div>
+<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><dt style="font-weight: 900">Пассивный транспорт</dt><dd style="margin: 4px 0 0; font-weight: 500">Перенос по градиенту без затрат энергии клетки.</dd></div>
+<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><dt style="font-weight: 900">Симпорт</dt><dd style="margin: 4px 0 0; font-weight: 500">Перенос двух веществ в одном направлении.</dd></div>
+<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><dt style="font-weight: 900">Сопряжённый транспорт</dt><dd style="margin: 4px 0 0; font-weight: 500">Вторично-активный: энергия берётся из градиента Na⁺, созданного насосом.</dd></div>
+<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><dt style="font-weight: 900">Унипорт</dt><dd style="margin: 4px 0 0; font-weight: 500">Перенос одного вещества белком-переносчиком.</dd></div>
+<div class="card" style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; padding: 16px 18px"><dt style="font-weight: 900">Электрогенный насос</dt><dd style="margin: 4px 0 0; font-weight: 500">Насос, который создаёт разность зарядов на мембране (как Na⁺/K⁺-АТФаза).</dd></div>
+</dl>
+</div>
+</section>
+
+<footer style="background: #000000; color: #FFFFFF">
+<div style="max-width: 1240px; margin: 0 auto; padding: 40px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 15px">
+<span style="font-weight: 900; font-size: 20px; letter-spacing: -0.02em">мембранный транспорт</span>
+<span style="color: #DADADA">По материалам §16–17 учебника биологии для 11 класса</span>
+</div>
+</footer>
+</div>
+
+</body>
+</html>

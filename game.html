@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Мини-игра «Пройди мембрану»</title>
+<meta name="description" content="Мини-игра «Пройди мембрану»: играй за натрий, калий или АТФ и найди правильный белок в мембране.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#000000}a:hover{color:#000000}
+.btn{box-shadow:4px 4px 0 #000000;transition:transform .12s ease,box-shadow .12s ease}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 #000000}
+.btn:active{transform:translate(4px,4px);box-shadow:0 0 0 #000000}
+@media (prefers-reduced-motion: reduce){.btn{transition:none}}
+</style>
+</head>
+<body>
+<div style="background: #FFFFFF; color: #000000; font-family: 'Inter Tight', system-ui, sans-serif; font-size: 18px; line-height: 1.5; min-height: 100vh">
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+<defs>
+<symbol id="na" viewBox="0 0 44 44">
+<circle cx="20" cy="24" r="16.5" fill="#FF9A2E" stroke="#000000" stroke-width="2.5"></circle>
+<circle cx="14" cy="21" r="3.6" fill="#FFFFFF"></circle>
+<circle cx="26" cy="21" r="3.6" fill="#FFFFFF"></circle>
+<circle cx="14.8" cy="21.8" r="1.8" fill="#000000"></circle>
+<circle cx="26.8" cy="21.8" r="1.8" fill="#000000"></circle>
+<path d="M15 29 Q20 33 25 29" stroke="#000000" stroke-width="2.2" fill="none" stroke-linecap="round"></path>
+<circle cx="35" cy="9" r="7" fill="#FFFFFF" stroke="#000000" stroke-width="1.8"></circle>
+<path d="M35 5.8 V12.2 M31.8 9 H38.2" stroke="#000000" stroke-width="2.2" stroke-linecap="round"></path>
+</symbol>
+<symbol id="k" viewBox="0 0 44 44">
+<rect x="3.5" y="7.5" width="33" height="33" rx="13" fill="#A77BFF" stroke="#000000" stroke-width="2.5"></rect>
+<circle cx="14" cy="21" r="3.6" fill="#FFFFFF"></circle>
+<circle cx="26" cy="21" r="3.6" fill="#FFFFFF"></circle>
+<circle cx="13.4" cy="20.4" r="1.8" fill="#000000"></circle>
+<circle cx="25.4" cy="20.4" r="1.8" fill="#000000"></circle>
+<path d="M16 30 H24" stroke="#000000" stroke-width="2.4" stroke-linecap="round"></path>
+<circle cx="35" cy="9" r="7" fill="#FFFFFF" stroke="#000000" stroke-width="1.8"></circle>
+<path d="M35 5.8 V12.2 M31.8 9 H38.2" stroke="#000000" stroke-width="2.2" stroke-linecap="round"></path>
+</symbol>
+<symbol id="atp" viewBox="0 0 44 44">
+<rect x="4.5" y="4.5" width="35" height="35" rx="8" fill="#FF5A4E" stroke="#000000" stroke-width="2.5"></rect>
+<path d="M24 9 L13 25 H21 L19 36 L31 19 H23 Z" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" stroke-linejoin="round"></path>
+</symbol>
+</defs>
+</svg>
+
+<header style="border-bottom: 2px solid #000000; background: #FFFFFF">
+<div style="max-width: 1240px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<a href="index.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #000000">
+<svg width="36" height="36" viewBox="0 0 44 44" aria-hidden="true"><use href="#na"></use></svg>
+<span style="font-weight: 900; font-size: 20px; letter-spacing: -0.02em">мембранный транспорт</span>
+</a>
+<nav aria-label="Разделы" style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
+<a href="spravochnik.html" style="color: #000000; text-decoration: none; padding: 10px 14px; font-weight: 700">Справочник</a>
+<a href="index.html" class="btn" style="color: #000000; background: #FFFFFF; border: 2px solid #000000; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: 800">← На главную</a>
+</nav>
+</div>
+</header>
+
+<section style="max-width: 1240px; margin: 0 auto; padding: 48px 24px 24px">
+<div style="display: inline-block; background: #000000; color: #FFFFFF; border-radius: 6px; padding: 6px 14px; font-weight: 900; font-size: 16px">Мини-игра</div>
+<h1 style="font-weight: 900; font-size: clamp(36px, 5vw, 68px); line-height: 0.98; letter-spacing: -0.035em; margin: 16px 0 12px">Пройди мембрану</h1>
+<p style="margin: 0; color: #333333; max-width: 720px; font-weight: 500">Выбери героя и пролети через стенки мембраны. В каждой стенке несколько белков — найди тот, который тебя правда пропустит.</p>
+</section>
+
+<section style="max-width: 1240px; margin: 0 auto; padding: 0 24px">
+<div style="display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; margin-bottom: 16px">
+<div data-if="isPlay" style="display: contents">
+<div style="display: flex; align-items: center; gap: 12px; flex: 1 1 420px; min-width: 0">
+<svg width="40" height="40" viewBox="0 0 44 44" aria-hidden="true"><use class="heroUse" href="#na"></use></svg>
+<div style="font-weight: 700; font-size: 16px"><span style="font-weight: 900"><span class="heroName"></span>.</span> <span class="mission"></span></div>
+</div>
+</div>
+<div data-if="notPlay" style="display: contents">
+<div style="font-weight: 800; font-size: 16px; flex: 1 1 420px">Выбери героя, чтобы начать</div>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+<div style="background: #FFC900; border: 2px solid #000000; border-radius: 6px; padding: 6px 14px; font-weight: 900">Очки: <span class="score">0</span></div>
+<div style="display: flex; gap: 6px; align-items: center; background: #FFFFFF; border: 2px solid #000000; border-radius: 6px; padding: 8px 12px" id="livesBox" aria-label="Жизни: 3 из 3">
+<span class="life" style="width: 16px; height: 16px; border-radius: 50%; border: 2px solid #000000; background: #FF5A4E; display: inline-block"></span>
+<span class="life" style="width: 16px; height: 16px; border-radius: 50%; border: 2px solid #000000; background: #FF5A4E; display: inline-block"></span>
+<span class="life" style="width: 16px; height: 16px; border-radius: 50%; border: 2px solid #000000; background: #FF5A4E; display: inline-block"></span>
+</div>
+<div data-if="isPlay" style="display: contents">
+<button type="button" class="btn" data-act="toMenu" style="min-height: 40px; padding: 0 16px; border-radius: 6px; border: 2px solid #000000; background: #FFFFFF; color: #000000; font: 800 15px 'Inter Tight', sans-serif; cursor: pointer">Сменить героя</button>
+</div>
+</div>
+</div>
+
+<div id="wrap" tabindex="0" aria-label="Игровое поле. Веди героя мышью, пальцем или стрелками" style="position: relative; max-width: calc((100vh - 110px) * 1.6); margin: 0 auto; border: 2px solid #000000; border-radius: 8px; overflow: hidden; touch-action: none; box-shadow: 8px 8px 0 #000000; background: #FFC900; cursor: crosshair">
+<canvas id="cv" width="960" height="600" style="display: block; width: 100%; height: auto"></canvas>
+
+<div data-if="hasToast" style="display: contents">
+<div role="status" id="toast" style="position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); width: min(640px, calc(100% - 32px)); box-sizing: border-box; background: #7CE0B0; border: 2px solid #000000; border-radius: 8px; box-shadow: 4px 4px 0 #000000; padding: 12px 16px; font-size: 16px; font-weight: 600; pointer-events: none"><span style="font-weight: 900"><span class="toastTitle"></span>.</span> <span class="toastText"></span></div>
+</div>
+
+<div data-if="isMenu" style="display: contents">
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(0,0,0,0.35); overflow: auto">
+<div style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; box-shadow: 8px 8px 0 #000000; padding: clamp(12px, 2vw, 28px); max-width: 860px; width: 100%; box-sizing: border-box">
+<div style="font-weight: 900; font-size: clamp(20px, 2.4vw, 30px); letter-spacing: -0.03em; margin-bottom: 12px">За кого играешь?</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px">
+<button type="button" class="btn" data-act="startNa" style="text-align: left; padding: 12px 14px; border-radius: 8px; border: 2px solid #000000; background: #FFC900; color: #000000; font-family: 'Inter Tight', sans-serif; cursor: pointer">
+<svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><use href="#na"></use></svg>
+<span style="display: block; font-weight: 900; font-size: 20px; margin-top: 4px">Натрий Na⁺</span>
+<span style="display: block; font-size: 15px; font-weight: 500; margin-top: 4px">Ты в цитоплазме. Выберись наружу — против градиента.</span>
+<span style="display: block; font-weight: 900; font-size: 15px; margin-top: 10px">Играть →</span>
+</button>
+<button type="button" class="btn" data-act="startK" style="text-align: left; padding: 12px 14px; border-radius: 8px; border: 2px solid #000000; background: #90A8ED; color: #000000; font-family: 'Inter Tight', sans-serif; cursor: pointer">
+<svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><use href="#k"></use></svg>
+<span style="display: block; font-weight: 900; font-size: 20px; margin-top: 4px">Калий K⁺</span>
+<span style="display: block; font-size: 15px; font-weight: 500; margin-top: 4px">Ты снаружи. Попади в клетку — тоже против градиента.</span>
+<span style="display: block; font-weight: 900; font-size: 15px; margin-top: 10px">Играть →</span>
+</button>
+<button type="button" class="btn" data-act="startAtp" style="text-align: left; padding: 12px 14px; border-radius: 8px; border: 2px solid #000000; background: #FF90E8; color: #000000; font-family: 'Inter Tight', sans-serif; cursor: pointer">
+<svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><use href="#atp"></use></svg>
+<span style="display: block; font-weight: 900; font-size: 20px; margin-top: 4px">АТФ</span>
+<span style="display: block; font-size: 15px; font-weight: 500; margin-top: 4px">Ты — энергия. Заряжай насосы, которые уже связали 3 Na⁺.</span>
+<span style="display: block; font-weight: 900; font-size: 15px; margin-top: 10px">Играть →</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+
+<div data-if="isOver" style="display: contents">
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(0,0,0,0.35)">
+<div style="background: #FFFFFF; border: 2px solid #000000; border-radius: 8px; box-shadow: 8px 8px 0 #000000; padding: 32px; max-width: 460px; width: 100%; box-sizing: border-box; text-align: center">
+<svg width="72" height="72" viewBox="0 0 44 44" aria-hidden="true"><use class="heroUse" href="#na"></use></svg>
+<div style="font-weight: 900; font-size: 32px; letter-spacing: -0.03em; margin: 8px 0 4px">Игра окончена</div>
+<div style="font-weight: 700; margin-bottom: 20px">Очки: <span class="score">0</span> · Рекорд: <span class="best">0</span></div>
+<div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap">
+<button type="button" class="btn" data-act="restart" style="min-height: 48px; padding: 0 22px; border-radius: 6px; border: 2px solid #000000; background: #FF90E8; color: #000000; font: 800 16px 'Inter Tight', sans-serif; cursor: pointer">Ещё раз</button>
+<button type="button" class="btn" data-act="toMenu" style="min-height: 48px; padding: 0 22px; border-radius: 6px; border: 2px solid #000000; background: #FFFFFF; color: #000000; font: 800 16px 'Inter Tight', sans-serif; cursor: pointer">Выбрать героя</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 12px 24px; margin: 28px 0 0; font-size: 15px; font-weight: 700">
+<span style="display: inline-flex; align-items: center; gap: 8px"><span style="width: 18px; height: 18px; border-radius: 50%; border: 4px solid #2F6FEB; outline: 2px solid #000000; display: inline-block"></span>Na⁺/K⁺-насос</span>
+<span style="display: inline-flex; align-items: center; gap: 8px"><span style="width: 18px; height: 18px; border-radius: 50%; border: 4px solid #A77BFF; outline: 2px solid #000000; display: inline-block"></span>K⁺-канал</span>
+<span style="display: inline-flex; align-items: center; gap: 8px"><span style="width: 18px; height: 18px; border-radius: 50%; border: 4px solid #FF9A2E; outline: 2px solid #000000; display: inline-block"></span>Na⁺-канал</span>
+<span style="display: inline-flex; align-items: center; gap: 8px"><span style="width: 18px; height: 18px; border-radius: 50%; border: 4px solid #5BC8F5; outline: 2px solid #000000; display: inline-block"></span>аквапорин</span>
+<span style="display: inline-flex; align-items: center; gap: 8px"><span style="width: 18px; height: 18px; border-radius: 4px; background: #23A094; outline: 2px solid #000000; display: inline-block"></span>липидный бислой</span>
+</div>
+<p style="margin: 12px 0 0; color: #333333; font-size: 15px">Управление: веди мышью или пальцем по полю. Стрелки на клавиатуре тоже работают — сначала кликни по полю.</p>
+</section>
+
+<footer style="background: #000000; color: #FFFFFF; margin-top: 72px">
+<div style="max-width: 1240px; margin: 0 auto; padding: 32px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 15px">
+<span style="font-weight: 900; font-size: 20px; letter-spacing: -0.02em">мембранный транспорт</span>
+<span style="color: #DADADA">По материалам §16–17 учебника биологии для 11 класса</span>
+</div>
+</footer>
+</div>
+<script>
+
+class DCLogic {
+  constructor(props) { this.props = props || {}; this.state = {}; }
+  setState(p) { Object.assign(this.state, typeof p === 'function' ? p(this.state) : p); if (this._ui) this._ui(); }
+}
+
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { screen: 'menu', hero: 'na', score: 0, lives: 3, best: 0, toast: '', toastOk: true };
+this.W = 960; this.HH = 600; this.F = 480; this.PZ = 8; this.SPAWN = 90; this.GAP = 34; this.TAU = Math.PI * 2;
+this.canvas = null; this.wrap = null; this.raf = 0; this.last = 0; this.g = null; this.toastT = 0;
+this.target = { x: 0, y: 0 }; this.keys = {}; this.camX = 0; this.camY = 0; this.sx = 0; this.sy = 0;
+this.COL = { na: '#FF9A2E', k: '#A77BFF', atp: '#FF5A4E', in: '#FFC900', out: '#90A8ED', pump: '#2F6FEB' };
+this.RING = { pumpOpen: '#2F6FEB', pumpClosed: '#2F6FEB', pumpLoaded: '#2F6FEB', pumpEmpty: '#2F6FEB', kChan: '#A77BFF', naChan: '#FF9A2E', aqua: '#5BC8F5' };
+this.LABEL = { pumpOpen: 'насос открыт', pumpClosed: 'насос закрыт', pumpLoaded: 'насос + 3 Na⁺', pumpEmpty: 'насос пуст', kChan: 'K⁺-канал', naChan: 'Na⁺-канал', aqua: 'аквапорин' };
+const lipidIon = 'Заряженный ион не проходит через липидный бислой — нужен белок.';
+this.H = {
+na: { title: 'Натрий Na⁺', side: 'in', good: ['pumpOpen'], bad: ['pumpClosed', 'kChan', 'naChan', 'aqua'],
+mission: 'Выберись из клетки: ищи насос, открытый к тебе.',
+msg: { pumpOpen: 'Насос связал Na⁺ со стороны цитоплазмы и вынес наружу — против градиента, за счёт АТФ.', pumpClosed: 'Этот насос сейчас открыт на другую сторону — ему нужно сменить конформацию.', kChan: 'K⁺-канал избирателен: натрий через него не пройдёт.', naChan: 'Na⁺-канал пропускает натрий только по градиенту — в клетку, а не наружу.', aqua: 'Аквапорин пропускает только воду.', lipid: lipidIon } },
+k: { title: 'Калий K⁺', side: 'out', good: ['pumpOpen'], bad: ['pumpClosed', 'kChan', 'naChan', 'aqua'],
+mission: 'Попади в клетку: ищи насос, открытый к тебе.',
+msg: { pumpOpen: 'Насос переносит 2 K⁺ в клетку против градиента.', pumpClosed: 'Этот насос сейчас открыт на другую сторону — ему нужно сменить конформацию.', kChan: 'K⁺-канал выпускает калий по градиенту — из клетки. Внутрь против градиента везёт только насос.', naChan: 'Na⁺-канал не пропускает калий.', aqua: 'Аквапорин пропускает только воду.', lipid: lipidIon } },
+atp: { title: 'АТФ', side: 'in', good: ['pumpLoaded'], bad: ['pumpEmpty', 'kChan', 'naChan'],
+mission: 'Заряжай только насосы, которые уже связали 3 Na⁺.',
+msg: { pumpLoaded: 'Фосфорилирование! АТФ → АДФ + Ф, насос меняет форму и выносит 3 Na⁺.', pumpEmpty: 'Насос ещё не связал 3 Na⁺ — гидролиз АТФ запускается только после этого.', kChan: 'Каналам АТФ не нужна: через них идёт пассивный транспорт.', naChan: 'Каналам АТФ не нужна: через них идёт пассивный транспорт.', lipid: 'Мимо! АТФ работает только с белками-насосами.' } }
+};
+}
+componentDidMount() {
+const loop = (t) => {
+try { this.frame(t); } catch (err) { }
+this.raf = requestAnimationFrame(loop);
+};
+this.raf = requestAnimationFrame(loop);
+}
+componentWillUnmount() {
+cancelAnimationFrame(this.raf);
+clearTimeout(this.toastT);
+}
+rnd(a, b) { return a + Math.random() * (b - a); }
+newPart(hero, z) {
+const side = this.H[hero].side;
+const major = side === 'in' ? 'k' : 'na';
+const minor = side === 'in' ? 'na' : 'k';
+let x = 0, y = 0;
+do { x = this.rnd(-10, 10); y = this.rnd(-6.5, 6.5); } while (Math.abs(x) < 1.6 && Math.abs(y) < 1.2);
+return { x: x, y: y, z: z, type: Math.random() < 0.72 ? major : minor, r: this.rnd(0.22, 0.36) };
+}
+newGame(hero) {
+const parts = [];
+for (let i = 0; i < 70; i++) parts.push(this.newPart(hero, this.rnd(2, this.SPAWN)));
+const lines = [];
+for (let i = 0; i < 18; i++) lines.push({ a: Math.random() * this.TAU, d: Math.random() * 500, l: this.rnd(30, 80) });
+return { hero: hero, px: 0, py: 0, gates: [], parts: parts, lines: lines, flash: 0, flashOk: true, shake: 0, t: 0, sp: 9 };
+}
+makeGate(hero, score) {
+const H = this.H[hero];
+const four = score >= 4;
+const slots = four
+? [[-2.5, -1.5], [2.5, -1.5], [-2.5, 1.5], [2.5, 1.5]]
+: [[-3.4, this.rnd(-1.4, 1.4)], [0, this.rnd(-1.4, 1.4)], [3.4, this.rnd(-1.4, 1.4)]];
+const good = Math.floor(Math.random() * slots.length);
+const bad = H.bad.slice().sort(() => Math.random() - 0.5);
+let bi = 0;
+const doors = slots.map((s, i) => ({ x: s[0], y: s[1], r: 1.15, pulse: 0, above: four ? s[1] < 0 : i === 1, type: i === good ? H.good[0] : bad[(bi++) % bad.length] }));
+return { z: this.SPAWN, doors: doors, checked: false };
+}
+start(hero) {
+this.g = this.newGame(hero);
+const first = this.makeGate(hero, 0);
+first.z = 55;
+this.g.gates.push(first);
+this.target = { x: 0, y: 0 };
+this.keys = {};
+clearTimeout(this.toastT);
+this.setState({ screen: 'play', hero: hero, score: 0, lives: 3, toast: '' });
+if (this.wrap && this.wrap.focus) this.wrap.focus({ preventScroll: true });
+if (this.wrap && this.wrap.scrollIntoView) this.wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+toMenu() {
+clearTimeout(this.toastT);
+this.g = this.newGame(this.state.hero);
+this.setState({ screen: 'menu', toast: '' });
+}
+showToast(msg, ok) {
+clearTimeout(this.toastT);
+this.setState({ toast: msg, toastOk: ok });
+this.toastT = setTimeout(() => this.setState({ toast: '' }), 4500);
+}
+pointer(e) {
+if (this.state.screen !== 'play') return;
+const r = e.currentTarget.getBoundingClientRect();
+const ox = ((e.clientX - r.left) / r.width - 0.5) * this.W;
+const oy = ((e.clientY - r.top) / r.height - 0.5) * this.HH;
+const k = 0.7 * this.F / this.PZ;
+this.target.x = ox / k;
+this.target.y = oy / k;
+}
+key(e, down) {
+const n = e.key;
+if (n === 'ArrowLeft' || n === 'ArrowRight' || n === 'ArrowUp' || n === 'ArrowDown') {
+if (this.state.screen === 'play') e.preventDefault();
+this.keys[n] = down;
+}
+}
+resolve(g, gt) {
+const H = this.H[g.hero];
+let hit = null;
+for (const d of gt.doors) {
+const dx = g.px - d.x, dy = g.py - d.y;
+if (dx * dx + dy * dy < (d.r + 0.1) * (d.r + 0.1)) { hit = d; break; }
+}
+const type = hit ? hit.type : 'lipid';
+const ok = H.good.indexOf(type) >= 0;
+if (hit) hit.pulse = 1;
+g.flash = 1; g.flashOk = ok;
+if (!ok) g.shake = 1;
+if (ok) {
+const score = this.state.score + 1;
+this.setState({ score: score, best: Math.max(this.state.best, score) });
+} else {
+const lives = this.state.lives - 1;
+if (lives <= 0) this.setState({ lives: 0, screen: 'over', best: Math.max(this.state.best, this.state.score) });
+else this.setState({ lives: lives });
+}
+this.showToast(H.msg[type], ok);
+}
+frame(t) {
+const c = this.canvas;
+if (!c) return;
+const ctx = c.getContext('2d');
+const now = t / 1000;
+const dt = this.last ? Math.min(0.2, Math.max(0, now - this.last)) : 0.016;
+this.last = now;
+if (!this.g) this.g = this.newGame(this.state.hero);
+const playing = this.state.screen === 'play';
+this.update(this.g, dt, playing);
+this.draw(ctx, this.g);
+}
+update(g, dt, playing) {
+g.t += dt;
+const T = this.target;
+if (playing) {
+const k = this.keys, v = 6.5 * dt;
+if (k.ArrowLeft) T.x -= v;
+if (k.ArrowRight) T.x += v;
+if (k.ArrowUp) T.y -= v;
+if (k.ArrowDown) T.y += v;
+} else {
+T.x = Math.sin(g.t * 0.6) * 3;
+T.y = Math.sin(g.t * 0.9) * 1.3;
+}
+T.x = Math.max(-4.6, Math.min(4.6, T.x));
+T.y = Math.max(-3, Math.min(3, T.y));
+const f = Math.min(1, dt * 7);
+g.px += (T.x - g.px) * f;
+g.py += (T.y - g.py) * f;
+const sp = playing ? Math.min(26, 11 + this.state.score * 0.6) : 9;
+g.sp = sp;
+for (const p of g.parts) {
+p.z -= sp * dt;
+if (p.z < 0.8) Object.assign(p, this.newPart(g.hero, this.SPAWN + this.rnd(0, 8)));
+}
+for (const gt of g.gates) {
+gt.z -= sp * dt;
+for (const d of gt.doors) d.pulse = Math.max(0, d.pulse - dt * 2);
+if (!gt.checked && gt.z <= this.PZ) {
+gt.checked = true;
+if (playing) this.resolve(g, gt);
+}
+}
+g.gates = g.gates.filter((gt) => gt.z > 0.7);
+const lastG = g.gates[g.gates.length - 1];
+if (!lastG || lastG.z < this.SPAWN - this.GAP) g.gates.push(this.makeGate(g.hero, playing ? this.state.score : 0));
+for (const l of g.lines) {
+l.d += dt * (120 + sp * 30);
+if (l.d > 700) { l.d = this.rnd(20, 80); l.a = Math.random() * this.TAU; }
+}
+g.flash = Math.max(0, g.flash - dt * 1.6);
+g.shake = Math.max(0, g.shake - dt * 2.5);
+}
+proj(x, y, s) {
+return { x: this.W / 2 + (x - this.camX) * s + this.sx, y: this.HH / 2 + (y - this.camY) * s + this.sy };
+}
+rr(ctx, x, y, w, h, r) {
+ctx.beginPath();
+ctx.moveTo(x + r, y);
+ctx.lineTo(x + w - r, y);
+ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+ctx.lineTo(x + w, y + h - r);
+ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+ctx.lineTo(x + r, y + h);
+ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+ctx.lineTo(x, y + r);
+ctx.quadraticCurveTo(x, y, x + r, y);
+ctx.closePath();
+}
+drawHero(ctx, type, x, y, r) {
+const lw = Math.max(1.2, r * 0.1);
+const off = r * 0.14;
+ctx.lineJoin = 'round';
+ctx.strokeStyle = '#000000';
+if (type === 'na') {
+ctx.fillStyle = '#000000';
+ctx.beginPath(); ctx.arc(x + off, y + off, r, 0, this.TAU); ctx.fill();
+ctx.beginPath(); ctx.arc(x, y, r, 0, this.TAU);
+ctx.fillStyle = this.COL.na; ctx.fill(); ctx.lineWidth = lw; ctx.stroke();
+} else {
+const sz = r * 1.8, rad = r * 0.5;
+ctx.fillStyle = '#000000';
+this.rr(ctx, x - sz / 2 + off, y - sz / 2 + off, sz, sz, rad); ctx.fill();
+this.rr(ctx, x - sz / 2, y - sz / 2, sz, sz, rad);
+ctx.fillStyle = type === 'k' ? this.COL.k : this.COL.atp; ctx.fill(); ctx.lineWidth = lw; ctx.stroke();
+}
+if (r < 6) return;
+if (type === 'atp') {
+const u = r * 0.045;
+const pts = [[2, -13], [-9, 3], [-1, 3], [-3, 14], [9, -3], [1, -3]];
+ctx.beginPath();
+pts.forEach((p, i) => { if (i === 0) ctx.moveTo(x + p[0] * u, y + p[1] * u); else ctx.lineTo(x + p[0] * u, y + p[1] * u); });
+ctx.closePath();
+ctx.fillStyle = '#FFFFFF'; ctx.fill(); ctx.lineWidth = lw * 0.6; ctx.stroke();
+return;
+}
+for (const sxn of [-1, 1]) {
+ctx.beginPath(); ctx.arc(x + sxn * r * 0.32, y - r * 0.12, r * 0.2, 0, this.TAU);
+ctx.fillStyle = '#FFFFFF'; ctx.fill();
+ctx.beginPath(); ctx.arc(x + sxn * r * 0.32 + r * 0.04, y - r * 0.08, r * 0.1, 0, this.TAU);
+ctx.fillStyle = '#000000'; ctx.fill();
+}
+ctx.lineWidth = lw * 0.8; ctx.lineCap = 'round';
+ctx.beginPath();
+if (type === 'na') ctx.arc(x, y + r * 0.1, r * 0.3, 0.15 * Math.PI, 0.85 * Math.PI);
+else { ctx.moveTo(x - r * 0.22, y + r * 0.38); ctx.lineTo(x + r * 0.22, y + r * 0.38); }
+ctx.stroke();
+const bx = x + r * 0.78, by = y - r * 0.78, br = r * 0.32;
+ctx.beginPath(); ctx.arc(bx, by, br, 0, this.TAU);
+ctx.fillStyle = '#FFFFFF'; ctx.fill(); ctx.lineWidth = lw * 0.7; ctx.stroke();
+ctx.beginPath(); ctx.moveTo(bx - br * 0.5, by); ctx.lineTo(bx + br * 0.5, by); ctx.moveTo(bx, by - br * 0.5); ctx.lineTo(bx, by + br * 0.5); ctx.stroke();
+}
+drawPart(ctx, p) {
+const s = this.F / p.z;
+const c = this.proj(p.x, p.y, s);
+const r = p.r * s;
+if (r < 0.8 || c.x < -r * 2 || c.x > this.W + r * 2 || c.y < -r * 2 || c.y > this.HH + r * 2) return;
+ctx.globalAlpha = Math.max(0, Math.min(1, (this.SPAWN + 8 - p.z) / 40));
+this.drawHero(ctx, p.type, c.x, c.y, r);
+ctx.globalAlpha = 1;
+}
+drawPlayer(ctx, g) {
+const s = this.F / this.PZ;
+const c = this.proj(g.px, g.py, s);
+this.drawHero(ctx, g.hero, c.x, c.y, 0.5 * s);
+}
+drawDoor(ctx, d, s, z, other) {
+const c = this.proj(d.x, d.y, s);
+const R = d.r * s * (1 + d.pulse * 0.15);
+const ring = Math.max(2, 0.3 * s);
+const t = d.type;
+const open = t === 'pumpOpen' || t === 'kChan' || t === 'naChan' || t === 'aqua';
+ctx.beginPath(); ctx.arc(c.x, c.y, R, 0, this.TAU);
+ctx.fillStyle = open ? other : (t === 'pumpClosed' ? this.COL.pump : '#CFE0FF');
+ctx.fill();
+if (t === 'pumpClosed') {
+ctx.strokeStyle = '#000000'; ctx.lineWidth = Math.max(2, 0.14 * s); ctx.lineCap = 'round';
+ctx.beginPath(); ctx.moveTo(c.x - R * 0.5, c.y); ctx.lineTo(c.x + R * 0.5, c.y); ctx.stroke();
+}
+if (t === 'pumpLoaded') {
+for (let i = 0; i < 3; i++) {
+ctx.beginPath(); ctx.arc(c.x + (i - 1) * R * 0.42, c.y + (i === 1 ? -R * 0.18 : R * 0.12), R * 0.2, 0, this.TAU);
+ctx.fillStyle = this.COL.na; ctx.fill(); ctx.strokeStyle = '#000000'; ctx.lineWidth = Math.max(1, 0.05 * s); ctx.stroke();
+}
+}
+ctx.beginPath(); ctx.arc(c.x, c.y, R, 0, this.TAU);
+ctx.lineWidth = ring; ctx.strokeStyle = this.RING[t]; ctx.stroke();
+ctx.lineWidth = Math.max(1, 0.05 * s); ctx.strokeStyle = '#000000';
+ctx.beginPath(); ctx.arc(c.x, c.y, R + ring / 2, 0, this.TAU); ctx.stroke();
+ctx.beginPath(); ctx.arc(c.x, c.y, Math.max(1, R - ring / 2), 0, this.TAU); ctx.stroke();
+if (s > 14) {
+const ey = c.y - R;
+for (const sxn of [-1, 1]) {
+ctx.beginPath(); ctx.arc(c.x + sxn * R * 0.3, ey, ring * 0.42, 0, this.TAU);
+ctx.fillStyle = '#FFFFFF'; ctx.fill(); ctx.lineWidth = Math.max(1, 0.04 * s); ctx.stroke();
+ctx.beginPath(); ctx.arc(c.x + sxn * R * 0.3, ey + ring * 0.06, ring * 0.2, 0, this.TAU);
+ctx.fillStyle = '#000000'; ctx.fill();
+}
+}
+if (z < 30) {
+const fs = Math.max(11, Math.min(22, 0.3 * s));
+ctx.font = '800 ' + fs + 'px "Inter Tight", sans-serif';
+const txt = this.LABEL[t];
+const tw = ctx.measureText(txt).width;
+const ph = fs * 1.5, pw = tw + fs;
+const lx = c.x - pw / 2;
+const ly = d.above ? c.y - R - ring / 2 - fs * 0.4 - ph - (s > 14 ? ring * 0.5 : 0) : c.y + R + ring / 2 + fs * 0.4;
+ctx.fillStyle = '#000000'; this.rr(ctx, lx + 3, ly + 3, pw, ph, 4); ctx.fill();
+this.rr(ctx, lx, ly, pw, ph, 4); ctx.fillStyle = '#FFFFFF'; ctx.fill();
+ctx.lineWidth = 2; ctx.strokeStyle = '#000000'; ctx.stroke();
+ctx.fillStyle = '#000000'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+ctx.fillText(txt, c.x, ly + ph / 2 + 1);
+}
+}
+drawGate(ctx, gt, other) {
+const z = gt.z;
+if (z < 0.7) return;
+const s = this.F / z;
+let a = Math.min(1, Math.max(0.12, (this.SPAWN - z) / 40 + 0.12));
+if (z < this.PZ) a *= Math.max(0, (z - this.PZ * 0.55) / (this.PZ * 0.45));
+if (a <= 0.01) return;
+ctx.save();
+ctx.globalAlpha = a;
+const tl = this.proj(-11, -7.5, s), br = this.proj(11, 7.5, s);
+ctx.fillStyle = '#23A094';
+ctx.fillRect(tl.x, tl.y, br.x - tl.x, br.y - tl.y);
+if (z < 55) {
+ctx.fillStyle = '#3FD3C2'; ctx.strokeStyle = '#000000'; ctx.lineWidth = Math.max(0.6, 0.04 * s);
+const hr = 0.38 * s;
+for (let yy = -7; yy <= 7.01; yy += 1.1) {
+for (let xx = -10.5; xx <= 10.51; xx += 1.1) {
+let skip = false;
+for (const d of gt.doors) { const dx = xx - d.x, dy = yy - d.y; if (dx * dx + dy * dy < (d.r + 0.5) * (d.r + 0.5)) { skip = true; break; } }
+if (skip) continue;
+const c = this.proj(xx, yy, s);
+if (c.x < -hr || c.x > this.W + hr || c.y < -hr || c.y > this.HH + hr) continue;
+ctx.beginPath(); ctx.arc(c.x, c.y, hr, 0, this.TAU); ctx.fill(); ctx.stroke();
+}
+}
+}
+ctx.lineWidth = Math.max(1.5, 0.06 * s); ctx.strokeStyle = '#000000';
+ctx.strokeRect(tl.x, tl.y, br.x - tl.x, br.y - tl.y);
+for (const d of gt.doors) this.drawDoor(ctx, d, s, z, other);
+ctx.restore();
+}
+draw(ctx, g) {
+const W = this.W, HH = this.HH;
+const H = this.H[g.hero];
+const env = this.COL[H.side];
+const other = this.COL[H.side === 'in' ? 'out' : 'in'];
+this.camX = g.px * 0.3; this.camY = g.py * 0.3;
+this.sx = g.shake ? (Math.random() * 2 - 1) * g.shake * 10 : 0;
+this.sy = g.shake ? (Math.random() * 2 - 1) * g.shake * 10 : 0;
+ctx.setTransform(1, 0, 0, 1, 0, 0);
+ctx.globalAlpha = 1;
+ctx.fillStyle = env; ctx.fillRect(0, 0, W, HH);
+const grd = ctx.createRadialGradient(W / 2, HH / 2, 10, W / 2, HH / 2, W * 0.6);
+grd.addColorStop(0, 'rgba(255,255,255,0.55)'); grd.addColorStop(1, 'rgba(255,255,255,0)');
+ctx.fillStyle = grd; ctx.fillRect(0, 0, W, HH);
+ctx.strokeStyle = 'rgba(0,0,0,0.13)'; ctx.lineWidth = 2; ctx.lineCap = 'round';
+ctx.beginPath();
+for (const l of g.lines) {
+const ca = Math.cos(l.a), sa = Math.sin(l.a);
+ctx.moveTo(W / 2 + ca * l.d, HH / 2 + sa * l.d * 0.62);
+ctx.lineTo(W / 2 + ca * (l.d + l.l), HH / 2 + sa * (l.d + l.l) * 0.62);
+}
+ctx.stroke();
+const items = [];
+for (const p of g.parts) items.push({ z: p.z, k: 0, o: p });
+for (const gt of g.gates) items.push({ z: gt.z, k: 1, o: gt });
+items.push({ z: this.PZ, k: 2, o: null });
+items.sort((a, b) => b.z - a.z);
+for (const it of items) {
+if (it.k === 0) this.drawPart(ctx, it.o);
+else if (it.k === 1) this.drawGate(ctx, it.o, other);
+else this.drawPlayer(ctx, g);
+}
+if (g.flash > 0) {
+ctx.fillStyle = g.flashOk ? 'rgba(35,160,148,' + (g.flash * 0.35) + ')' : 'rgba(255,90,78,' + (g.flash * 0.4) + ')';
+ctx.fillRect(0, 0, W, HH);
+}
+}
+renderVals() {
+const st = this.state;
+const H = this.H[st.hero];
+return {
+setCanvas: (el) => { this.canvas = el; },
+setWrap: (el) => { this.wrap = el; },
+onMove: (e) => this.pointer(e),
+onKeyDown: (e) => this.key(e, true),
+onKeyUp: (e) => this.key(e, false),
+isMenu: st.screen === 'menu',
+isPlay: st.screen === 'play',
+notPlay: st.screen !== 'play',
+isOver: st.screen === 'over',
+startNa: () => this.start('na'),
+startK: () => this.start('k'),
+startAtp: () => this.start('atp'),
+restart: () => this.start(st.hero),
+toMenu: () => this.toMenu(),
+heroName: H.title,
+heroSym: '#' + st.hero,
+mission: H.mission,
+score: st.score,
+best: st.best,
+lives: st.lives,
+livesArr: [0, 1, 2].map((i) => ({ fill: i < st.lives ? '#FF5A4E' : '#FFFFFF' })),
+hasToast: !!st.toast,
+toast: st.toast,
+toastBg: st.toastOk ? '#7CE0B0' : '#FF90E8',
+toastTitle: st.toastOk ? 'Верно' : 'Ошибка'
+};
+}
+}
+
+(function () {
+  var c = new Component({});
+  var wrap = document.getElementById('wrap');
+  c.canvas = document.getElementById('cv');
+  c.wrap = wrap;
+  function all(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
+  function ui() {
+    var v = c.renderVals();
+    all('[data-if]').forEach(function (el) { el.style.display = v[el.getAttribute('data-if')] ? 'contents' : 'none'; });
+    all('.heroUse').forEach(function (u) { u.setAttribute('href', v.heroSym); });
+    all('.heroName').forEach(function (e) { e.textContent = v.heroName; });
+    all('.mission').forEach(function (e) { e.textContent = v.mission; });
+    all('.score').forEach(function (e) { e.textContent = v.score; });
+    all('.best').forEach(function (e) { e.textContent = v.best; });
+    all('.life').forEach(function (e, i) { e.style.background = v.livesArr[i].fill; });
+    document.getElementById('livesBox').setAttribute('aria-label', 'Жизни: ' + v.lives + ' из 3');
+    var t = document.getElementById('toast');
+    t.style.background = v.toastBg;
+    t.querySelector('.toastTitle').textContent = v.toastTitle;
+    t.querySelector('.toastText').textContent = v.toast;
+  }
+  c._ui = ui;
+  wrap.addEventListener('pointermove', function (e) { c.pointer(e); });
+  wrap.addEventListener('pointerdown', function (e) { c.pointer(e); });
+  wrap.addEventListener('keydown', function (e) { c.key(e, true); });
+  wrap.addEventListener('keyup', function (e) { c.key(e, false); });
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act]');
+    if (!b) return;
+    var v = c.renderVals();
+    var f = v[b.getAttribute('data-act')];
+    if (typeof f === 'function') f();
+  });
+  ui();
+  c.componentDidMount();
+})();
+
+</script>
+</body>
+</html>
