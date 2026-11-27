@@ -129,8 +129,10 @@ mark{background:#FF90E8;color:#000000;padding:0 .12em;border-radius:.08em;-webki
 .split .mid{flex:1 1 320px}
 .qcard{flex:1 1 440px;max-width:620px;align-self:center;background:#FFFFFF;border:2px solid #000000;border-radius:8px;box-shadow:8px 8px 0 #000000;padding:24px}
 #scene{width:100%;max-width:1160px;margin:0 auto}
-#scene > [role="img"]{border:2px solid #000000;border-radius:8px;opacity:0;transition:opacity .8s ease;box-shadow:6px 6px 0 #000000}
-[data-panel="pump"].assembled #scene > [role="img"]{opacity:1}
+#scene > [role="img"]{border:2px solid #000000;border-radius:8px;opacity:0;transition:opacity .12s ease;box-shadow:6px 6px 0 #000000}
+[data-panel="pump"].assembled #scene > [role="img"]{opacity:1;transition:opacity .7s ease}
+.tcard2 > [aria-hidden]{opacity:0;transition:opacity .12s ease}
+[data-panel="types"].assembled .tcard2.on > [aria-hidden]{opacity:1;transition:opacity .7s ease}
 .note{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;font-weight:600}
 .note b{background:#000000;color:#FFFFFF;border-radius:4px;padding:2px 8px}
 @media (prefers-reduced-motion: reduce){.panel.active .rv{animation:none;opacity:1}.panel{transition:none}}

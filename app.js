@@ -66,6 +66,7 @@
       na(g, 300, 205, 140);
     } },
     type0: { dw: 320, dh: 170, draw: function (g) {
+      g.fillStyle = C.yel; g.fillRect(0, 0, 320, 170);
       slope(g, function () { g.moveTo(0, 40); g.quadraticCurveTo(160, 60, 320, 150); });
       g.strokeStyle = C.ink; g.lineWidth = 4; g.lineCap = 'round'; g.beginPath();
       g.moveTo(98, 42); g.lineTo(124, 42); g.moveTo(92, 54); g.lineTo(118, 54); g.moveTo(100, 66); g.lineTo(126, 66); g.stroke();
@@ -73,11 +74,13 @@
       arrow(g, 210, 128, 290, 160, 3);
     } },
     type1: { dw: 320, dh: 170, draw: function (g) {
+      g.fillStyle = C.pink; g.fillRect(0, 0, 320, 170);
       slope(g, function () { g.moveTo(0, 150); g.quadraticCurveTo(160, 60, 320, 40); });
       atp(g, 119, 74, 28); na(g, 160, 55, 20);
       arrow(g, 210, 34, 290, 16, 3);
     } },
     type2: { dw: 320, dh: 170, draw: function (g) {
+      g.fillStyle = C.per; g.fillRect(0, 0, 320, 170);
       slope(g, function () { g.moveTo(0, 150); g.lineTo(160, 50); g.lineTo(320, 150); });
       g.strokeStyle = C.ink; g.lineWidth = 3; g.beginPath(); g.moveTo(160, 46); g.lineTo(206, 75); g.moveTo(160, 46); g.lineTo(52, 118); g.stroke();
       circle(g, 160, 40, 14, C.ink); circle(g, 160, 40, 11, C.white);
@@ -85,8 +88,8 @@
       glu(g, 44, 124, 19); na(g, 212, 82, 17);
     } },
     pump: { dw: 1440, dh: 500, draw: function (g) {
+      g.fillStyle = C.per; g.fillRect(0, 0, 1440, 240); g.fillStyle = C.yel; g.fillRect(0, 320, 1440, 180);
       membrane(g, 11 * 1.6, 1440, 228 + 9 * 1.6, 228 + 55 * 1.6, 35.2, 12.8);
-      g.fillStyle = C.white; g.fillRect(596, 180, 208, 200);
       lobe(g, 604, 190, 72, 180, C.blue); lobe(g, 724, 190, 72, 180, C.blue);
       [[636, 226], [764, 226]].forEach(function (e) { circle(g, e[0], e[1], 11, C.ink); circle(g, e[0], e[1], 9, C.white); circle(g, e[0] + 2, e[1] + 2, 4.5, C.ink); });
       [[140, 50, 64], [320, 110, 52], [430, 30, 58], [920, 100, 56], [1060, 40, 64], [1250, 130, 52]].forEach(function (b) { na(g, b[0] + b[2] * 20 / 44, b[1] + b[2] * 24 / 44, b[2] * 16.5 / 44); });
@@ -116,7 +119,7 @@
   var cv = document.getElementById('particles');
   var ctx = cv.getContext('2d');
   var W = 0, H = 0, dpr = 1;
-  var N = Math.min(5200, Math.max(2600, Math.round(window.innerWidth * window.innerHeight / 300)));
+  var N = Math.min(6000, Math.max(2600, Math.round(window.innerWidth * window.innerHeight / 240)));
   var P = [];
   for (var i = 0; i < N; i++) P.push({ x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight, vx: 0, vy: 0, rx: 0, ry: 0, r: 200, g: 200, b: 200, tr: 200, tg: 200, tb: 200, ph: Math.random() * TAU, delay: 0, s: 2.8 + Math.random() * 1.8 });
   var cur = null, targetEl = null, switchT = 0, pAlpha = 1, pAlphaT = 1, mx = -9999, my = -9999, last = 0, haveTarget = false;
@@ -126,7 +129,12 @@
     cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
   function panelEl(name) { return document.querySelector('[data-panel="' + name + '"]'); }
-  function targetFor(name) { return name === 'pump' ? panelEl(name).querySelector('#scene > [role="img"]') : panelEl(name).querySelector('.target'); }
+  function targetFor(name) {
+    if (name === 'pump') return panelEl(name).querySelector('#scene > [role="img"]');
+    if (name === 'types') return panelEl(name).querySelector('.tcard2.on > [aria-hidden]');
+    return panelEl(name).querySelector('.target');
+  }
+  var CRISP = { pump: 1, types: 1 };
   var typeIdx = 0;
   function targetKey(name) { return name === 'types' ? 'type' + typeIdx : name; }
 
@@ -155,40 +163,43 @@
     for (j = 0; j < N; j++) {
       var c = order[j] * 5, p = P[j];
       p.rx = cand[c]; p.ry = cand[c + 1]; p.s = size;
-      p.tr = cand[c + 2]; p.tg = cand[c + 3]; p.tb = cand[c + 4];
+      p.tr = cand[c + 2]; p.tg = cand[c + 3]; p.tb = cand[c + 4]; p.key = (p.tr << 16) | (p.tg << 8) | p.tb;
     }
+    P.sort(function (a, b) { return a.key - b.key; });
     targetEl = el; haveTarget = true;
   }
   function scatter() {
     var cx = W / 2, cy = H / 2;
     P.forEach(function (p) {
-      var a = Math.atan2(p.y - cy, p.x - cx) + (Math.random() - 0.5) * 1.6, sp = 3 + Math.random() * 7;
-      p.vx += Math.cos(a) * sp; p.vy += Math.sin(a) * sp; p.delay = Math.random() * 420;
+      p.vx += (Math.random() - 0.5) * 7 + (p.x - cx) * 0.004; p.vy += -2 - Math.random() * 6; p.delay = 250 + Math.random() * 450;
     });
   }
 
   function frame(now) {
     var dt = last ? Math.min(3, (now - last) / 16.667) : 1; last = now;
-    var pumpPanel = panelEl('pump');
-    if (cur === 'pump' && !pumpPanel.classList.contains('assembled') && now - switchT > (reduce ? 0 : 1700)) { pumpPanel.classList.add('assembled'); pAlphaT = 0; }
+    var curPanel = cur && panelEl(cur);
+    if (curPanel && CRISP[cur] && !curPanel.classList.contains('assembled') && now - switchT > (reduce ? 0 : 1800)) { curPanel.classList.add('assembled'); pAlphaT = 0; }
     pAlpha += (pAlphaT - pAlpha) * Math.min(1, 0.1 * dt);
     ctx.clearRect(0, 0, W, H);
     if (haveTarget && pAlpha > 0.01) {
       var rect = targetEl.getBoundingClientRect(), ox = rect.left, oy = rect.top, t = now / 1000;
       var k = 0.05 * dt, damp = Math.pow(0.84, dt), ck = Math.min(1, 0.07 * dt);
       ctx.globalAlpha = pAlpha;
+      var lastKey = -1;
       for (var i = 0; i < N; i++) {
         var p = P[i];
         var tx = ox + p.rx, ty = oy + p.ry;
         if (reduce) { p.x = tx; p.y = ty; p.r = p.tr; p.g = p.tg; p.b = p.tb; }
         else {
           if (now - switchT > p.delay) { p.vx += (tx - p.x) * k; p.vy += (ty - p.y) * k; }
+          else p.vy += 0.55 * dt;
           var dx = p.x - mx, dy = p.y - my, d2 = dx * dx + dy * dy;
           if (d2 < 6400) { var d = Math.sqrt(d2) || 1, f = (1 - d2 / 6400) * 2.4 * dt; p.vx += dx / d * f; p.vy += dy / d * f; }
           p.vx *= damp; p.vy *= damp; p.x += p.vx * dt; p.y += p.vy * dt;
           p.r += (p.tr - p.r) * ck; p.g += (p.tg - p.g) * ck; p.b += (p.tb - p.b) * ck;
         }
-        ctx.fillStyle = 'rgb(' + (p.r | 0) + ',' + (p.g | 0) + ',' + (p.b | 0) + ')';
+        var ri = p.r | 0, gi = p.g | 0, bi = p.b | 0, key = (ri << 16) | (gi << 8) | bi;
+        if (key !== lastKey) { ctx.fillStyle = 'rgb(' + ri + ',' + gi + ',' + bi + ')'; lastKey = key; }
         ctx.fillRect(Math.round(p.x - p.s / 2), Math.round(p.y - p.s / 2), p.s, p.s);
       }
       ctx.globalAlpha = 1;
@@ -215,12 +226,11 @@
       if (on) el.removeAttribute('inert'); else el.setAttribute('inert', '');
     });
     document.querySelectorAll('.dock [data-go]').forEach(function (b) { var on = b.getAttribute('data-go') === name; b.setAttribute('aria-selected', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; });
-    panelEl('pump').classList.remove('assembled');
-    pAlpha = 1; pAlphaT = 1;
+    panelEl('pump').classList.remove('assembled'); panelEl('types').classList.remove('assembled');
+    pAlpha = 1; pAlphaT = 1; switchT = performance.now();
     syncPause();
     replayJumps(name, down);
-    if (name === 'types') pAlphaT = 0;
-    else requestAnimationFrame(function () { sample(name); if (!reduce) scatter(); switchT = performance.now(); });
+    requestAnimationFrame(function () { sample(name); if (!reduce) scatter(); switchT = performance.now(); });
     decodePanel(name);
     if (!fromHash) history.replaceState(null, '', name === 'home' ? location.pathname : '#' + name);
   }
@@ -274,13 +284,17 @@
 
   function setType(i, silent) {
     var prev = typeIdx;
+    if (!silent && cur === 'types') { panelEl('types').classList.remove('assembled'); pAlpha = 1; pAlphaT = 1; switchT = performance.now(); }
     typeIdx = (i + 3) % 3;
     document.querySelectorAll('[data-card]').forEach(function (c) {
       var on = +c.getAttribute('data-card') === typeIdx; c.classList.toggle('on', on);
       if (on) { c.style.setProperty('--dx', (i < prev ? -40 : 40) + 'px'); }
     });
     document.querySelectorAll('[data-gate]').forEach(function (gEl) { gEl.classList.toggle('cur', +gEl.getAttribute('data-gate') === typeIdx); });
-    if (!silent) decode(document.querySelector('[data-card="' + typeIdx + '"]'), 80);
+    if (!silent) {
+      decode(document.querySelector('[data-card="' + typeIdx + '"] .dec'), 80);
+      if (cur === 'types') { requestAnimationFrame(function () { sample('types'); if (!reduce) scatter(); switchT = performance.now(); }); }
+    }
   }
   document.addEventListener('click', function (e) {
     var s = e.target.closest('[data-type-step]'); if (s) { setType(typeIdx + +s.getAttribute('data-type-step')); return; }
@@ -330,7 +344,7 @@
   window.addEventListener('pointermove', function (e) { mx = e.clientX; my = e.clientY; });
   document.addEventListener('pointerleave', function () { mx = -9999; my = -9999; });
   var rt = 0;
-  window.addEventListener('resize', function () { resize(); clearTimeout(rt); rt = setTimeout(function () { if (cur && cur !== 'types') sample(cur); }, 150); });
+  window.addEventListener('resize', function () { resize(); clearTimeout(rt); rt = setTimeout(function () { if (cur) sample(cur); }, 150); });
   document.getElementById('pauseBtn').addEventListener('click', function () { userPaused = !userPaused; syncPause(); });
 
   /* ---------- quiz ---------- */
