@@ -143,6 +143,10 @@ mark{background:#FF90E8;color:#000000;padding:0 .12em;border-radius:.08em;-webki
 .arr2{background:none;border:0;padding:10px 12px;color:#000000;font:900 52px/1 'Inter Tight',sans-serif;cursor:pointer;flex:0 0 auto;transition:transform .15s ease}
 .arr2[data-type-step="-1"]:hover{transform:translateX(-6px)}
 .arr2[data-type-step="1"]:hover{transform:translateX(6px)}
+.jmp{opacity:0;transform:translateY(var(--jy2,70px)) scale(.95);transition:opacity .2s ease,transform .2s ease}
+.jmp.jin{opacity:1;transform:none;transition:opacity .35s ease var(--jd,0s),transform .75s cubic-bezier(.34,1.56,.64,1) var(--jd,0s)}
+.jmp.jin.btn:hover,.refgrid a.jmp.jin:hover{transform:translate(-2px,-2px);transition-delay:0s}
+@media (prefers-reduced-motion: reduce){.jmp{opacity:1;transform:none;transition:none}}
 .decoding{color:#7A7A7A}
 mark.decoding,.btn.decoding{color:#333333}
 .strip{display:flex;flex-direction:column;align-items:center;gap:10px}
@@ -286,8 +290,8 @@ mark.decoding,.btn.decoding{color:#333333}
 </div>
 <button type="button" class="arr2" data-type-step="1" aria-label="Следующий тип транспорта">→</button>
 </div>
-<div class="wrap strip rv" style="--d: .2s">
-<div class="stripbox"><svg viewBox="0 0 1000 200" role="img" aria-label="Мембрана: K⁺-канал — пассивный транспорт, Na⁺/K⁺-насос — активный, переносчик Na⁺ и глюкозы — сопряжённый" style="display: block; width: 100%; height: auto">
+<div class="wrap strip">
+<div class="stripbox jmp"><svg viewBox="0 0 1000 200" role="img" aria-label="Мембрана: K⁺-канал — пассивный транспорт, Na⁺/K⁺-насос — активный, переносчик Na⁺ и глюкозы — сопряжённый" style="display: block; width: 100%; height: auto">
 <rect x="0" y="0" width="1000" height="68" fill="#90A8ED"></rect><rect x="0" y="0" width="1000" height="68" fill="url(#texOut)"></rect>
 <rect x="0" y="132" width="1000" height="68" fill="#FFC900"></rect><rect x="0" y="132" width="1000" height="68" fill="url(#texIn)"></rect>
 <g transform="translate(0,68)"><rect x="0" y="0" width="1000" height="64" fill="url(#lipid)"></rect></g>
@@ -397,9 +401,9 @@ mark.decoding,.btn.decoding{color:#333333}
 </div>
 <div class="mid"><div class="target"></div></div>
 <div class="wrap cardrow">
-<a class="hero-link btn rv" href="game.html?hero=na" style="--d: .2s; background: #FFC900"><svg width="56" height="56" viewBox="0 0 44 44" aria-hidden="true"><use href="#na"></use></svg><div><b>Натрий Na⁺</b><span>Выберись из клетки против градиента →</span></div></a>
-<a class="hero-link btn rv" href="game.html?hero=k" style="--d: .3s; background: #90A8ED"><svg width="56" height="56" viewBox="0 0 44 44" aria-hidden="true"><use href="#k"></use></svg><div><b>Калий K⁺</b><span>Попади в клетку через насос →</span></div></a>
-<a class="hero-link btn rv" href="game.html?hero=atp" style="--d: .4s; background: #FF90E8"><svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true"><use href="#atp"></use></svg><div><b>АТФ</b><span>Заряжай насосы с тремя Na⁺ →</span></div></a>
+<a class="hero-link btn jmp" href="game.html?hero=na" style="--d: .2s; background: #FFC900"><svg width="56" height="56" viewBox="0 0 44 44" aria-hidden="true"><use href="#na"></use></svg><div><b>Натрий Na⁺</b><span>Выберись из клетки против градиента →</span></div></a>
+<a class="hero-link btn jmp" href="game.html?hero=k" style="--d: .3s; background: #90A8ED"><svg width="56" height="56" viewBox="0 0 44 44" aria-hidden="true"><use href="#k"></use></svg><div><b>Калий K⁺</b><span>Попади в клетку через насос →</span></div></a>
+<a class="hero-link btn jmp" href="game.html?hero=atp" style="--d: .4s; background: #FF90E8"><svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true"><use href="#atp"></use></svg><div><b>АТФ</b><span>Заряжай насосы с тремя Na⁺ →</span></div></a>
 </div>
 </section>
 
@@ -410,19 +414,19 @@ mark.decoding,.btn.decoding{color:#333333}
 </div>
 <div class="wrap split">
 <div class="mid"><div class="target"></div></div>
-<div class="refgrid rv" style="--d: .2s; flex: 1 1 460px; align-content: center">
-<a href="spravochnik.html#a1"><small>01</small>Строение мембраны</a>
-<a href="spravochnik.html#a2"><small>02</small>Градиент концентрации</a>
-<a href="spravochnik.html#a3"><small>03</small>Простая диффузия</a>
-<a href="spravochnik.html#a4"><small>04</small>Облегчённая диффузия</a>
-<a href="spravochnik.html#a5"><small>05</small>Обменная диффузия и антипорт</a>
-<a href="spravochnik.html#a6"><small>06</small>Осмос и фильтрация</a>
-<a href="spravochnik.html#a7"><small>07</small>Активный транспорт и АТФ</a>
-<a href="spravochnik.html#a8"><small>08</small>Na⁺/K⁺-насос: полный цикл</a>
-<a href="spravochnik.html#a9"><small>09</small>Вторично-активный транспорт</a>
-<a href="spravochnik.html#a10"><small>10</small>Ионные каналы</a>
-<a href="spravochnik.html#a11"><small>11</small>Фаго-, пино-, экзоцитоз</a>
-<a href="spravochnik.html#glossary" style="background: #FFC900"><small>А–Я</small>Словарь терминов</a>
+<div class="refgrid" style="flex: 1 1 460px; align-content: center">
+<a class="jmp" href="spravochnik.html#a1"><small>01</small>Строение мембраны</a>
+<a class="jmp" href="spravochnik.html#a2"><small>02</small>Градиент концентрации</a>
+<a class="jmp" href="spravochnik.html#a3"><small>03</small>Простая диффузия</a>
+<a class="jmp" href="spravochnik.html#a4"><small>04</small>Облегчённая диффузия</a>
+<a class="jmp" href="spravochnik.html#a5"><small>05</small>Обменная диффузия и антипорт</a>
+<a class="jmp" href="spravochnik.html#a6"><small>06</small>Осмос и фильтрация</a>
+<a class="jmp" href="spravochnik.html#a7"><small>07</small>Активный транспорт и АТФ</a>
+<a class="jmp" href="spravochnik.html#a8"><small>08</small>Na⁺/K⁺-насос: полный цикл</a>
+<a class="jmp" href="spravochnik.html#a9"><small>09</small>Вторично-активный транспорт</a>
+<a class="jmp" href="spravochnik.html#a10"><small>10</small>Ионные каналы</a>
+<a class="jmp" href="spravochnik.html#a11"><small>11</small>Фаго-, пино-, экзоцитоз</a>
+<a class="jmp" href="spravochnik.html#glossary" style="background: #FFC900"><small>А–Я</small>Словарь терминов</a>
 </div>
 </div>
 </section>
@@ -434,7 +438,7 @@ mark.decoding,.btn.decoding{color:#333333}
 </div>
 <div class="wrap split">
 <div class="mid"><div class="target"></div></div>
-<div class="qcard rv" id="quizRoot" style="--d: .2s"></div>
+<div class="qcard jmp" id="quizRoot"></div>
 </div>
 </section>
 </main>

@@ -218,6 +218,7 @@
     panelEl('pump').classList.remove('assembled');
     pAlpha = 1; pAlphaT = 1;
     syncPause();
+    replayJumps(name, down);
     if (name === 'types') pAlphaT = 0;
     else requestAnimationFrame(function () { sample(name); if (!reduce) scatter(); switchT = performance.now(); });
     decodePanel(name);
@@ -297,6 +298,35 @@
     var n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; n.focus(); go(n.getAttribute('data-go')); e.preventDefault();
   });
   window.addEventListener('hashchange', function () { go(location.hash.slice(1) || 'home', true); });
+
+  /* ---------- jumping cards: they bounce in when a tab opens and whenever they scroll into view ---------- */
+  function inView(el) { var r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < window.innerHeight; }
+  function replayJumps(name, down) {
+    var k = 0;
+    panelEl(name).querySelectorAll('.jmp').forEach(function (el) {
+      el.classList.remove('jin'); el.style.setProperty('--jy2', down ? '70px' : '-70px');
+    });
+    requestAnimationFrame(function () {
+      panelEl(name).querySelectorAll('.jmp').forEach(function (el) {
+        if (inView(el)) { el.style.setProperty('--jd', (0.15 + Math.min(k++ * 0.08, 0.5)) + 's'); el.classList.add('jin'); }
+      });
+    });
+  }
+  if ('IntersectionObserver' in window) {
+    var jio = new IntersectionObserver(function (entries) {
+      var k = 0;
+      entries.sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top; });
+      entries.forEach(function (e) {
+        var el = e.target, panel = el.closest('.panel');
+        if (!panel || !panel.classList.contains('active')) return;
+        if (e.isIntersecting) { el.style.setProperty('--jd', Math.min(k++ * 0.08, 0.4) + 's'); el.classList.add('jin'); }
+        else { el.style.setProperty('--jy2', e.boundingClientRect.top < 0 ? '-70px' : '70px'); el.style.setProperty('--jd', '0s'); el.classList.remove('jin'); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.jmp').forEach(function (el) { jio.observe(el); });
+  } else {
+    document.querySelectorAll('.jmp').forEach(function (el) { el.classList.add('jin'); });
+  }
   window.addEventListener('pointermove', function (e) { mx = e.clientX; my = e.clientY; });
   document.addEventListener('pointerleave', function () { mx = -9999; my = -9999; });
   var rt = 0;
