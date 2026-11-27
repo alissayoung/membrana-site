@@ -224,36 +224,47 @@
   /* ---------- decode effect: glyphs flicker, then lock into the real text left to right ---------- */
   var GLYPHS = 'NaKCaHOАТФ⁺⁻→←↑↓⇌Δαβγ0123456789абвгдеклмнопрст'.split('');
   function glyph() { return GLYPHS[Math.floor(Math.random() * GLYPHS.length)]; }
-  function decode(el, delay) {
-    if (!el || reduce) return;
-    var token = {}; el._dec = token;
-    if (!el._parts) {
-      var w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), n, parts = [];
-      while ((n = w.nextNode())) parts.push({ n: n, t: Array.from(n.nodeValue) });
-      el._parts = parts;
-    }
-    var parts = el._parts, total = parts.reduce(function (a, p) { return a + p.t.length; }, 0);
-    var frames = Math.min(42, Math.max(16, Math.round(total * 0.9)));
-    function paint(locked) {
-      var off = 0;
-      parts.forEach(function (p) {
-        var s = ''; for (var k = 0; k < p.t.length; k++) { var ch = p.t[k]; s += (off + k < locked || /\s/.test(ch)) ? ch : glyph(); }
-        p.n.nodeValue = s; off += p.t.length;
+  function scramble(t, locked) {
+    var s = ''; for (var k = 0; k < t.length; k++) { var ch = t[k]; s += (k < locked || /\s/.test(ch)) ? ch : glyph(); } return s;
+  }
+  // All visible text nodes inside root (SVG labels and hidden cards are skipped).
+  function textNodes(root) {
+    if (!root) return [];
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: function (n) {
+      var p = n.parentElement;
+      if (!p || !/\S/.test(n._orig !== undefined ? n._orig : n.nodeValue)) return NodeFilter.FILTER_REJECT;
+      if (p.closest('svg,script,style')) return NodeFilter.FILTER_REJECT;
+      if (p.offsetParent === null) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    } });
+    var out = [], n; while ((n = w.nextNode())) out.push(n); return out;
+  }
+  // Every node flickers with glyphs, then locks into its real text left to right; nodes start one after another.
+  function decodeNodes(nodes, base, step) {
+    if (reduce || !nodes.length) return;
+    var token = {};
+    var items = nodes.map(function (n, i) {
+      if (n._orig === undefined) n._orig = n.nodeValue;
+      n._dec = token;
+      var t = Array.from(n._orig);
+      return { n: n, t: t, p: n.parentElement, frames: Math.min(30, Math.max(10, Math.round(t.length * 0.7))), start: (base || 0) + Math.min(i * (step || 30), 650), done: false };
+    });
+    items.forEach(function (it) { it.n.nodeValue = scramble(it.t, 0); it.p.classList.add('decoding'); });
+    var t0 = performance.now();
+    (function tick() {
+      var now = performance.now() - t0, alive = false;
+      items.forEach(function (it) {
+        if (it.done || it.n._dec !== token) return;
+        var f = Math.floor((now - it.start) / 34);
+        if (f < 0) { alive = true; if (Math.random() < 0.35) it.n.nodeValue = scramble(it.t, 0); return; }
+        if (f >= it.frames) { it.n.nodeValue = it._final = it.t.join(''); it.done = true; it.p.classList.remove('decoding'); return; }
+        alive = true; it.n.nodeValue = scramble(it.t, Math.floor(it.t.length * f / it.frames));
       });
-    }
-    paint(0); el.classList.add('decoding');
-    var f = 0;
-    setTimeout(function tick() {
-      if (el._dec !== token) return;
-      paint(Math.floor(total * f / frames));
-      if (++f <= frames) setTimeout(tick, 34);
-      else { parts.forEach(function (p) { p.n.nodeValue = p.t.join(''); }); el.classList.remove('decoding'); }
-    }, delay || 0);
+      if (alive) setTimeout(tick, 34);
+    })();
   }
-  function decodePanel(name) {
-    var k = 0;
-    panelEl(name).querySelectorAll('.dec').forEach(function (el) { if (el.offsetParent !== null) decode(el, 60 + (k++) * 140); });
-  }
+  function decode(el, delay) { decodeNodes(textNodes(el), delay || 0, 30); }
+  function decodePanel(name) { decodeNodes(textNodes(panelEl(name)), 40, 28); }
 
   function setType(i, silent) {
     var prev = typeIdx;
@@ -263,7 +274,7 @@
       if (on) { c.style.setProperty('--dx', (i < prev ? -40 : 40) + 'px'); }
     });
     document.querySelectorAll('[data-gate]').forEach(function (gEl) { gEl.classList.toggle('cur', +gEl.getAttribute('data-gate') === typeIdx); });
-    if (!silent) decode(document.querySelector('[data-card="' + typeIdx + '"] .dec'), 80);
+    if (!silent) decode(document.querySelector('[data-card="' + typeIdx + '"]'), 80);
   }
   document.addEventListener('click', function (e) {
     var s = e.target.closest('[data-type-step]'); if (s) { setType(typeIdx + +s.getAttribute('data-type-step')); return; }
@@ -326,7 +337,7 @@
     }
     qRoot.innerHTML = h;
     var key = qs.done ? 'done' : 'q' + qs.q;
-    if (key !== lastQuizKey && cur === 'quiz') decode(qRoot.querySelector('.dec'), 40);
+    if (key !== lastQuizKey && cur === 'quiz') decode(qRoot, 40);
     lastQuizKey = key;
   }
   var lastQuizKey = '';
