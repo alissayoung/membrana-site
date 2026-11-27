@@ -297,30 +297,6 @@
     var n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; n.focus(); go(n.getAttribute('data-go')); e.preventDefault();
   });
   window.addEventListener('hashchange', function () { go(location.hash.slice(1) || 'home', true); });
-
-  /* ---------- wheel / swipe: scroll down → next tab, scroll up → previous ---------- */
-  var lastFlip = 0;
-  function flip(dir) {
-    var p = panelEl(cur);
-    if (p.scrollHeight > p.clientHeight + 4) {
-      if (dir > 0 && p.scrollTop + p.clientHeight < p.scrollHeight - 4) return;
-      if (dir < 0 && p.scrollTop > 4) return;
-    }
-    var now = Date.now(); if (now - lastFlip < 900) return;
-    var i = PANELS.indexOf(cur) + dir; if (i < 0 || i >= PANELS.length) return;
-    lastFlip = now; go(PANELS[i]);
-  }
-  window.addEventListener('wheel', function (e) {
-    if (Math.abs(e.deltaY) < 14 || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
-    if (e.target.closest && e.target.closest('.dock')) return;
-    flip(e.deltaY > 0 ? 1 : -1);
-  }, { passive: true });
-  var ty0 = null;
-  window.addEventListener('touchstart', function (e) { ty0 = e.touches.length === 1 ? e.touches[0].clientY : null; }, { passive: true });
-  window.addEventListener('touchend', function (e) {
-    if (ty0 === null) return; var dy = ty0 - e.changedTouches[0].clientY; ty0 = null;
-    if (Math.abs(dy) > 70) flip(dy > 0 ? 1 : -1);
-  }, { passive: true });
   window.addEventListener('pointermove', function (e) { mx = e.clientX; my = e.clientY; });
   document.addEventListener('pointerleave', function () { mx = -9999; my = -9999; });
   var rt = 0;
