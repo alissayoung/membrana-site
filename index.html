@@ -106,8 +106,8 @@ main{position:fixed;inset:0;z-index:2}
 .mid{position:relative;flex:1 1 auto;min-height:150px}
 .target{position:absolute;inset:0}
 .rv{opacity:0}
-.panel.active .rv{animation:blurIn .8s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--d,0s)}
-@keyframes blurIn{from{opacity:0;filter:blur(14px);transform:translateY(16px)}to{opacity:1;filter:none;transform:none}}
+.panel.active .rv{animation:jumpIn .85s both;animation-delay:var(--d,0s)}
+@keyframes jumpIn{0%{opacity:0;transform:translateY(var(--jy,90px)) scale(.94);animation-timing-function:cubic-bezier(.2,.9,.3,1)}55%{opacity:1;transform:translateY(calc(var(--jy,90px) * -0.16)) scale(1.015);animation-timing-function:ease-in-out}78%{transform:translateY(calc(var(--jy,90px) * 0.05)) scale(.998)}100%{opacity:1;transform:none}}
 mark{background:#FF90E8;color:#000000;padding:0 .12em;border-radius:.08em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .dock{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:7;display:flex;gap:6px;background:#FFFFFF;border:2px solid #000000;border-radius:12px;box-shadow:6px 6px 0 #000000;padding:8px;max-width:calc(100vw - 24px);overflow-x:auto}
 .dock button{font:800 17px 'Inter Tight',sans-serif;border:2px solid transparent;background:transparent;padding:10px 16px;border-radius:8px;cursor:pointer;white-space:nowrap;color:#000000;transition:background .2s ease,transform .15s ease,box-shadow .15s ease}
@@ -239,7 +239,7 @@ mark.decoding,.btn.decoding{color:#333333}
 <section class="panel" data-panel="home" aria-label="Главная">
 <div class="mid"><div class="target"></div></div>
 <div class="wrap head">
-<h1 class="dec hero-h1">Транспорт веществ через <mark>клеточную мембрану</mark></h1>
+<h1 class="dec rv hero-h1">Транспорт веществ через <mark>клеточную мембрану</mark></h1>
 <div class="rv" style="--d: .15s; max-width: 380px">
 <p style="margin: 0 0 16px; font-weight: 500">Пассивный и активный перенос, механизм работы <span style="white-space: nowrap">Na⁺/K⁺-АТФазы</span>. Выбери раздел внизу.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 12px">
@@ -252,9 +252,9 @@ mark.decoding,.btn.decoding{color:#333333}
 
 <section class="panel" data-panel="types" aria-label="§16 Типы транспорта">
 <div class="wrap head">
-<h2 class="dec">Классификация видов транспорта</h2>
+<h2 class="dec rv">Классификация видов транспорта</h2>
 </div>
-<div class="wrap tcar">
+<div class="wrap tcar rv" style="--d: .1s">
 <button type="button" class="arr2" data-type-step="-1" aria-label="Предыдущий тип транспорта">←</button>
 <div class="tslot" aria-live="polite">
 <article class="tcard tcard2 on" data-card="0"><div aria-hidden="true" style="position: relative; overflow: hidden; border-bottom: 2px solid #000000; background-color: #FFC900; background-image: radial-gradient(rgba(0,0,0,0.13) 1.4px, transparent 1.7px); background-size: 12px 12px">
@@ -320,10 +320,10 @@ mark.decoding,.btn.decoding{color:#333333}
 
 <section class="panel" data-panel="pump" aria-label="§17 Натрий-калиевый насос">
 <div class="wrap head">
-<h2 class="dec">Na⁺/K⁺-АТФаза: цикл работы насоса</h2>
+<h2 class="dec rv">Na⁺/K⁺-АТФаза: цикл работы насоса</h2>
 <p class="rv" style="--d: .1s">За один цикл: <b>3 Na⁺</b> из клетки, <b>2 K⁺</b> в клетку, <b>1 АТФ</b>. Наружу выходит на один «плюс» больше — поэтому внутри клетки «минус».</p>
 </div>
-<div class="wrap" style="flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center">
+<div class="wrap rv" style="--d: .1s; flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center">
 <div class="scene" id="scene" style="--cycle: 14s">
 <div role="img" aria-label="Анимация цикла Na⁺/K⁺-АТФазы: три иона Na⁺ выводятся из цитоплазмы во внеклеточную среду, два иона K⁺ переносятся в цитоплазму, на цикл расходуется одна молекула АТФ" style="position: relative; overflow: hidden; border-bottom: 2px solid #000000">
 <svg viewBox="0 0 1440 500" style="display: block; width: 100%; height: auto" aria-hidden="true">
@@ -392,7 +392,7 @@ mark.decoding,.btn.decoding{color:#333333}
 
 <section class="panel" data-panel="game" aria-label="Мини-игра">
 <div class="wrap head">
-<h2 class="dec">Мини-игра «Пройди мембрану»</h2>
+<h2 class="dec rv">Мини-игра «Пройди мембрану»</h2>
 <p class="rv" style="--d: .1s">Лети сквозь стенки мембраны и выбирай белок, который правда тебя пропустит. Не врежься в липиды.</p>
 </div>
 <div class="mid"><div class="target"></div></div>
@@ -405,7 +405,7 @@ mark.decoding,.btn.decoding{color:#333333}
 
 <section class="panel" data-panel="ref" aria-label="Справочник">
 <div class="wrap head">
-<h2 class="dec">Справочник</h2>
+<h2 class="dec rv">Справочник</h2>
 <p class="rv" style="--d: .1s">11 статей: каждый процесс разобран по шагам — что происходит, в каком порядке и зачем это клетке.</p>
 </div>
 <div class="wrap split">
@@ -429,7 +429,7 @@ mark.decoding,.btn.decoding{color:#333333}
 
 <section class="panel" data-panel="quiz" aria-label="Вопросы">
 <div class="wrap head">
-<h2 class="dec">Проверь себя</h2>
+<h2 class="dec rv">Проверь себя</h2>
 <p class="rv" style="--d: .1s">6 контрольных вопросов по §16–17. После каждого ответа — объяснение из учебника.</p>
 </div>
 <div class="wrap split">
